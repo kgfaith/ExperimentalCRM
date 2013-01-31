@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperimentalCRM", "ExperimentalCRM\ExperimentalCRM.csproj", "{B4705D4B-A298-4453-96B5-0EF2EE57A25B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{BA2341D9-F652-4670-A2DD-FAA7EA1C29B1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B4705D4B-A298-4453-96B5-0EF2EE57A25B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4705D4B-A298-4453-96B5-0EF2EE57A25B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4705D4B-A298-4453-96B5-0EF2EE57A25B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4705D4B-A298-4453-96B5-0EF2EE57A25B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA2341D9-F652-4670-A2DD-FAA7EA1C29B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA2341D9-F652-4670-A2DD-FAA7EA1C29B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA2341D9-F652-4670-A2DD-FAA7EA1C29B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA2341D9-F652-4670-A2DD-FAA7EA1C29B1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
