@@ -70,6 +70,10 @@ namespace Model.DataAccess
             pictures[3].Places.Add(places[3]);
             context.SaveChanges();
 
+
+
+            string something = "this is something to test and let's see what happen";
+            string putSomething = something;
         }
     }
 }
