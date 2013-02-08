@@ -48,9 +48,14 @@ table {
 }
 
 
-
-
-/* Layout elements */
-
-
-/* */
+/* Layout elements 
+========================*/
+body {
+    background-color: #FFFFFF;
+    font-size: 12px;
+    font-family: arial, Sans-Serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    height:100%;
+}
