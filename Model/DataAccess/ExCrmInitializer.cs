@@ -69,11 +69,6 @@ namespace Model.DataAccess
             pictures[2].Places.Add(places[2]);
             pictures[3].Places.Add(places[3]);
             context.SaveChanges();
-
-
-
-            string something = "this is something to test and let's see what happen";
-            string putSomething = something;
         }
     }
 }

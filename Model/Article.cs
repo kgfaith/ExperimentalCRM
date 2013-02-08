@@ -29,12 +29,5 @@ namespace Model
         public DateTime PublishDate { get; set; }
 
         public ICollection<Place> Places { get; set; }
-
-        public string Testfield1 { get; set; }
-
-        public string Testfield2 { get; set; }
-
-        public string Testfield3 { get; set; }
-
     }
 }
