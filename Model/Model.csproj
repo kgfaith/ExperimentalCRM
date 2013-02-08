@@ -48,9 +48,7 @@
     <Compile Include="Article.cs" />
     <Compile Include="DataAccess\ExCrmContext.cs" />
     <Compile Include="DataAccess\ExCrmInitializer.cs" />
-    <Compile Include="EntityType.cs" />
     <Compile Include="Picture.cs" />
-    <Compile Include="PictureRelation.cs" />
     <Compile Include="PictureSource.cs" />
     <Compile Include="Place.cs" />
     <Compile Include="PlaceType.cs" />
