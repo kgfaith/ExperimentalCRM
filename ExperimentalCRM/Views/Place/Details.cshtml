@@ -1,0 +1,36 @@
+﻿@model Model.Place
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Place</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PlaceName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PlaceName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PlaceType.PlaceTypeName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PlaceType.PlaceTypeName)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.PlaceId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

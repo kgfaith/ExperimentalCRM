@@ -69,6 +69,15 @@ namespace Model.DataAccess
             pictures[2].Places.Add(places[2]);
             pictures[3].Places.Add(places[3]);
             context.SaveChanges();
+
+            var admins = new List<Admin>
+            {
+                new Admin { FirstName = "Ahboo", LastName = "Admin", Email = "kg.faith@gmail.com", UserName = "SuperCoolKg" ,DateCreated = DateTime.Parse("2011-02-03"), Activated = true, Password = "Test1234"},
+                new Admin { FirstName = "BabyLay", LastName = "Nge", Email = "babylay@gmail.com", UserName = "BabyLay" ,DateCreated = DateTime.Parse("2011-02-12"), Activated = true, Password = "Test1234"},
+                new Admin { FirstName = "Lao", LastName = "Nan", Email = "lao@gmail.com", UserName = "Lao" ,DateCreated = DateTime.Parse("2011-05-23"), Activated = true, Password = "Test1234"}
+            };
+            admins.ForEach(u => context.Admins.Add(u));
+            context.SaveChanges();
         }
     }
 }

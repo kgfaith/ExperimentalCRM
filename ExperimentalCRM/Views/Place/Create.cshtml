@@ -1,0 +1,51 @@
+﻿@model Model.Place
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Place</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PlaceName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PlaceName)
+            @Html.ValidationMessageFor(model => model.PlaceName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PlaceTypeId, "PlaceType")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("PlaceTypeId", String.Empty)
+            @Html.ValidationMessageFor(model => model.PlaceTypeId)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

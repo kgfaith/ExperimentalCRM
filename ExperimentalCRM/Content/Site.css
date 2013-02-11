@@ -51,7 +51,7 @@ table {
 /* Layout elements 
 ========================*/
 body {
-    background-color: #FFFFFF;
+    background-color: #D3D3D3;
     font-size: 12px;
     font-family: arial, Sans-Serif;
     margin: 0;
@@ -59,3 +59,79 @@ body {
     color: #333;
     height:100%;
 }
+
+header {
+     height: 60px;
+     background-color: #FFD700;
+}
+
+nav 
+{
+    background-color: #41446b;
+    width: 100%;
+}
+
+nav ul#menu {
+    display: block;
+    float: none;
+    margin: 0 20px;
+}
+nav ul#menu li {
+    float: left;
+    display: block;
+    margin: 7px 0px;
+}
+
+nav li a {
+    text-decoration: none;
+    color: #FFD700;
+    padding: 5px 20px;
+}
+
+nav li a:hover {
+    background-color: #8B4513;
+}
+
+.content-wrapper {
+    padding: 0 20px;   
+}
+
+.float-left {
+    float: left;    
+}
+
+.site-title {
+    margin-top: 7px;
+    font-size: 40px;
+    font-weight: normal;
+    font-family: 'Lobster', cursive;
+}
+
+.site-title a {
+    text-decoration: none;
+    color: #41446b;
+}
+
+.float-right {
+    float: right;
+}
+
+
+
+
+#menu {
+    
+}
+
+#body {
+    
+}
+
+.main-content {
+    padding: 20px;
+}
+
+
+/* MISC */
+
+.clear { clear: both;}

@@ -4,6 +4,7 @@
         <meta charset="utf-8" />
         <title>@ViewBag.Title - T-CMS</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
         <link href="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/Content/css")" rel="stylesheet" type="text/css" />
         <link href="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/Content/themes/base/css")" rel="stylesheet" type="text/css" />
         <script src="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/Scripts/js")"></script>
@@ -13,32 +14,37 @@
         <header>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("your logo here.", "Index", "Home")</p>
+                    <p class="site-title">@Html.ActionLink("Myanmar Attractions", "Index", "Home")</p>
                 </div>
                 <div class="float-right">
                     <section id="login">
                         @Html.Partial("_LoginPartial")
                     </section>
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        </ul>
-                    </nav>
-                </div>
+                   
+                </div> 
+                <div class="clear"></div>
+               
+                
             </div>
         </header>
+         <nav>
+            <ul id="menu">
+                <li>@Html.ActionLink("Articles", "Index", "Home")</li>
+                <li>@Html.ActionLink("Places", "About", "Home")</li>
+                <li>@Html.ActionLink("Admin", "About", "Home")</li>
+            </ul>
+            <div class="clear"></div>
+        </nav>
         <div id="body">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
+            @*@RenderSection("featured", required: false)*@
+            <section class="content-wrapper main-content">
                 @RenderBody()
             </section>
         </div>
         <footer>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                    <p>&copy; @DateTime.Now.Year - MyanmarAttractions.com</p>
                 </div>
                 <div class="float-right">
                     <ul id="social">

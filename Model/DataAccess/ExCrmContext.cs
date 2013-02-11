@@ -11,6 +11,7 @@ namespace Model.DataAccess
         public DbSet<PictureSource> PictureSources { get; set; }
         public DbSet<Place> Places { get; set; }
         public DbSet<PlaceType> PlaceTypes { get; set; }
+        public DbSet<Admin> Admins { get; set; }
 
         public ExCrmContext() : base("ExperimentalCrm")
         {
