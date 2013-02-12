@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Data.Entity;
+using ExperimentalCRM.App_Start;
 using Model.DataAccess;
 
 namespace ExperimentalCRM
@@ -47,7 +48,7 @@ namespace ExperimentalCRM
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
-            BundleTable.Bundles.RegisterTemplateBundles();
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
 }

@@ -29,9 +29,9 @@
         </header>
          <nav>
             <ul id="menu">
-                <li>@Html.ActionLink("Articles", "Index", "Home")</li>
-                <li>@Html.ActionLink("Places", "About", "Home")</li>
-                <li>@Html.ActionLink("Admin", "About", "Home")</li>
+                <li>@Html.ActionLink("Articles", "Index", "Article")</li>
+                <li>@Html.ActionLink("Places", "Index", "Place")</li>
+                <li>@Html.ActionLink("Admin", "Index", "Home")</li>
             </ul>
             <div class="clear"></div>
         </nav>
@@ -54,5 +54,7 @@
                 </div>
             </div>
         </footer>
+         @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
     </body>
 </html>
