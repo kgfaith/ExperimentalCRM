@@ -26,7 +26,10 @@ namespace ExperimentalCRM.App_Start
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                 "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                "~/Content/bootstrap.css",
+                "~/Content/bootstrap-responsive.css",
+                "~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                 "~/Content/themes/base/jquery.ui.core.css",
@@ -40,7 +43,8 @@ namespace ExperimentalCRM.App_Start
                 "~/Content/themes/base/jquery.ui.tabs.css",
                 "~/Content/themes/base/jquery.ui.datepicker.css",
                 "~/Content/themes/base/jquery.ui.progressbar.css",
-                "~/Content/themes/base/jquery.ui.theme.css"));
+                "~/Content/themes/base/jquery.ui.theme.css",
+                "~/Content/themes/base/bootstrap.js"));
         }
     }
 }

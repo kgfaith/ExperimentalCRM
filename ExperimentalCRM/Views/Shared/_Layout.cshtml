@@ -15,50 +15,38 @@
         <meta name="viewport" content="width=device-width" />
     </head>
     <body>
-        <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("Myanmar Attractions", "Index", "Home")</p>
+        <header class="navbar navbar-inverse ">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Myanmar Attractions", "Index", "Home", null, new { @class = "brand"})
+                    <div class="nav-collapse collapse">
+                        <a href="#" class="btn pull-right">Log in</a>
+                        <ul class="nav">
+                            <li>@Html.ActionLink("Articles", "Index", "Article")</li>
+                            <li>@Html.ActionLink("Places", "Index", "Place")</li>
+                            <li>@Html.ActionLink("Admin", "Index", "Home")</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
-                   
-                </div> 
-                <div class="clear"></div>
-               
-                
             </div>
         </header>
-         <nav>
-            <ul id="menu">
-                <li>@Html.ActionLink("Articles", "Index", "Article")</li>
-                <li>@Html.ActionLink("Places", "Index", "Place")</li>
-                <li>@Html.ActionLink("Admin", "Index", "Home")</li>
-            </ul>
-            <div class="clear"></div>
-        </nav>
-        <div id="body">
-            @*@RenderSection("featured", required: false)*@
-            <section class="content-wrapper main-content">
-                @RenderBody()
-            </section>
-        </div>
-        <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - MyanmarAttractions.com</p>
-                </div>
-                <div class="float-right">
-                    <ul id="social">
-                        <li><a href="http://facebook.com" class="facebook">Facebook</a></li>
-                        <li><a href="http://twitter.com" class="twitter">Twitter</a></li>
-                    </ul>
-                </div>
-            </div>
-        </footer>
-         @Scripts.Render("~/bundles/jquery")
+
+        <div class="container-fluid">
+          <div class="row-fluid">
+             @RenderBody()
+          </div><!--/row-->
+
+          
+            <footer id="footer" class="navbar-fixed-bottom">
+                <p>© MyanmarAttractions.com 2013</p>
+            </footer>
+          </div>
+        @Scripts.Render("~/bundles/jquery")
         @RenderSection("scripts", required: false)
     </body>
 </html>

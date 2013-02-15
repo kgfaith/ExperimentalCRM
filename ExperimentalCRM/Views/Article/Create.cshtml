@@ -4,13 +4,11 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
-
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Article</legend>
+        <legend>Create Article</legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.ArticleName)
@@ -61,14 +59,11 @@
         </div>
 
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Create" class="btn btn-primary" /> @Html.ActionLink("Back to List", "Index", null, new { @class = "btn"})
         </p>
     </fieldset>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
