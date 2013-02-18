@@ -21,8 +21,7 @@ namespace Model.DataAccess
         public ExCrmContext(string nameOrConnectionString)
             : base(nameOrConnectionString)
         {
-            Database.SetInitializer<ExCrmContext>(null);
-            
+           
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

@@ -40,10 +40,10 @@ namespace Model.DataAccess
             places.ForEach(s => context.Places.Add(s));
             context.SaveChanges();
 
-            articles[0].Places.Add(places[0]);
-            articles[1].Places.Add(places[1]);
-            articles[2].Places.Add(places[2]);
-            articles[3].Places.Add(places[3]);
+            articles[0].Places = new List<Place>{ places[0]};
+            articles[1].Places = new List<Place> { places[1]};
+            articles[2].Places = new List<Place> { places[2] };
+            articles[3].Places = new List<Place> { places[3] };
             context.SaveChanges();
 
             var pictureSources = new List<PictureSource>
@@ -64,18 +64,18 @@ namespace Model.DataAccess
             pictures.ForEach(s => context.Pictures.Add(s));
             context.SaveChanges();
 
-            pictures[0].Places.Add(places[0]);
-            pictures[1].Places.Add(places[1]);
-            pictures[2].Places.Add(places[2]);
-            pictures[3].Places.Add(places[3]);
+            pictures[0].Places = new List<Place> { places[0] };
+            pictures[1].Places = new List<Place> { places[1] };
+            pictures[2].Places = new List<Place> { places[2] };
+            pictures[3].Places = new List<Place> { places[3] };
             context.SaveChanges();
 
             var admins = new List<Admin>
-            {
-                new Admin { FirstName = "Ahboo", LastName = "Admin", Email = "kg.faith@gmail.com", UserName = "SuperCoolKg" ,DateCreated = DateTime.Parse("2011-02-03"), Activated = true, Password = "Test1234"},
-                new Admin { FirstName = "BabyLay", LastName = "Nge", Email = "babylay@gmail.com", UserName = "BabyLay" ,DateCreated = DateTime.Parse("2011-02-12"), Activated = true, Password = "Test1234"},
-                new Admin { FirstName = "Lao", LastName = "Nan", Email = "lao@gmail.com", UserName = "Lao" ,DateCreated = DateTime.Parse("2011-05-23"), Activated = true, Password = "Test1234"}
-            };
+                            {
+                                new Admin { FirstName = "Ahboo", LastName = "Admin", Email = "kg.faith@gmail.com", UserName = "SuperCoolKg" ,DateCreated = DateTime.Parse("2011-02-03"), Activated = true, Password = "Test1234"},
+                                new Admin { FirstName = "BabyLay", LastName = "Nge", Email = "babylay@gmail.com", UserName = "BabyLay" ,DateCreated = DateTime.Parse("2011-02-12"), Activated = true, Password = "Test1234"},
+                                new Admin { FirstName = "Lao", LastName = "Nan", Email = "lao@gmail.com", UserName = "Lao" ,DateCreated = DateTime.Parse("2011-05-23"), Activated = true, Password = "Test1234"}
+                            };
             admins.ForEach(u => context.Admins.Add(u));
             context.SaveChanges();
         }

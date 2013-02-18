@@ -28,6 +28,7 @@ namespace Model
         [MaxLength(200)]
         public string PasswordHash { get; set; }
 
+        public string Something { get; set; }
 
         public DateTime DateCreated { get; set; }
         public DateTime? LastLoginTime { get; set; }
