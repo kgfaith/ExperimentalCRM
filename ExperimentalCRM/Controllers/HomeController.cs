@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
-using Model.DataAccess;
+using ExperimentalCMS.Model.DataAccess;
 
-namespace ExperimentalCRM.Controllers
+namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
     public class HomeController : Controller
     {

@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperimentalCRM", "ExperimentalCRM\ExperimentalCRM.csproj", "{B4705D4B-A298-4453-96B5-0EF2EE57A25B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperimentalCMS.Web.BackEnd", "ExperimentalCRM\ExperimentalCMS.Web.BackEnd.csproj", "{B4705D4B-A298-4453-96B5-0EF2EE57A25B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{BA2341D9-F652-4670-A2DD-FAA7EA1C29B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperimentalCMS.Model", "Model\ExperimentalCMS.Model.csproj", "{BA2341D9-F652-4670-A2DD-FAA7EA1C29B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{1038F5F3-1792-4F79-8D5B-41FE42AEB608}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperimentalCMS.Domain", "Domain\ExperimentalCMS.Domain.csproj", "{1038F5F3-1792-4F79-8D5B-41FE42AEB608}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,8 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using System;
 
-namespace Model.DataAccess
+namespace ExperimentalCMS.Model.DataAccess
 {
     public class ExCrmContext : DbContext
     {

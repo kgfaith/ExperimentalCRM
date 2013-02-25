@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using DevOne.Security.Cryptography.BCrypt;
 
-namespace Model
+namespace ExperimentalCMS.Model
 {
     public class Admin
     {

@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Data.Entity;
 
-namespace Model.DataAccess
+namespace ExperimentalCMS.Model.DataAccess
 {
     public class ExCrmInitializer : DropCreateDatabaseIfModelChanges<ExCrmContext>
     {

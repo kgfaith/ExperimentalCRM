@@ -1,25 +1,21 @@
 ﻿using System.Data;
 using System.Linq;
 using System.Web.Mvc;
-using Model;
-using Model.DataAccess;
+using AutoMapper;
+using ExperimentalCMS.Model;
+using ExperimentalCMS.Model.DataAccess;
+using ExperimentalCMS.Web.BackEnd.ViewModels;
 
-namespace ExperimentalCRM.Controllers
+namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
     public class ArticleController : Controller
     {
         private ExCrmContext db = new ExCrmContext();
 
-        //
-        // GET: /Article/
-
         public ActionResult Index()
         {
             return View(db.Articles.ToList());
         }
-
-        //
-        // GET: /Article/Details/5
 
         public ActionResult Details(int id = 0)
         {
@@ -31,32 +27,25 @@ namespace ExperimentalCRM.Controllers
             return View(article);
         }
 
-        //
-        // GET: /Article/Create
-
         public ActionResult Create()
         {
             return View();
         }
 
-        //
-        // POST: /Article/Create
-
+        
         [HttpPost]
-        public ActionResult Create(Article article)
+        public ActionResult Create(ArticleCreateViewModel article)
         {
             if (ModelState.IsValid)
             {
-                db.Articles.Add(article);
+                var articleModel = Mapper.Map<ArticleCreateViewModel, Article>(article);
+                db.Articles.Add(articleModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             return View(article);
         }
-
-        //
-        // GET: /Article/Edit/5
 
         public ActionResult Edit(int id = 0)
         {
@@ -67,9 +56,6 @@ namespace ExperimentalCRM.Controllers
             }
             return View(article);
         }
-
-        //
-        // POST: /Article/Edit/5
 
         [HttpPost]
         public ActionResult Edit(Article article)
@@ -83,9 +69,6 @@ namespace ExperimentalCRM.Controllers
             return View(article);
         }
 
-        //
-        // GET: /Article/Delete/5
-
         public ActionResult Delete(int id = 0)
         {
             Article article = db.Articles.Find(id);
@@ -95,9 +78,6 @@ namespace ExperimentalCRM.Controllers
             }
             return View(article);
         }
-
-        //
-        // POST: /Article/Delete/5
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)

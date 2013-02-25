@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+using ExperimentalCMS.Model;
 
-namespace ExperimentalCMS.Model
+namespace ExperimentalCMS.Web.BackEnd.ViewModels
 {
-    public class Article 
+    public class ArticleCreateViewModel
     {
         public int ArticleId { get; set; }
 

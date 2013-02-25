@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Model;
-using Model.DataAccess;
+using ExperimentalCMS.Model;
+using ExperimentalCMS.Model.DataAccess;
 
-namespace ExperimentalCRM.Controllers
+namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
     public class AdminController : Controller
     {
