@@ -4,9 +4,9 @@ using System.Data.Entity;
 
 namespace ExperimentalCMS.Model.DataAccess
 {
-    public class ExCrmInitializer : DropCreateDatabaseIfModelChanges<ExCrmContext>
+    public class ExCrmInitializer : DropCreateDatabaseIfModelChanges<ExCMSContext>
     {
-        protected override void Seed(ExCrmContext context)
+        protected override void Seed(ExCMSContext context)
         {
             var articles = new List<Article>
                             {

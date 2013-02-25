@@ -4,7 +4,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Data.Entity;
 using ExperimentalCMS.Model.DataAccess;
-using ExperimentalCRM.App_Start;
+using ExperimentalCMS.Web.BackEnd.App_Start;
 
 namespace ExperimentalCMS.Web.BackEnd
 {
@@ -37,7 +37,7 @@ namespace ExperimentalCMS.Web.BackEnd
 
         protected void Application_Start()
         {
-            Database.SetInitializer<ExCrmContext>(new ExCrmInitializer());
+            Database.SetInitializer<ExCMSContext>(new ExCrmInitializer());
 
             AreaRegistration.RegisterAllAreas();
 

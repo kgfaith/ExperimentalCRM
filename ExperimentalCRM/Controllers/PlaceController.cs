@@ -9,7 +9,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
     public class PlaceController : Controller
     {
-        private ExCrmContext db = new ExCrmContext();
+        private ExCMSContext db = new ExCMSContext();
 
         //
         // GET: /Place/

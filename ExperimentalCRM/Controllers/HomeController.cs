@@ -6,7 +6,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
     public class HomeController : Controller
     {
-        private ExCrmContext db = new ExCrmContext();
+        private ExCMSContext db = new ExCMSContext();
         public ActionResult Index()
         {
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using ExperimentalCMS.Model;
 
 namespace ExperimentalCMS.Web.BackEnd.ViewModels
@@ -19,6 +20,7 @@ namespace ExperimentalCMS.Web.BackEnd.ViewModels
         public string Title { get; set; }
 
         [MaxLength(25000)]
+        [AllowHtml]
         public string Content { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]

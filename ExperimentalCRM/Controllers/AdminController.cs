@@ -8,7 +8,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
     public class AdminController : Controller
     {
-        private ExCrmContext db = new ExCrmContext();
+        private ExCMSContext db = new ExCMSContext();
 
         //
         // GET: /Admin/

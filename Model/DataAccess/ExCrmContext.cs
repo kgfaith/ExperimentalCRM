@@ -3,7 +3,7 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace ExperimentalCMS.Model.DataAccess
 {
-    public class ExCrmContext : DbContext
+    public class ExCMSContext : DbContext
     {
         public DbSet<Article> Articles { get; set; }
         public DbSet<Picture> Pictures { get; set; }
@@ -12,12 +12,12 @@ namespace ExperimentalCMS.Model.DataAccess
         public DbSet<PlaceType> PlaceTypes { get; set; }
         public DbSet<Admin> Admins { get; set; }
 
-        public ExCrmContext() : base("ExperimentalCrm")
+        public ExCMSContext() : base("ExperimentalCMS")
         {
             
         }
 
-        public ExCrmContext(string nameOrConnectionString)
+        public ExCMSContext(string nameOrConnectionString)
             : base(nameOrConnectionString)
         {
            

@@ -4,13 +4,14 @@ using System.Web.Mvc;
 using AutoMapper;
 using ExperimentalCMS.Model;
 using ExperimentalCMS.Model.DataAccess;
+using ExperimentalCMS.Web.BackEnd.Controllers.BaseController;
 using ExperimentalCMS.Web.BackEnd.ViewModels;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
-    public class ArticleController : Controller
+    public class ArticleController : CmsBaseController
     {
-        private ExCrmContext db = new ExCrmContext();
+        private ExCMSContext db = new ExCMSContext();
 
         public ActionResult Index()
         {

@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
-using ExperimentalCRM.Models;
+using ExperimentalCMS.Web.BackEnd.Models;
+using ExperimentalCMS.Web.BackEnd.Controllers.BaseController;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
-
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : CmsBaseController
     {
-
         //
         // GET: /Account/Login
 
