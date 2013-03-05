@@ -20,7 +20,7 @@ namespace ExperimentalCMS.Model
         [MaxLength(200, ErrorMessage = "Article title cannot be more than {0} string length")]
         public string Title { get; set; }
 
-        [MaxLength(25000)]
+        [MaxLength(25001)]
         public string Content { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
