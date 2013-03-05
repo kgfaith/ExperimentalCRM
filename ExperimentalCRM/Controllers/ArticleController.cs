@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
@@ -40,6 +41,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             if (ModelState.IsValid)
             {
                 var articleModel = Mapper.Map<ArticleCreateViewModel, Article>(article);
+                articleModel.LastUpdatedDate = DateTime.Now;
                 db.Articles.Add(articleModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");

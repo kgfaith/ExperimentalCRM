@@ -6,6 +6,11 @@ namespace ExperimentalCMS.Model
 {
     public class Article 
     {
+        public Article()
+        {
+            LastUpdatedDate = DateTime.Now;
+        }
+        
         public int ArticleId { get; set; }
 
         [Display(Name = "Article Name")]
@@ -22,7 +27,8 @@ namespace ExperimentalCMS.Model
         public DateTime CreatedDate { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
-        public DateTime LastUpdatedDate { get; set; }
+        public DateTime? LastUpdatedDate { get; set; }
+       
 
         [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public DateTime PublishDate { get; set; }
