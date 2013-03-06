@@ -41,6 +41,45 @@
 }
 
 
+/* Sign-in form 
+=============================================*/
+.form-signin {
+    max-width: 400px;
+    margin: 0 auto 20px;
+    padding: 19px 29px;
+    background: #f5f5f5;
+    border: 1px solid #e5e5e5;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+.form-signin ol {
+    list-style: none;
+}
+.form-signin input[type='text'], .form-signin input[type='password'] {
+    padding: 9px 9px;
+     margin-top: 15px;
+}
+
+.form-signin input[type='submit'] {
+    margin-top: 15px;
+    padding: 9px 30px;
+}
+
+.form-signin fieldset {
+    margin: 30px 45px;
+}
+.form-signin fieldset {
+    margin: 30px 45px;
+}
+.form-signin fieldset .checkbox {
+    margin-top: 15px;
+}
+
+
 /* Margins 
 =============================================*/
 

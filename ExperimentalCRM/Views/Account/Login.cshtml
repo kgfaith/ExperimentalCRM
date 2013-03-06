@@ -3,39 +3,37 @@
 @{
     ViewBag.Title = "Log in";
 }
-
-<hgroup class="title">
+<div class="span12">
+<div class="container">
+@*<hgroup class="title">
     <h1>@ViewBag.Title.</h1>
     <h2>Enter your user name and password below.</h2>
 </hgroup>
-
+*@
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
-@using (Html.BeginForm((string)ViewBag.FormAction, "Account")) {
+@using (Html.BeginForm((string)ViewBag.FormAction, "Account", FormMethod.Post, new { @class = "form-signin" }))
+{
     @Html.ValidationSummary(true, "Log in was unsuccessful. Please correct the errors and try again.")
 
     <fieldset>
-        <legend>Log in Form</legend>
-        <ol>
-            <li>
-                @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName)
-                @Html.ValidationMessageFor(m => m.UserName)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
+        <h1>@ViewBag.Title</h1>
+        
+        <div class="editor-field">
+            @Html.TextBoxFor(m => m.UserName, new Dictionary<string, Object> { { "placeholder", "User Name" }, { "class", "input-xlarge" } })
+            @Html.ValidationMessageFor(m => m.UserName)
+        </div>
+       
+        <div class="editor-field">   @Html.PasswordFor(m => m.Password, new Dictionary<string, Object> { { "placeholder", "Password" }, { "class", "input-xlarge" } })
                 @Html.ValidationMessageFor(m => m.Password)
-            </li>
-            <li>
-                @Html.CheckBoxFor(m => m.RememberMe)
-                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
-            </li>
-        </ol>
-        <input type="submit" value="Log in" />
+        </div>
+        <label class="checkbox">
+        @Html.CheckBoxFor(m => m.RememberMe)
+        @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+        </label>
+        <input type="submit" value="Log in" class="btn btn-large btn-primary" />
     </fieldset>
-    <p>
-        @Html.ActionLink("Register", "Register") if you don't have an account.
-    </p>
-}
+
+}</div>
+</div>

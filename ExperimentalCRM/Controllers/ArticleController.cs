@@ -10,6 +10,7 @@ using ExperimentalCMS.Web.BackEnd.ViewModels;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ArticleController : CmsBaseController
     {
         private ExCMSContext db = new ExCMSContext();
