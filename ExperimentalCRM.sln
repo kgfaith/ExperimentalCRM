@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperimentalCMS.Web.BackEnd", "ExperimentalCRM\ExperimentalCMS.Web.BackEnd.csproj", "{B4705D4B-A298-4453-96B5-0EF2EE57A25B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperimentalCMS.Model", "Model\ExperimentalCMS.Model.csproj", "{BA2341D9-F652-4670-A2DD-FAA7EA1C29B1}"
