@@ -4,9 +4,10 @@ using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using ExperimentalCMS.Model;
-using ExperimentalCMS.Model.DataAccess;
+using ExperimentalCMS.Domain.DataAccess;
+using ExperimentalCMS.ViewModels;
 using ExperimentalCMS.Web.BackEnd.Controllers.BaseController;
-using ExperimentalCMS.Web.BackEnd.ViewModels;
+//using ExperimentalCMS.Web.BackEnd.ViewModels;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {

@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using MaxLengthAttribute = System.ComponentModel.DataAnnotations.MaxLengthAttribute;
+using System.Collections.Generic;
 
 namespace ExperimentalCMS.Model
 {

@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using AutoMapper;
 using ExperimentalCMS.Model;
-using ExperimentalCMS.Web.BackEnd.ViewModels;
+using ExperimentalCMS.ViewModels;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers.BaseController
 {

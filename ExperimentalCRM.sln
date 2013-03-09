@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperimentalCMS.Model", "Mo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperimentalCMS.Domain", "Domain\ExperimentalCMS.Domain.csproj", "{1038F5F3-1792-4F79-8D5B-41FE42AEB608}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperimentalCMS.ViewModels", "ExperimentalCMS.ViewModels\ExperimentalCMS.ViewModels.csproj", "{677932F6-0624-48A7-8D65-F914E5971B17}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{1038F5F3-1792-4F79-8D5B-41FE42AEB608}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1038F5F3-1792-4F79-8D5B-41FE42AEB608}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1038F5F3-1792-4F79-8D5B-41FE42AEB608}.Release|Any CPU.Build.0 = Release|Any CPU
+		{677932F6-0624-48A7-8D65-F914E5971B17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{677932F6-0624-48A7-8D65-F914E5971B17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{677932F6-0624-48A7-8D65-F914E5971B17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{677932F6-0624-48A7-8D65-F914E5971B17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using ExperimentalCMS.Model.DataAccess;
+using ExperimentalCMS.Domain.DataAccess;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {

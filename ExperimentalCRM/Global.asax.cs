@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Data.Entity;
-using ExperimentalCMS.Model.DataAccess;
+using ExperimentalCMS.Domain.DataAccess;
 using ExperimentalCMS.Web.BackEnd.App_Start;
 
 namespace ExperimentalCMS.Web.BackEnd
