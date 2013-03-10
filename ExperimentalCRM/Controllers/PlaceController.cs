@@ -7,6 +7,7 @@ using ExperimentalCMS.Domain.DataAccess;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
+    [Authorize]
     public class PlaceController : Controller
     {
         private ExCMSContext db = new ExCMSContext();

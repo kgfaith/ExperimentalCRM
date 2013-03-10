@@ -5,6 +5,8 @@ using System.Web.Routing;
 using System.Data.Entity;
 using ExperimentalCMS.Domain.DataAccess;
 using ExperimentalCMS.Web.BackEnd.App_Start;
+using WebMatrix.WebData;
+using System.Linq;
 
 namespace ExperimentalCMS.Web.BackEnd
 {
@@ -38,6 +40,9 @@ namespace ExperimentalCMS.Web.BackEnd
         protected void Application_Start()
         {
             Database.SetInitializer<ExCMSContext>(new ExCrmInitializer());
+            ExCMSContext db = new ExCMSContext();
+            var article = db.Articles.ToList();
+            WebSecurity.InitializeDatabaseConnection("ExperimentalCMS", "Admin", "AdminId", "UserName", autoCreateTables: true);
 
             AreaRegistration.RegisterAllAreas();
 

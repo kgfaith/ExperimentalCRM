@@ -5,91 +5,60 @@ using System.Web.Mvc;
 using System.Web.Security;
 using ExperimentalCMS.Web.BackEnd.Models;
 using ExperimentalCMS.Web.BackEnd.Controllers.BaseController;
+using WebMatrix.WebData;
+using ExperimentalCMS.Domain.DataAccess;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
     [Authorize]
     public class AccountController : CmsBaseController
     {
+        private ExCMSContext db = new ExCMSContext();
+
         //
         // GET: /Account/Login
 
         [AllowAnonymous]
-        public ActionResult Login()
+        public ActionResult Login(string returnUrl)
         {
-            return ContextDependentView();
-        }
-
-        //
-        // POST: /Account/JsonLogin
-
-        [AllowAnonymous]
-        [HttpPost]
-        public JsonResult JsonLogin(LoginModel model, string returnUrl)
-        {
-            if (ModelState.IsValid)
-            {
-                if (Membership.ValidateUser(model.UserName, model.Password))
-                {
-                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
-                    return Json(new { success = true, redirect = returnUrl });
-                }
-                else
-                {
-                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
-                }
-            }
-
-            // If we got this far, something failed
-            return Json(new { errors = GetErrorsFromModelState() });
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
         }
 
         //
         // POST: /Account/Login
 
-        [AllowAnonymous]
         [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
-                if (Membership.ValidateUser(model.UserName, model.Password))
-                {
-                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
-                    if (Url.IsLocalUrl(returnUrl))
-                    {
-                        return Redirect(returnUrl);
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
-                }
+                return RedirectToLocal(returnUrl);
             }
 
             // If we got this far, something failed, redisplay form
+            ModelState.AddModelError("", "The user name or password provided is incorrect.");
             return View(model);
         }
 
         //
-        // GET: /Account/LogOff
+        // POST: /Account/LogOff
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            FormsAuthentication.SignOut();
+            WebSecurity.Logout();
 
             return RedirectToAction("Index", "Home");
         }
 
         //
         // GET: /Account/Register
-
         [AllowAnonymous]
-        public ActionResult Register()
+         public ActionResult Register()
         {
             return ContextDependentView();
         }
@@ -97,7 +66,6 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         //
         // POST: /Account/JsonRegister
 
-        [AllowAnonymous]
         [HttpPost]
         public ActionResult JsonRegister(RegisterModel model)
         {
@@ -124,7 +92,6 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
 
         //
         // POST: /Account/Register
-
         [AllowAnonymous]
         [HttpPost]
         public ActionResult Register(RegisterModel model)
@@ -132,8 +99,8 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
-                MembershipCreateStatus createStatus;
-                Membership.CreateUser(model.UserName, model.Password, model.Email, passwordQuestion: null, passwordAnswer: null, isApproved: true, providerUserKey: null, status: out createStatus);
+                MembershipCreateStatus createStatus = MembershipCreateStatus.Success;
+                var str = WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
@@ -222,7 +189,43 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             return ModelState.SelectMany(x => x.Value.Errors.Select(error => error.ErrorMessage));
         }
 
-        #region Status Codes
+        #region Helpers
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        public enum ManageMessageId
+        {
+            ChangePasswordSuccess,
+            SetPasswordSuccess,
+            RemoveLoginSuccess,
+        }
+
+        /*internal class ExternalLoginResult : ActionResult
+        {
+            public ExternalLoginResult(string provider, string returnUrl)
+            {
+                Provider = provider;
+                ReturnUrl = returnUrl;
+            }
+
+            public string Provider { get; private set; }
+            public string ReturnUrl { get; private set; }
+
+            public override void ExecuteResult(ControllerContext context)
+            {
+                OAuthWebSecurity.RequestAuthentication(Provider, ReturnUrl);
+            }
+        }*/
+
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
         {
             // See http://go.microsoft.com/fwlink/?LinkID=177550 for

@@ -11,6 +11,7 @@ namespace ExperimentalCMS.Model
     public class Admin
     {
         [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int AdminId { get; set; }
 
         [MaxLength(50)]
@@ -28,12 +29,10 @@ namespace ExperimentalCMS.Model
         [MaxLength(200)]
         public string PasswordHash { get; set; }
 
-        public string Something { get; set; }
-
-        public DateTime DateCreated { get; set; }
+        public DateTime? DateCreated { get; set; }
         public DateTime? LastLoginTime { get; set; }
 
-        public bool Activated { get; set; }
+        public bool? Activated { get; set; }
      
         [NotMapped]
         public string Password

@@ -2,7 +2,6 @@
 using System.Data;
 using System.Linq;
 using System.Web.Mvc;
-using AutoMapper;
 using ExperimentalCMS.Model;
 using ExperimentalCMS.Domain.DataAccess;
 using ExperimentalCMS.ViewModels;
@@ -11,7 +10,7 @@ using ExperimentalCMS.Web.BackEnd.Controllers.BaseController;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public class ArticleController : CmsBaseController
     {
         private ExCMSContext db = new ExCMSContext();
@@ -42,7 +41,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         {
             if (ModelState.IsValid)
             {
-                var articleModel = Mapper.Map<ArticleCreateViewModel, Article>(article);
+                var articleModel = article.TransformToArticle();
                 articleModel.LastUpdatedDate = DateTime.Now;
                 db.Articles.Add(articleModel);
                 db.SaveChanges();

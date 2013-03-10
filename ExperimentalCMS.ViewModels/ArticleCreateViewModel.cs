@@ -33,5 +33,18 @@ namespace ExperimentalCMS.ViewModels
         public DateTime PublishDate { get; set; }
 
         public ICollection<Place> Places { get; set; }
+
+        public Article TransformToArticle()
+        {
+            Article articleObj = new Article();
+            articleObj.ArticleId = ArticleId;
+            articleObj.ArticleName = ArticleName;
+            articleObj.Title = Title;
+            articleObj.Content = Content;
+            articleObj.CreatedDate = CreatedDate;
+            articleObj.LastUpdatedDate = LastUpdatedDate;
+            articleObj.PublishDate = PublishDate;
+            return articleObj;
+        }
     }
 }

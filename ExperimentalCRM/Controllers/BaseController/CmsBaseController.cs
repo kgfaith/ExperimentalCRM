@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using AutoMapper;
 using ExperimentalCMS.Model;
 using ExperimentalCMS.ViewModels;
 
@@ -15,7 +14,6 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers.BaseController
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
             base.Initialize(requestContext);
-            Mapper.CreateMap<ArticleCreateViewModel, Article>();
         }
     }
 }

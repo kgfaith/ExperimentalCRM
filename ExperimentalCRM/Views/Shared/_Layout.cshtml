@@ -25,7 +25,8 @@
                     </button>
                     @Html.ActionLink("Myanmar Attractions", "Index", "Home", null, new { @class = "brand"})
                     <div class="nav-collapse collapse">
-                        <a href="#" class="btn pull-right">Log in</a>
+                        
+                        @Html.Partial("_LoginPartial")
                         <ul class="nav">
                             <li>@Html.ActionLink("Articles", "Index", "Article")</li>
                             <li>@Html.ActionLink("Places", "Index", "Place")</li>
