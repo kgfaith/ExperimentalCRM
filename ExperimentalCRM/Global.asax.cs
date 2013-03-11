@@ -42,6 +42,7 @@ namespace ExperimentalCMS.Web.BackEnd
             Database.SetInitializer<ExCMSContext>(new ExCrmInitializer());
             ExCMSContext db = new ExCMSContext();
             var article = db.Articles.ToList();
+            db.Dispose();
             WebSecurity.InitializeDatabaseConnection("ExperimentalCMS", "Admin", "AdminId", "UserName", autoCreateTables: true);
 
             AreaRegistration.RegisterAllAreas();

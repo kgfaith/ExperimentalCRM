@@ -1,17 +1,14 @@
 ﻿<div class="pull-right">
-@if (Request.IsAuthenticated) {
-    @*<p>
-        Hello, @Html.ActionLink(User.Identity.Name, "ChangePassword", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Change password" })!
-        @Html.ActionLink("Log off", "LogOff", "Account")
-    </p>*@
-    
-     <text>
-        Hello, @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })!
-        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
-            @Html.AntiForgeryToken()
-            <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
-        }
-    </text>
+@if (Request.IsAuthenticated)
+{
+    <div class="btn-group">
+        <a class="btn btn-primary " data-toggle="dropdown" href="#"><i class="icon-user icon-white"></i>@User.Identity.Name</a>
+        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li><a href="@Url.Action("Edit", "Admin")"><i class="icon-pencil"></i> Edit </a></li>
+            <li><a href="@Url.Action("LogOff", "Account")"><i class="icon-off"></i> Log out </a></li>
+        </ul>
+    </div>
 } else {
  
     @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", data_dialog_title = "Identification", @class = "btn pull-right" })
