@@ -1,4 +1,4 @@
-﻿@model Model.Admin
+﻿@model ExperimentalCMS.ViewModels.AdminEditViewModel
 @{
     ViewBag.Title = "Edit";
 }
@@ -30,41 +30,29 @@
             @Html.EditorFor(model => model.Email)
             @Html.ValidationMessageFor(model => model.Email)
         </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.UserName)
+             
+         <div class="editor-label">
+            @Html.LabelFor(model => model.OldPassword)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.UserName)
-            @Html.ValidationMessageFor(model => model.UserName)
+            @Html.EditorFor(model => model.OldPassword)
+            @Html.ValidationMessageFor(model => model.OldPassword)
         </div>
         <div class="editor-label">
-            @Html.LabelFor(model => model.PasswordHash)
+            @Html.LabelFor(model => model.NewPassword)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.PasswordHash)
-            @Html.ValidationMessageFor(model => model.PasswordHash)
+            @Html.EditorFor(model => model.NewPassword)
+            @Html.ValidationMessageFor(model => model.NewPassword)
         </div>
         <div class="editor-label">
-            @Html.LabelFor(model => model.DateCreated)
+            @Html.LabelFor(model => model.ConfirmNewPassword)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.DateCreated)
-            @Html.ValidationMessageFor(model => model.DateCreated)
+            @Html.EditorFor(model => model.ConfirmNewPassword)
+            @Html.ValidationMessageFor(model => model.ConfirmNewPassword)
         </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.LastLoginTime)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.LastLoginTime)
-            @Html.ValidationMessageFor(model => model.LastLoginTime)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Activated)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Activated)
-            @Html.ValidationMessageFor(model => model.Activated)
-        </div>
+        
         <p>
             <input type="submit" value="Save" class="btn btn-primary" />
             @Html.ActionLink("Back to List", "Index", null, new { @class = "btn" })

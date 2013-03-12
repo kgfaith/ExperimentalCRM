@@ -34,7 +34,6 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         {
             return View();
         }
-
         
         [HttpPost]
         public ActionResult Create(ArticleCreateViewModel article)

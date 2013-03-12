@@ -87,27 +87,42 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
 
         public ActionResult Edit(int id = 0)
         {
+            if (id <= 0)
+            {
+                id = WebSecurity.GetUserId(User.Identity.Name);
+            }
+
             Admin admin = db.Admins.Find(id);
+           
             if (admin == null)
             {
                 return HttpNotFound();
-            }
-            return View(admin);
+            } 
+
+            var model = new AdminEditViewModel();
+            model.TransformFromAdmin(admin);
+            return View(model);
         }
 
         //
         // POST: /Admin/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Admin admin)
+        public ActionResult Edit(AdminEditViewModel model)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid )
             {
+                Admin admin = db.Admins.Find(model.AdminId);
+                
                 db.Entry(admin).State = EntityState.Modified;
                 db.SaveChanges();
+
+                bool changePasswordSucceeded;
+                MembershipUser currentUser = Membership.GetUser(model.AdminId, userIsOnline: false);
+                changePasswordSucceeded = currentUser.ChangePassword(model.OldPassword, model.NewPassword);
                 return RedirectToAction("Index");
             }
-            return View(admin);
+            return View(model);
         }
 
         //
