@@ -6,12 +6,14 @@ using ExperimentalCMS.Domain.DataAccess;
 using ExperimentalCMS.ViewModels;
 using System.Web.Security;
 using WebMatrix.WebData;
+using ExperimentalCMS.Repositories;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
     public class AdminController : Controller
     {
         private ExCMSContext db = new ExCMSContext();
+        private UnitOfWork uOW = new UnitOfWork();
 
         //
         // GET: /Admin/
@@ -50,36 +52,20 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                    var userId = WebSecurity.GetUserId(model.UserName);
                     var adminModel = model.TransformToAdmin();
-                    adminModel.AdminId = userId;
-                    db.Entry(adminModel).State = EntityState.Modified;
-                    db.SaveChanges();
-
-                    WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    adminModel = uOW.AdminRepo.Insert(adminModel);
+                    return RedirectToAction("Index");
                 }
+
                 catch (MembershipCreateUserException e)
                 {
                     ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return View(model);
-
-            //if (ModelState.IsValid)
-            //{
-            //    db.Admins.Add(admin);
-            //    db.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
-
-            //return View(admin);
         }
 
         //

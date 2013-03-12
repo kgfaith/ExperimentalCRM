@@ -515,6 +515,10 @@
       <Project>{1038f5f3-1792-4f79-8d5b-41fe42aeb608}</Project>
       <Name>ExperimentalCMS.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ExperimentalCMS.Repositories\ExperimentalCMS.Repositories.csproj">
+      <Project>{14f34ec4-2abe-46fb-ab37-4f486a1433cd}</Project>
+      <Name>ExperimentalCMS.Repositories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ExperimentalCMS.ViewModels\ExperimentalCMS.ViewModels.csproj">
       <Project>{677932f6-0624-48a7-8d65-f914e5971b17}</Project>
       <Name>ExperimentalCMS.ViewModels</Name>

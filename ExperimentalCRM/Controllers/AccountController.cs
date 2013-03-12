@@ -7,6 +7,7 @@ using ExperimentalCMS.Web.BackEnd.Models;
 using ExperimentalCMS.Web.BackEnd.Controllers.BaseController;
 using WebMatrix.WebData;
 using ExperimentalCMS.Domain.DataAccess;
+using ExperimentalCMS.Repositories;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
@@ -14,7 +15,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
     public class AccountController : CmsBaseController
     {
         private ExCMSContext db = new ExCMSContext();
-
+        private UnitOfWork uOW = new UnitOfWork();
         //
         // GET: /Account/Login
 
@@ -37,7 +38,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             if(ModelState.IsValid && Membership.ValidateUser(model.UserName, model.Password))
             {
                 FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
-                User.Identity.Name =
+                
                 if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                 {
