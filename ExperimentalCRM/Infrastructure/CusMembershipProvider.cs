@@ -13,11 +13,10 @@ namespace ExperimentalCMS.Web.BackEnd.Infrastructure
     public class CusMembershipProvider : SimpleMembershipProvider
     {
         private ExCMSContext db = new ExCMSContext();
-        public MembershipUser CreateUser(Admin admin, string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey, out MembershipCreateStatus status)
-        {
-            var result = base.CreateUser(username, password, email, passwordQuestion: null, passwordAnswer: null, isApproved: true, providerUserKey: null, status: out status);
 
-            return result;
+        public override bool ValidateUser(string username, string password)
+        {
+            return true;
         }
     }
 }

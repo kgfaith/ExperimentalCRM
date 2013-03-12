@@ -33,9 +33,19 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            //if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            if(ModelState.IsValid && Membership.ValidateUser(model.UserName, model.Password))
             {
-                return RedirectToLocal(returnUrl);
+                FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+                        && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                {
+                    return Redirect(returnUrl);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
 
             // If we got this far, something failed, redisplay form
