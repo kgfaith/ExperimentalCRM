@@ -20,6 +20,21 @@ namespace ExperimentalCMS.Repositories.Repositories
             _context = context;
         }
 
+        public bool IsValidAdminLogin(string username, string password)
+        {
+            Admin user = _context.Admins.Where(u => u.UserName == username).SingleOrDefault();
+            if (user != null)
+            {
+                return true;//BCryptHelper.CheckPassword(password, user.PasswordHash);
+            }
+            return false;
+        }
+
+        public string[] GetRolesForUser(string id)
+        {
+            return new string[] { "Admin" };
+        }
+
         private bool disposed = false;
 
         protected virtual void Dispose(bool disposing)

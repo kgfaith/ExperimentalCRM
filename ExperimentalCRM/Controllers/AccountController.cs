@@ -5,7 +5,6 @@ using System.Web.Mvc;
 using System.Web.Security;
 using ExperimentalCMS.Web.BackEnd.Models;
 using ExperimentalCMS.Web.BackEnd.Controllers.BaseController;
-using WebMatrix.WebData;
 using ExperimentalCMS.Domain.DataAccess;
 using ExperimentalCMS.Repositories;
 
@@ -62,7 +61,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            WebSecurity.Logout();
+             FormsAuthentication.SignOut();
 
             return RedirectToAction("Index", "Home");
         }
@@ -108,22 +107,22 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         [HttpPost]
         public ActionResult Register(RegisterModel model)
         {
-            if (ModelState.IsValid)
-            {
-                // Attempt to register the user
-                MembershipCreateStatus createStatus = MembershipCreateStatus.Success;
-                var str = WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+            //if (ModelState.IsValid)
+            //{
+            //    // Attempt to register the user
+            //    MembershipCreateStatus createStatus = MembershipCreateStatus.Success;
+            //    var str = WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
 
-                if (createStatus == MembershipCreateStatus.Success)
-                {
-                    FormsAuthentication.SetAuthCookie(model.UserName, createPersistentCookie: false);
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    ModelState.AddModelError("", ErrorCodeToString(createStatus));
-                }
-            }
+            //    if (createStatus == MembershipCreateStatus.Success)
+            //    {
+            //        FormsAuthentication.SetAuthCookie(model.UserName, createPersistentCookie: false);
+            //        return RedirectToAction("Index", "Home");
+            //    }
+            //    else
+            //    {
+            //        ModelState.AddModelError("", ErrorCodeToString(createStatus));
+            //    }
+            //}
 
             // If we got this far, something failed, redisplay form
             return View(model);

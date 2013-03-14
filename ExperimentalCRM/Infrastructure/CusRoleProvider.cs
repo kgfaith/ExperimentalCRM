@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
+using ExperimentalCMS.Repositories;
 
 namespace ExperimentalCMS.Web.BackEnd.Infrastructure
 {
@@ -71,7 +72,10 @@ namespace ExperimentalCMS.Web.BackEnd.Infrastructure
 
         public override string[] GetRolesForUser(string id)
         {
-            return new string[] { "Admin" };//AccountRepository.GetRolesForUser(id);
+            using (UnitOfWork UOW = new UnitOfWork())
+            {
+                return UOW.AdminRepo.GetRolesForUser(id);
+            }
         }
 
         public override bool RoleExists(string roleName)
