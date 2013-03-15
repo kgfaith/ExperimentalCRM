@@ -38,10 +38,14 @@ namespace ExperimentalCMS.Model
         public string Password
         {
             set {
-                string salt = BCryptHelper.GenerateSalt(8);
-                PasswordHash = BCryptHelper.HashPassword(value, salt); 
+                Salt = BCryptHelper.GenerateSalt(8);
+                PasswordHash = BCryptHelper.HashPassword(value, Salt); 
             }
         }
+
+        [Required]
+        [StringLength(36)]
+        public string Salt { get; set; }
 
         internal static string GenerateRandomString()
         {

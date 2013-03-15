@@ -1,12 +1,14 @@
 ﻿<div class="pull-right">
-@if (Request.IsAuthenticated)
+@if (Request.IsAuthenticated && Session["Token"] != null)
 {
+    var loginUserToken = Session["Token"] as ExperimentalCMS.ViewModels.LoginToken;
+    
     <div class="btn-group">
-        <a class="btn btn-primary " data-toggle="dropdown" href="#"><i class="icon-user icon-white"></i>&nbsp; @User.Identity.Name</a>
+        <a class="btn btn-primary " data-toggle="dropdown" href="#"><i class="icon-user icon-white"></i>&nbsp; @loginUserToken.FullName</a>
         <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
         <ul class="dropdown-menu">
-            <li><a href="@Url.Action("Edit", "Admin", new { id = "4"})"><i class="icon-pencil"></i> Edit profile </a></li>
-            <li> @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }, new Dictionary<string, object> {{ "style", "margin: 0px;"} }))
+            <li><a href="@Url.Action("Edit", "Admin", new { id = loginUserToken.UserId})"><i class="icon-pencil"></i> Edit profile </a></li>
+            <li> @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
                  {
                   @Html.AntiForgeryToken()<a href="javascript:document.getElementById('logoutForm').submit()"><i class="icon-off"></i> Log off</a> }</li>
         </ul>

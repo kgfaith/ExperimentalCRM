@@ -5,16 +5,17 @@ using System.Web.Mvc;
 using System.Web.Security;
 using ExperimentalCMS.Web.BackEnd.Models;
 using ExperimentalCMS.Web.BackEnd.Controllers.BaseController;
-using ExperimentalCMS.Domain.DataAccess;
+using ExperimentalCMS.Repositories.DataAccess;
 using ExperimentalCMS.Repositories;
+using ExperimentalCMS.Domain.Contracts;
+using ExperimentalCMS.Domain.Managers;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
     [Authorize]
     public class AccountController : CmsBaseController
     {
-        private ExCMSContext db = new ExCMSContext();
-        private UnitOfWork uOW = new UnitOfWork();
+        private IAdminManager adminManager = new AdminManager();
         //
         // GET: /Account/Login
 
@@ -66,135 +67,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //
-        // GET: /Account/Register
-        [AllowAnonymous]
-         public ActionResult Register()
-        {
-            return ContextDependentView();
-        }
-
-        //
-        // POST: /Account/JsonRegister
-
-        [HttpPost]
-        public ActionResult JsonRegister(RegisterModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                // Attempt to register the user
-                MembershipCreateStatus createStatus;
-                Membership.CreateUser(model.UserName, model.Password, model.Email, passwordQuestion: null, passwordAnswer: null, isApproved: true, providerUserKey: null, status: out createStatus);
-
-                if (createStatus == MembershipCreateStatus.Success)
-                {
-                    FormsAuthentication.SetAuthCookie(model.UserName, createPersistentCookie: false);
-                    return Json(new { success = true });
-                }
-                else
-                {
-                    ModelState.AddModelError("", ErrorCodeToString(createStatus));
-                }
-            }
-
-            // If we got this far, something failed
-            return Json(new { errors = GetErrorsFromModelState() });
-        }
-
-        //
-        // POST: /Account/Register
-        [AllowAnonymous]
-        [HttpPost]
-        public ActionResult Register(RegisterModel model)
-        {
-            //if (ModelState.IsValid)
-            //{
-            //    // Attempt to register the user
-            //    MembershipCreateStatus createStatus = MembershipCreateStatus.Success;
-            //    var str = WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-
-            //    if (createStatus == MembershipCreateStatus.Success)
-            //    {
-            //        FormsAuthentication.SetAuthCookie(model.UserName, createPersistentCookie: false);
-            //        return RedirectToAction("Index", "Home");
-            //    }
-            //    else
-            //    {
-            //        ModelState.AddModelError("", ErrorCodeToString(createStatus));
-            //    }
-            //}
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
-
-        //
-        // GET: /Account/ChangePassword
-
-        public ActionResult ChangePassword()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Account/ChangePassword
-
-        [HttpPost]
-        public ActionResult ChangePassword(ChangePasswordModel model)
-        {
-            if (ModelState.IsValid)
-            {
-
-                // ChangePassword will throw an exception rather
-                // than return false in certain failure scenarios.
-                bool changePasswordSucceeded;
-                try
-                {
-                    MembershipUser currentUser = Membership.GetUser(User.Identity.Name, userIsOnline: true);
-                    changePasswordSucceeded = currentUser.ChangePassword(model.OldPassword, model.NewPassword);
-                }
-                catch (Exception)
-                {
-                    changePasswordSucceeded = false;
-                }
-
-                if (changePasswordSucceeded)
-                {
-                    return RedirectToAction("ChangePasswordSuccess");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
-                }
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
-
-        //
-        // GET: /Account/ChangePasswordSuccess
-
-        public ActionResult ChangePasswordSuccess()
-        {
-            return View();
-        }
-
-        private ActionResult ContextDependentView()
-        {
-            string actionName = ControllerContext.RouteData.GetRequiredString("action");
-            if (Request.QueryString["content"] != null)
-            {
-                ViewBag.FormAction = "Json" + actionName;
-                return PartialView();
-            }
-            else
-            {
-                ViewBag.FormAction = actionName;
-                return View();
-            }
-        }
-
+      
         private IEnumerable<string> GetErrorsFromModelState()
         {
             return ModelState.SelectMany(x => x.Value.Errors.Select(error => error.ErrorMessage));
@@ -219,23 +92,6 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             SetPasswordSuccess,
             RemoveLoginSuccess,
         }
-
-        /*internal class ExternalLoginResult : ActionResult
-        {
-            public ExternalLoginResult(string provider, string returnUrl)
-            {
-                Provider = provider;
-                ReturnUrl = returnUrl;
-            }
-
-            public string Provider { get; private set; }
-            public string ReturnUrl { get; private set; }
-
-            public override void ExecuteResult(ControllerContext context)
-            {
-                OAuthWebSecurity.RequestAuthentication(Provider, ReturnUrl);
-            }
-        }*/
 
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
         {

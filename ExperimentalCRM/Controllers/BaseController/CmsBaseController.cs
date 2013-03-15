@@ -15,5 +15,20 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers.BaseController
         {
             base.Initialize(requestContext);
         }
+
+        public LoginToken Token
+        {
+            get
+            {
+                if (Session["Token"] != null)
+                {
+                    return Session["Token"] as LoginToken;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
     }
 }

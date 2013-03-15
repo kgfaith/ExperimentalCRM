@@ -37,6 +37,10 @@
     <Reference Include="AutoMapper">
       <HintPath>..\packages\AutoMapper.2.2.1\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="DevOne.Security.Cryptography.BCrypt, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\BCrypt.1.0.0.0\lib\DevOne.Security.Cryptography.BCrypt.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
@@ -52,20 +56,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccess\ExCMSContext.cs" />
-    <Compile Include="DataAccess\ExCrmInitializer.cs" />
+    <Compile Include="Contracts\IAdminManager.cs" />
+    <Compile Include="Contracts\IAuthenticationManager.cs" />
+    <Compile Include="Managers\AdminManager.cs" />
+    <Compile Include="Managers\AuthenticationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\Crypto.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ExperimentalCMS.Repositories\ExperimentalCMS.Repositories.csproj">
+      <Project>{14f34ec4-2abe-46fb-ab37-4f486a1433cd}</Project>
+      <Name>ExperimentalCMS.Repositories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\ExperimentalCMS.Model.csproj">
       <Project>{ba2341d9-f652-4670-a2dd-faa7ea1c29b1}</Project>
       <Name>ExperimentalCMS.Model</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -51,6 +51,8 @@
     <Compile Include="Contracts\IPictureSourceRepository.cs" />
     <Compile Include="Contracts\IPlaceRepository.cs" />
     <Compile Include="Contracts\IPlaceTypeRepository.cs" />
+    <Compile Include="DataAccess\ExCMSContext.cs" />
+    <Compile Include="DataAccess\ExCrmInitializer.cs" />
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Repositories\PictureRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,10 +65,6 @@
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Domain\ExperimentalCMS.Domain.csproj">
-      <Project>{1038f5f3-1792-4f79-8d5b-41fe42aeb608}</Project>
-      <Name>ExperimentalCMS.Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Model\ExperimentalCMS.Model.csproj">
       <Project>{ba2341d9-f652-4670-a2dd-faa7ea1c29b1}</Project>
       <Name>ExperimentalCMS.Model</Name>

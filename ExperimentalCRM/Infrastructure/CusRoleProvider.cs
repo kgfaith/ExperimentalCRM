@@ -74,7 +74,7 @@ namespace ExperimentalCMS.Web.BackEnd.Infrastructure
         {
             using (UnitOfWork UOW = new UnitOfWork())
             {
-                return UOW.AdminRepo.GetRolesForUser(id);
+                return new string[] { "Admin" };
             }
         }
 

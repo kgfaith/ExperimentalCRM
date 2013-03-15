@@ -3,24 +3,54 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
-using ExperimentalCMS.Domain.DataAccess;
+using ExperimentalCMS.Repositories.DataAccess;
 using ExperimentalCMS.Model;
 using WebMatrix.WebData;
 using WebMatrix.Data;
 using ExperimentalCMS.Repositories;
+using ExperimentalCMS.Domain.Contracts;
+using ExperimentalCMS.Domain.Managers;
+using ExperimentalCMS.ViewModels;
 
 namespace ExperimentalCMS.Web.BackEnd.Infrastructure
 {
     public class CusMembershipProvider : SimpleMembershipProvider
     {
+        //TODO: decouple auth manager.
+        IAuthenticationManager authManager = new AuthenticationManager();
         public override bool ValidateUser(string username, string password)
         {
             bool isValidLogin;
-            using (UnitOfWork UOW = new UnitOfWork())
+            Admin admin;
+            isValidLogin = authManager.IsValidBackEndAdminUser(username, password, out admin);
+            if (isValidLogin)
             {
-                isValidLogin = UOW.AdminRepo.IsValidAdminLogin(username, password);
+                var token = new LoginToken();
+                token.UserId = admin.AdminId;
+                token.FullName = admin.FirstName + " " + admin.LastName;
+                token.EmailAddress = admin.Email;
+                LoginUserData = token;
             }
             return isValidLogin;
         }
+
+        public LoginToken LoginUserData
+        {
+            get
+            {
+                if (System.Web.HttpContext.Current == null)
+                {
+                    return null;
+                }
+                return System.Web.HttpContext.Current.Session["Token"] as LoginToken;
+            }
+            set
+            {
+                if (System.Web.HttpContext.Current != null)
+                {
+                    System.Web.HttpContext.Current.Session["Token"] = value;
+                }
+            }
+        } 
     }
 }

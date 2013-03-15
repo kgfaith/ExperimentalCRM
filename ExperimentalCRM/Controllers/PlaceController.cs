@@ -3,7 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using ExperimentalCMS.Model;
-using ExperimentalCMS.Domain.DataAccess;
+using ExperimentalCMS.Repositories.DataAccess;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {

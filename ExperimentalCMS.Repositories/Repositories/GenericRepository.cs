@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ExperimentalCMS.Domain.DataAccess;
+using ExperimentalCMS.Repositories.DataAccess;
 using System.Data.Entity;
 using System.Linq.Expressions;
 using System.Data;
