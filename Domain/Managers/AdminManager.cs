@@ -59,5 +59,17 @@ namespace ExperimentalCMS.Domain.Managers
         {
             return true;
         }
+
+        public Admin GetAdminByUserName(string userName)
+        {
+            try
+            {
+                return uOW.AdminRepo.Get(u => u.UserName == userName).SingleOrDefault();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
     }
 }

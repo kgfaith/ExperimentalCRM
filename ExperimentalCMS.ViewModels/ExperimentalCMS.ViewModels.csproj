@@ -45,7 +45,7 @@
     <Compile Include="AdminCreateViewModel.cs" />
     <Compile Include="AdminEditViewModel.cs" />
     <Compile Include="ArticleCreateViewModel.cs" />
-    <Compile Include="LoginToken.cs" />
+    <Compile Include="CustomPrincipalSerializeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

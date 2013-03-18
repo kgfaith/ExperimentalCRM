@@ -9,6 +9,9 @@ using ExperimentalCMS.Repositories.DataAccess;
 using ExperimentalCMS.Repositories;
 using ExperimentalCMS.Domain.Contracts;
 using ExperimentalCMS.Domain.Managers;
+using ExperimentalCMS.ViewModels;
+using System.Web.Script.Serialization;
+using System.Web;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
@@ -34,10 +37,9 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            //if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             if(ModelState.IsValid && Membership.ValidateUser(model.UserName, model.Password))
             {
-                FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                LogInUser(model.UserName, model.RememberMe);
                 
                 if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
@@ -67,11 +69,37 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-      
         private IEnumerable<string> GetErrorsFromModelState()
         {
             return ModelState.SelectMany(x => x.Value.Errors.Select(error => error.ErrorMessage));
         }
+
+        private void LogInUser(string userName, bool rememberMe)
+        {
+            var user = adminManager.GetAdminByUserName(userName);
+
+            CustomPrincipalSerializeModel serializeModel = new CustomPrincipalSerializeModel();
+            serializeModel.UserId = user.AdminId;
+            serializeModel.FullName = user.FirstName + " " + user.LastName;
+            serializeModel.EmailAddress = user.Email;
+
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+            string userData = serializer.Serialize(serializeModel);
+
+            FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
+                     1,
+                     user.Email,
+                     DateTime.Now,
+                     DateTime.Now.AddMinutes(15),
+                     rememberMe,
+                     userData);
+
+            string encTicket = FormsAuthentication.Encrypt(authTicket);
+            HttpCookie faCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
+            Response.Cookies.Add(faCookie);
+        }
+
 
         #region Helpers
         private ActionResult RedirectToLocal(string returnUrl)

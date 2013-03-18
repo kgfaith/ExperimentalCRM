@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ExperimentalCMS.ViewModels
 {
-    public class LoginToken
+    public class CustomPrincipalSerializeModel
     {
         public int UserId { get; set; }
         public string FullName { get; set; }

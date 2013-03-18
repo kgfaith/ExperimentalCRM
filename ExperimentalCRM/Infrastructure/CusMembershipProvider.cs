@@ -25,7 +25,7 @@ namespace ExperimentalCMS.Web.BackEnd.Infrastructure
             isValidLogin = authManager.IsValidBackEndAdminUser(username, password, out admin);
             if (isValidLogin)
             {
-                var token = new LoginToken();
+                var token = new CustomPrincipalSerializeModel();
                 token.UserId = admin.AdminId;
                 token.FullName = admin.FirstName + " " + admin.LastName;
                 token.EmailAddress = admin.Email;
@@ -34,7 +34,7 @@ namespace ExperimentalCMS.Web.BackEnd.Infrastructure
             return isValidLogin;
         }
 
-        public LoginToken LoginUserData
+        public CustomPrincipalSerializeModel LoginUserData
         {
             get
             {
@@ -42,7 +42,7 @@ namespace ExperimentalCMS.Web.BackEnd.Infrastructure
                 {
                     return null;
                 }
-                return System.Web.HttpContext.Current.Session["Token"] as LoginToken;
+                return System.Web.HttpContext.Current.Session["Token"] as CustomPrincipalSerializeModel;
             }
             set
             {

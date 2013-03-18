@@ -14,5 +14,6 @@ namespace ExperimentalCMS.Domain.Contracts
         IEnumerable<Admin> GetAllAdminList();
         Admin GetAdminById(int id);
         bool DeleteAdminById(int id);
+        Admin GetAdminByUserName(string userName);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using ExperimentalCMS.Model;
 using ExperimentalCMS.ViewModels;
+using ExperimentalCMS.Web.BackEnd.Infrastructure;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers.BaseController
 {
@@ -16,19 +17,24 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers.BaseController
             base.Initialize(requestContext);
         }
 
-        public LoginToken Token
+        //public CustomPrincipalSerializeModel Token
+        //{
+        //    get
+        //    {
+        //        if (Session["Token"] != null)
+        //        {
+        //            return Session["Token"] as CustomPrincipalSerializeModel;
+        //        }
+        //        else
+        //        {
+        //            return null;
+        //        }
+        //    }
+        //}
+
+        protected virtual new CustomPrincipal User
         {
-            get
-            {
-                if (Session["Token"] != null)
-                {
-                    return Session["Token"] as LoginToken;
-                }
-                else
-                {
-                    return null;
-                }
-            }
+            get { return HttpContext.User as CustomPrincipal; }
         }
     }
 }

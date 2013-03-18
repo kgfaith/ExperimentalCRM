@@ -7,6 +7,12 @@ using ExperimentalCMS.Repositories.DataAccess;
 using ExperimentalCMS.Web.BackEnd.App_Start;
 using WebMatrix.WebData;
 using System.Linq;
+using System;
+using System.Web;
+using System.Web.Security;
+using System.Web.Script.Serialization;
+using ExperimentalCMS.ViewModels;
+using ExperimentalCMS.Web.BackEnd.Infrastructure;
 
 namespace ExperimentalCMS.Web.BackEnd
 {
@@ -51,6 +57,27 @@ namespace ExperimentalCMS.Web.BackEnd
             RegisterRoutes(RouteTable.Routes);
 
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+
+        protected void Application_PostAuthenticateRequest(Object sender, EventArgs e)
+        {
+            HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+
+            if (authCookie != null)
+            {
+                FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+                CustomPrincipalSerializeModel serializeModel = serializer.Deserialize<CustomPrincipalSerializeModel>(authTicket.UserData);
+
+                CustomPrincipal newUser = new CustomPrincipal(authTicket.Name);
+                newUser.UserId = serializeModel.UserId;
+                newUser.FullName = serializeModel.FullName;
+                newUser.EmailAddress = serializeModel.EmailAddress;
+
+                HttpContext.Current.User = newUser;
+            }
         }
     }
 }
