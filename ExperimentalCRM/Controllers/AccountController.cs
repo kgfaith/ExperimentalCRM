@@ -62,7 +62,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-             FormsAuthentication.SignOut();
+            FormsAuthentication.SignOut();
 
             return RedirectToAction("Index", "Home");
         }

@@ -16,7 +16,7 @@
 @using (Html.BeginForm((string)ViewBag.FormAction, "Account", FormMethod.Post, new { @class = "form-signin" }))
 {
     @Html.AntiForgeryToken();
-    @Html.ValidationSummary(true, "Log in was unsuccessful. Please correct the errors and try again.")
+    @Html.ValidationSummary(true, "Log in was unsuccessful. Please correct the errors and try again.", new { @class = "alert alert-error" })
 
     <fieldset>
         <h1>@ViewBag.Title</h1>

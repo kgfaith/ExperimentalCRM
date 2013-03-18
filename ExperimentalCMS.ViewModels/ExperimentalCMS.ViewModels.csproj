@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountModels.cs" />
+    <Compile Include="AdminChangePasswordViewModel.cs" />
     <Compile Include="AdminCreateViewModel.cs" />
     <Compile Include="AdminEditViewModel.cs" />
     <Compile Include="ArticleCreateViewModel.cs" />

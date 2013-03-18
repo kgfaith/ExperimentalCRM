@@ -7,13 +7,17 @@ using ExperimentalCMS.ViewModels;
 using System.Web.Security;
 using WebMatrix.WebData;
 using ExperimentalCMS.Repositories;
+using ExperimentalCMS.Domain.Contracts;
+using ExperimentalCMS.Domain.Managers;
+using System;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
+        private IAdminManager adminManager = new AdminManager();
         private ExCMSContext db = new ExCMSContext();
-        private UnitOfWork uOW = new UnitOfWork();
 
         //
         // GET: /Admin/
@@ -55,13 +59,14 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
                 try
                 {
                     var adminModel = model.TransformToAdmin();
-                    adminModel = uOW.AdminRepo.Insert(adminModel);
-                    return RedirectToAction("Index");
+                    adminModel = adminManager.CreateNewAdminAccount(adminModel);
+                    if(adminModel != null)
+                        return RedirectToAction("Index");
                 }
 
-                catch (MembershipCreateUserException e)
+                catch (Exception ex)
                 {
-                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                    ModelState.AddModelError("", ex.Message);
                 }
             }
 
@@ -98,14 +103,10 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         {
             if (ModelState.IsValid )
             {
-                Admin admin = db.Admins.Find(model.AdminId);
-                
-                db.Entry(admin).State = EntityState.Modified;
-                db.SaveChanges();
+                var adminModel = model.TransformToAdmin();
+                var updateSuccess = adminManager.EditAdmin(adminModel);
+                return RedirectToAction("Index");
 
-                bool changePasswordSucceeded;
-                MembershipUser currentUser = Membership.GetUser(model.AdminId, userIsOnline: false);
-                changePasswordSucceeded = currentUser.ChangePassword(model.OldPassword, model.NewPassword);
                 return RedirectToAction("Index");
             }
             return View(model);

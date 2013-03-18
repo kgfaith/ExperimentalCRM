@@ -1,5 +1,5 @@
 ﻿<div class="pull-right">
-@if (Request.IsAuthenticated && Session["Token"] != null)
+@if (Request.IsAuthenticated)
 {
     var loginUserToken = Session["Token"] as ExperimentalCMS.ViewModels.LoginToken;
     
