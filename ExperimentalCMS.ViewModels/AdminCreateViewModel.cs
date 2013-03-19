@@ -43,6 +43,7 @@ namespace ExperimentalCMS.ViewModels
             adminObj.LastName = LastName;
             adminObj.UserName = UserName;
             adminObj.Email = Email;
+            adminObj.Password = ConfirmPassword;
             return adminObj;
         }
     }

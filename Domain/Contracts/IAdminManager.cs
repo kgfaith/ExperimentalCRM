@@ -15,5 +15,7 @@ namespace ExperimentalCMS.Domain.Contracts
         Admin GetAdminById(int id);
         bool DeleteAdminById(int id);
         Admin GetAdminByUserName(string userName);
+        bool IsDuplicatedUsername(string userName, int currentUserId);
+        bool IsDuplicatedEmail(string email, int currentUserId);
     }
 }

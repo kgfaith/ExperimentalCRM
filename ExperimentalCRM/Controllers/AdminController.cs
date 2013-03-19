@@ -54,20 +54,29 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         [HttpPost]
         public ActionResult Create(AdminCreateViewModel model)
         {
+            if (adminManager.IsDuplicatedUsername(model.UserName, 0))
+            {
+                ModelState.AddModelError("UserName", "This user name have already existed on the system. Please try another one. ");
+            }
+
+            if(adminManager.IsDuplicatedEmail(model.Email, 0))
+            {
+                ModelState.AddModelError("Email", "This email address have already existed on the system. Please try another one. ");
+            }
+
             if (ModelState.IsValid)
             {
-                try
-                {
-                    var adminModel = model.TransformToAdmin();
-                    adminModel = adminManager.CreateNewAdminAccount(adminModel);
-                    if(adminModel != null)
-                        return RedirectToAction("Index");
-                }
-
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError("", ex.Message);
-                }
+                    try
+                    {
+                        var adminModel = model.TransformToAdmin();
+                        adminModel = adminManager.CreateNewAdminAccount(adminModel);
+                        if (adminModel != null)
+                            return RedirectToAction("Index");
+                    }
+                    catch (Exception ex)
+                    {
+                        ModelState.AddModelError("", ex.Message);
+                    }
             }
 
             return View(model);
@@ -110,31 +119,6 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
                 return RedirectToAction("Index");
             }
             return View(model);
-        }
-
-        //
-        // GET: /Admin/Delete/5
-
-        public ActionResult Delete(int id = 0)
-        {
-            Admin admin = db.Admins.Find(id);
-            if (admin == null)
-            {
-                return HttpNotFound();
-            }
-            return View(admin);
-        }
-
-        //
-        // POST: /Admin/Delete/5
-
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Admin admin = db.Admins.Find(id);
-            db.Admins.Remove(admin);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         //

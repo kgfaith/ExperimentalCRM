@@ -29,9 +29,6 @@
                         @Html.DisplayNameFor(model => model.LastLoginTime)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Activated)
-                    </th>
-                    <th>
                     </th>
                 </tr>
                 @foreach (var item in Model)
@@ -50,11 +47,7 @@
                             @Html.DisplayFor(modelItem => item.LastLoginTime)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Activated)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.AdminId }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.AdminId })
+                            @Html.ActionLink("Edit", "Edit", new { id = item.AdminId }) 
                         </td>
                     </tr>
                 }

@@ -7,6 +7,7 @@ using ExperimentalCMS.Domain.Contracts;
 using ExperimentalCMS.Model;
 using DevOne.Security.Cryptography.BCrypt;
 using ExperimentalCMS.Repositories;
+using ExperimentalCMS.Domain.Utility;
 
 namespace ExperimentalCMS.Domain.Managers
 {
@@ -17,7 +18,12 @@ namespace ExperimentalCMS.Domain.Managers
         {
             try
             {
+                if (newAdmin.DateCreated == DateTime.MinValue)
+                    newAdmin.DateCreated = DateTime.Now;
+
+                newAdmin.Activated = true;
                 newAdmin = uOW.AdminRepo.Insert(newAdmin);
+                uOW.Save();
             }
 
             catch(Exception ex)
@@ -70,6 +76,34 @@ namespace ExperimentalCMS.Domain.Managers
             {
                 return null;
             }
+        }
+
+        public bool IsDuplicatedUsername(string userName, int currentUserId)
+        {
+            Admin resultAdmin;
+            if (currentUserId > 0)
+            {
+                resultAdmin = uOW.AdminRepo.Get(u => string.Compare(u.UserName , userName, true) == 0 && u.AdminId != currentUserId).SingleOrDefault();
+            }
+            else
+            {
+                resultAdmin = uOW.AdminRepo.Get(u => string.Compare(u.UserName, userName, true) == 0).SingleOrDefault();
+            }
+            return resultAdmin != null;
+        }
+
+        public bool IsDuplicatedEmail(string email, int currentUserId)
+        {
+            Admin resultAdmin;
+            if (currentUserId > 0)
+            {
+                resultAdmin = uOW.AdminRepo.Get(u => string.Compare(u.Email, email, true) == 0 && u.AdminId != currentUserId).SingleOrDefault();
+            }
+            else
+            {
+                resultAdmin = uOW.AdminRepo.Get(u => string.Compare(u.Email, email, true) == 0).SingleOrDefault();
+            }
+            return resultAdmin != null;
         }
     }
 }

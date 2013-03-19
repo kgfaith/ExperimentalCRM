@@ -10,7 +10,6 @@
         <legend>@Model.UserName</legend>
         @Html.HiddenFor(model => model.AdminId)
 
-
         <div class="editor-label">
             @Html.LabelFor(model => model.FirstName)
         </div>
@@ -32,11 +31,10 @@
             @Html.EditorFor(model => model.Email)
             @Html.ValidationMessageFor(model => model.Email)
         </div>
-             
-      
         
         <p>
             <input type="submit" value="Save" class="btn btn-primary" />
+             @Html.ActionLink("Change Password", "ChangePassword", null, new { @class = "btn" })
             @Html.ActionLink("Back to List", "Index", null, new { @class = "btn" })
         </p>
     </fieldset>
