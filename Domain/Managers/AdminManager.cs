@@ -105,5 +105,26 @@ namespace ExperimentalCMS.Domain.Managers
             }
             return resultAdmin != null;
         }
+
+        public bool ChangeAdminPassword(int adminId, string newPassword)
+        {
+            if (adminId <= 0)
+                return false;
+
+            var resultAdmin = uOW.AdminRepo.Get(u => u.AdminId == adminId).SingleOrDefault();
+            resultAdmin.Password = newPassword;
+            try
+            {
+                uOW.AdminRepo.Update(resultAdmin); 
+                uOW.Save();
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+           
+            return true;
+        }
+
     }
 }

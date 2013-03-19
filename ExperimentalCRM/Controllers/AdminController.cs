@@ -124,9 +124,18 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         //
         // GET: /Admin/Create
 
-        public ActionResult ChangePassword()
+        public ActionResult ChangePassword(int id = 0)
         {
-            return View();
+            Admin admin = db.Admins.Find(id);
+
+            if (admin == null)
+            {
+                return HttpNotFound();
+            }
+
+            var model = new AdminChangePasswordViewModel();
+            model.TransformFromAdminObject(admin);
+            return View(model);
         }
 
         //
@@ -139,9 +148,8 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             {
                 try
                 {
-                    //var adminModel = model.TransformToAdmin();
-                    //adminModel = adminManager.CreateNewAdminAccount(adminModel);
-                    //if (adminModel != null)
+                    var updateSuccessful = adminManager.ChangeAdminPassword(model.AdminId, model.ConfirmNewPassword);
+                    if (updateSuccessful)
                         return RedirectToAction("Index");
                 }
 

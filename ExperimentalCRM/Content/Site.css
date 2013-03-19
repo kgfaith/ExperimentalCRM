@@ -40,6 +40,9 @@
     background-repeat: repeat-x;
 }
 
+legend{
+    font-size: 18px;
+}
 
 /* Sign-in form 
 =============================================*/

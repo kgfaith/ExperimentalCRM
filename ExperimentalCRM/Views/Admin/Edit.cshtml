@@ -34,7 +34,7 @@
         
         <p>
             <input type="submit" value="Save" class="btn btn-primary" />
-             @Html.ActionLink("Change Password", "ChangePassword", null, new { @class = "btn" })
+             @Html.ActionLink("Change Password", "ChangePassword", new { id = Model.AdminId }, new { @class = "btn" })
             @Html.ActionLink("Back to List", "Index", null, new { @class = "btn" })
         </p>
     </fieldset>

@@ -17,5 +17,6 @@ namespace ExperimentalCMS.Domain.Contracts
         Admin GetAdminByUserName(string userName);
         bool IsDuplicatedUsername(string userName, int currentUserId);
         bool IsDuplicatedEmail(string email, int currentUserId);
+        bool ChangeAdminPassword(int adminId, string newPassword);
     }
 }
