@@ -137,6 +137,39 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             return RedirectToAction("Index");
         }
 
+        //
+        // GET: /Admin/Create
+
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Admin/Create
+
+        [HttpPost]
+        public ActionResult ChangePassword(AdminChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    //var adminModel = model.TransformToAdmin();
+                    //adminModel = adminManager.CreateNewAdminAccount(adminModel);
+                    //if (adminModel != null)
+                        return RedirectToAction("Index");
+                }
+
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+            }
+
+            return View(model);
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

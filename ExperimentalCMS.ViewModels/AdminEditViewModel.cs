@@ -12,6 +12,9 @@ namespace ExperimentalCMS.ViewModels
     {
         public int AdminId { get; set; }
 
+        [Display(Name = "User name")]
+        public string UserName { get; set; }
+
         [MaxLength(50)]
         public string FirstName { get; set; }
 

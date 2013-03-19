@@ -9,6 +9,8 @@ namespace ExperimentalCMS.ViewModels
 {
     public class AdminChangePasswordViewModel
     {
+        public int AdminId { get; set; }
+
         [Required]
         [StringLength(100)]
         [DataType(DataType.Password)]

@@ -513,6 +513,7 @@
     <None Include="Content\ckeditor\README.md" />
     <None Include="Content\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
     <None Include="Content\ckeditor\skins\moono\readme.md" />
+    <Content Include="Views\Admin\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Domain\ExperimentalCMS.Domain.csproj">

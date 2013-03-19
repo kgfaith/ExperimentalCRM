@@ -7,8 +7,10 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Edit Admin</legend>
+        <legend>@Model.UserName</legend>
         @Html.HiddenFor(model => model.AdminId)
+
+
         <div class="editor-label">
             @Html.LabelFor(model => model.FirstName)
         </div>
@@ -31,27 +33,7 @@
             @Html.ValidationMessageFor(model => model.Email)
         </div>
              
-         @*<div class="editor-label">
-            @Html.LabelFor(model => model.OldPassword)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.OldPassword)
-            @Html.ValidationMessageFor(model => model.OldPassword)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.NewPassword)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.NewPassword)
-            @Html.ValidationMessageFor(model => model.NewPassword)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ConfirmNewPassword)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ConfirmNewPassword)
-            @Html.ValidationMessageFor(model => model.ConfirmNewPassword)
-        </div>*@
+      
         
         <p>
             <input type="submit" value="Save" class="btn btn-primary" />
