@@ -30,6 +30,7 @@ namespace ExperimentalCMS.ViewModels
         public Admin TransformToAdmin()
         {
             Admin adminObj = new Admin();
+            adminObj.AdminId = AdminId;
             adminObj.FirstName = FirstName;
             adminObj.LastName = LastName;
             adminObj.Email = Email;

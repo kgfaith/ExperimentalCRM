@@ -10,6 +10,7 @@ using ExperimentalCMS.Repositories;
 using ExperimentalCMS.Domain.Contracts;
 using ExperimentalCMS.Domain.Managers;
 using System;
+using ExperimentalCMS.Web.BackEnd.Extensions;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
@@ -22,8 +23,10 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         //
         // GET: /Admin/
 
-        public ActionResult Index()
+        public ActionResult Index(string gsm = null)
         {
+            ViewBag.gsm = gsm;
+
             return View(db.Admins.ToList());
         }
 
@@ -87,16 +90,13 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            if (id <= 0)
-            {
-                id = WebSecurity.GetUserId(User.Identity.Name);
-            }
+            string errorMessage;
+            var admin = GetAdminById(id, out errorMessage);
 
-            Admin admin = db.Admins.Find(id);
-           
             if (admin == null)
             {
-                return HttpNotFound();
+                admin = new Admin();
+                ModelState.AddModelError("", errorMessage);
             }
 
             var model = new AdminEditViewModel();
@@ -113,10 +113,13 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             if (ModelState.IsValid )
             {
                 var adminModel = model.TransformToAdmin();
-                var updateSuccess = adminManager.EditAdmin(adminModel);
-                return RedirectToAction("Index");
+                var domainResponse = adminManager.EditAdmin(adminModel);
 
-                return RedirectToAction("Index");
+                if(domainResponse.Success)
+                    return RedirectToAction("Index", new { gsm = domainResponse.Messages.FirstOrDefault() });
+                else
+                    ModelState.AddModelErrors("", domainResponse.Messages);
+
             }
             return View(model);
         }
@@ -126,11 +129,13 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
 
         public ActionResult ChangePassword(int id = 0)
         {
-            Admin admin = db.Admins.Find(id);
+            string errorMessage;
+            var admin = GetAdminById(id, out errorMessage);
 
             if (admin == null)
             {
-                return HttpNotFound();
+                admin = new Admin();
+                ModelState.AddModelError("", errorMessage);
             }
 
             var model = new AdminChangePasswordViewModel();
@@ -148,9 +153,12 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             {
                 try
                 {
-                    var updateSuccessful = adminManager.ChangeAdminPassword(model.AdminId, model.ConfirmNewPassword);
-                    if (updateSuccessful)
-                        return RedirectToAction("Index");
+                    var domainResponse = adminManager.ChangeAdminPassword(model.AdminId, model.ConfirmNewPassword);
+                    if (domainResponse.Result.Success)
+                    {
+                        return RedirectToAction("Index", new { gsm = "Admin password has been successfully updated." });
+                    }
+                    ModelState.AddModelErrors("", domainResponse.Messages);
                 }
 
                 catch (Exception ex)
@@ -159,7 +167,25 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
                 }
             }
 
+            string errorMessage = string.Empty;
+            var admin = GetAdminById(model.AdminId, out errorMessage);
+            model.TransformFromAdminObject(admin);
             return View(model);
+        }
+
+        private Admin GetAdminById(int id, out string errorMessage)
+        {
+            errorMessage = string.Empty;
+
+            var domainResponse = adminManager.GetAdminById(id);
+
+            if (!domainResponse.Success)
+            {
+                errorMessage = domainResponse.Messages.FirstOrDefault();
+                return null;
+            }
+
+            return domainResponse.Result;
         }
 
         protected override void Dispose(bool disposing)

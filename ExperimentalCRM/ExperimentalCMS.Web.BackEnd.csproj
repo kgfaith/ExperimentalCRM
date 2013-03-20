@@ -148,6 +148,8 @@
     <Compile Include="Controllers\BaseController\CmsBaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlaceController.cs" />
+    <Compile Include="Extensions\ErrorMessageExtension.cs" />
+    <Compile Include="Extensions\ModelStateExtension.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

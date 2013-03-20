@@ -38,28 +38,50 @@ namespace ExperimentalCMS.Domain.Managers
             return null;
         }
 
-        public bool EditAdmin(Admin admin)
+        public DomainResponse<BooleanResult> EditAdmin(Admin admin)
         {
+            var response = new DomainResponse<BooleanResult>();
+           
             try
             {
                 uOW.AdminRepo.Update(admin);
+                uOW.Save();
             }
 
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return false;
+                return response.ReturnFailResponse( new[] { ex.Message }
+                       , "There is an error trying to update data"
+                       , new BooleanResult { Success = false });
             }
-           
-            return true;
+
+            return response.ReturnSuccessResponse(new BooleanResult { Success = true }
+                    , new[] { "Admin data has been successfully updated." }
+                    , "Admin data has been successfully updated.");
         }
 
         public IEnumerable<Admin> GetAllAdminList()
         {
             return null;
         }
-        public Admin GetAdminById(int id)
+        public DomainResponse<Admin> GetAdminById(int id)
         {
-            return null;
+            var response = new DomainResponse<Admin>();
+            try
+            {
+                response.Result = uOW.AdminRepo.GetByID(id);
+            }
+            catch (Exception ex)
+            {
+                return response.ReturnFailResponse(new[] { ex.Message }
+                       , "There is an error trying to retrieve data", null);
+            }
+
+            if (response.Result != null)
+                return response.ReturnSuccessResponse(response.Result, null, null);
+            else
+                return response.ReturnFailResponse(new [] { string.Format("Error occur whilte retrieving data for admingId {0}", id) }
+                    , "There is an error trying to retrieve data", null);
         }
         public bool DeleteAdminById(int id)
         {
@@ -106,10 +128,13 @@ namespace ExperimentalCMS.Domain.Managers
             return resultAdmin != null;
         }
 
-        public bool ChangeAdminPassword(int adminId, string newPassword)
+        public DomainResponse<BooleanResult> ChangeAdminPassword(int adminId, string newPassword)
         {
+            var response = new DomainResponse<BooleanResult>();
             if (adminId <= 0)
-                return false;
+                return response.ReturnFailResponse(new []{"Data cannot be retrieve with AdminId NULL"}
+                    ,"There is an error trying to retrieve data"
+                    ,new BooleanResult { Success = false });
 
             var resultAdmin = uOW.AdminRepo.Get(u => u.AdminId == adminId).SingleOrDefault();
             resultAdmin.Password = newPassword;
@@ -120,10 +145,14 @@ namespace ExperimentalCMS.Domain.Managers
             }
             catch(Exception ex)
             {
-                return false;
+                return response.ReturnFailResponse( new[] { ex.Message }
+                    , "There is an error trying to retrieve data"
+                    , new BooleanResult { Success = false });
             }
-           
-            return true;
+
+            return response.ReturnSuccessResponse(new BooleanResult { Success = true }
+                    , new[] { "Password has been successfully updated." }
+                    , "Password has been successfully updated.");
         }
 
     }

@@ -4,7 +4,7 @@
     //var loginUserToken = Session["Token"] as ExperimentalCMS.ViewModels.LoginToken;
     
     <div class="btn-group">
-        <a class="btn btn-primary " data-toggle="dropdown" href="#"><i class="icon-user icon-white"></i>&nbsp; @User.FullName</a>
+        <a class="btn btn-primary" data-toggle="dropdown" href="#"><i class="icon-user icon-white"></i>&nbsp; @User.FullName</a>
         <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
         <ul class="dropdown-menu">
             <li><a href="@Url.Action("Edit", "Admin", new { id = User.UserId})"><i class="icon-pencil"></i> Edit profile </a></li>
