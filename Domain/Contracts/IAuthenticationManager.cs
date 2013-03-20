@@ -10,5 +10,6 @@ namespace ExperimentalCMS.Domain.Contracts
     public interface IAuthenticationManager
     {
         bool IsValidBackEndAdminUser(string username, string password, out Admin admin);
+        void Dispose();
     }
 }

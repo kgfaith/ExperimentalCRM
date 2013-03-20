@@ -190,7 +190,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            db.Dispose();
+            adminManager.Dispose();
             base.Dispose(disposing);
         }
 

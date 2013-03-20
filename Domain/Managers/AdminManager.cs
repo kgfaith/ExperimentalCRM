@@ -11,7 +11,7 @@ using ExperimentalCMS.Domain.Utility;
 
 namespace ExperimentalCMS.Domain.Managers
 {
-    public class AdminManager : IAdminManager
+    public class AdminManager : IAdminManager, IDisposable
     {
         private UnitOfWork uOW = new UnitOfWork();
         public Admin CreateNewAdminAccount(Admin newAdmin)
@@ -44,7 +44,11 @@ namespace ExperimentalCMS.Domain.Managers
            
             try
             {
-                uOW.AdminRepo.Update(admin);
+                var adminData = uOW.AdminRepo.GetByID(admin.AdminId);
+                adminData.FirstName = admin.FirstName;
+                adminData.LastName = admin.LastName;
+                adminData.Email = admin.Email;
+                uOW.AdminRepo.Update(adminData);
                 uOW.Save();
             }
 
@@ -153,6 +157,24 @@ namespace ExperimentalCMS.Domain.Managers
             return response.ReturnSuccessResponse(new BooleanResult { Success = true }
                     , new[] { "Password has been successfully updated." }
                     , "Password has been successfully updated.");
+        }
+
+        //protected virtual void Dispose(bool disposing)
+        //{
+        //    if (!this.disposed)
+        //    {
+        //        if (disposing)
+        //        {
+        //            context.Dispose();
+        //        }
+        //    }
+        //    this.disposed = true;
+        //}
+
+        public void Dispose()
+        {
+            uOW.Dispose();
+            GC.SuppressFinalize(this);
         }
 
     }

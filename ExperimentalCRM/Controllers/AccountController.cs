@@ -100,6 +100,11 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             Response.Cookies.Add(faCookie);
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            adminManager.Dispose();
+            base.Dispose(disposing);
+        }
 
         #region Helpers
         private ActionResult RedirectToLocal(string returnUrl)

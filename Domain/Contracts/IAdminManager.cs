@@ -19,5 +19,6 @@ namespace ExperimentalCMS.Domain.Contracts
         bool IsDuplicatedUsername(string userName, int currentUserId);
         bool IsDuplicatedEmail(string email, int currentUserId);
         DomainResponse<BooleanResult> ChangeAdminPassword(int adminId, string newPassword);
+        void Dispose();
     }
 }

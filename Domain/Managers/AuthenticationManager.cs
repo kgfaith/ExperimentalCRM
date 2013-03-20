@@ -22,5 +22,11 @@ namespace ExperimentalCMS.Domain.Managers
             }
             return false;
         }
+
+        public void Dispose()
+        {
+            uOW.Dispose();
+            GC.SuppressFinalize(this);
+        }
     }
 }

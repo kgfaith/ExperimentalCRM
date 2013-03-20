@@ -17,40 +17,16 @@ namespace ExperimentalCMS.Web.BackEnd.Infrastructure
     public class CusMembershipProvider : SimpleMembershipProvider
     {
         //TODO: decouple auth manager.
-        IAuthenticationManager authManager = new AuthenticationManager();
+        
         public override bool ValidateUser(string username, string password)
         {
+            IAuthenticationManager authManager = new AuthenticationManager();
             bool isValidLogin;
             Admin admin;
             isValidLogin = authManager.IsValidBackEndAdminUser(username, password, out admin);
-            if (isValidLogin)
-            {
-                var token = new CustomPrincipalSerializeModel();
-                token.UserId = admin.AdminId;
-                token.FullName = admin.FirstName + " " + admin.LastName;
-                token.EmailAddress = admin.Email;
-                LoginUserData = token;
-            }
+            authManager.Dispose();
+           
             return isValidLogin;
         }
-
-        public CustomPrincipalSerializeModel LoginUserData
-        {
-            get
-            {
-                if (System.Web.HttpContext.Current == null)
-                {
-                    return null;
-                }
-                return System.Web.HttpContext.Current.Session["Token"] as CustomPrincipalSerializeModel;
-            }
-            set
-            {
-                if (System.Web.HttpContext.Current != null)
-                {
-                    System.Web.HttpContext.Current.Session["Token"] = value;
-                }
-            }
-        } 
     }
 }
