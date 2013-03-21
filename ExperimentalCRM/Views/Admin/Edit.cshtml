@@ -4,12 +4,12 @@
 }
 @using (Html.BeginForm())
 {
-    
+    <div>
     @Html.ValidationSummary(true)
-
+    </div>
     <fieldset>
         <legend>@Model.UserName</legend>
-
+        @Html.HiddenFor(model => model.UserName)
         @Html.HiddenFor(model => model.AdminId)
 
         <div class="editor-label">

@@ -13,6 +13,8 @@ using System.Web.Security;
 using System.Web.Script.Serialization;
 using ExperimentalCMS.ViewModels;
 using ExperimentalCMS.Web.BackEnd.Infrastructure;
+using Castle.Windsor;
+using Castle.Windsor.Installer;
 
 namespace ExperimentalCMS.Web.BackEnd
 {
@@ -46,17 +48,14 @@ namespace ExperimentalCMS.Web.BackEnd
         protected void Application_Start()
         {
             Database.SetInitializer<ExCMSContext>(new ExCrmInitializer());
-            //ExCMSContext db = new ExCMSContext();
-            //var article = db.Articles.ToList();
-            //db.Dispose();
-            //WebSecurity.InitializeDatabaseConnection("ExperimentalCMS", "Admin", "AdminId", "UserName", autoCreateTables: true);
-
             AreaRegistration.RegisterAllAreas();
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            BootstrapContainer();
         }
 
         protected void Application_PostAuthenticateRequest(Object sender, EventArgs e)
@@ -78,6 +77,20 @@ namespace ExperimentalCMS.Web.BackEnd
 
                 HttpContext.Current.User = newUser;
             }
+        }
+
+        private static IWindsorContainer container;
+
+        private static void BootstrapContainer()
+        {
+            container = new WindsorContainer().Install(FromAssembly.This());
+            var controllerFactory = new CustomControllerFactory(container.Kernel);
+            ControllerBuilder.Current.SetControllerFactory(controllerFactory);
+        }
+
+        protected void Application_End()
+        {
+            container.Dispose();
         }
     }
 }

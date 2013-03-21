@@ -18,7 +18,6 @@ namespace ExperimentalCMS.ViewModels
         [Display(Name = "Name")]
         public string FullName { get; set; }
 
-        [DataType(DataType.EmailAddress)]
         [Display(Name = "Email address")]
         public string Email { get; set; }
 

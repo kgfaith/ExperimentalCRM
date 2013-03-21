@@ -41,7 +41,13 @@ namespace ExperimentalCMS.Domain.Managers
         public DomainResponse<BooleanResult> EditAdmin(Admin admin)
         {
             var response = new DomainResponse<BooleanResult>();
-           
+            if (IsDuplicatedEmail(admin.Email, admin.AdminId))
+            {
+                return response.ReturnFailResponse(new[] { "This email address is already existed on the system. Please choose another one." }
+                       , "This email address is already existed on the system. Please choose another one."
+                       , new BooleanResult { Success = false });
+            }
+
             try
             {
                 var adminData = uOW.AdminRepo.GetByID(admin.AdminId);

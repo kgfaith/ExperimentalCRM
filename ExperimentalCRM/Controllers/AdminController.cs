@@ -26,7 +26,6 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         public ActionResult Index(string gsm = null)
         {
             ViewBag.gsm = gsm;
-
             return View(db.Admins.ToList());
         }
 
