@@ -14,6 +14,12 @@ namespace ExperimentalCMS.Domain.Managers
     public class AdminManager : IAdminManager, IDisposable
     {
         private UnitOfWork uOW = new UnitOfWork();
+
+        public AdminManager()
+        {
+
+        }
+
         public Admin CreateNewAdminAccount(Admin newAdmin)
         {
             try

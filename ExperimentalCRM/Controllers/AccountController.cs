@@ -12,13 +12,22 @@ using ExperimentalCMS.Domain.Managers;
 using ExperimentalCMS.ViewModels;
 using System.Web.Script.Serialization;
 using System.Web;
+using Castle.Core.Logging;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
     [Authorize]
     public class AccountController : CmsBaseController
     {
-        private IAdminManager adminManager = new AdminManager();
+        // this is Castle.Core.Logging.ILogger, not log4net.Core.ILogger
+        public ILogger Logger { get; set; }
+        private IAdminManager _adminManager;
+
+        public AccountController(IAdminManager adminManager)
+        {
+            _adminManager = adminManager;
+        }
+
         //
         // GET: /Account/Login
 
@@ -37,18 +46,25 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if(ModelState.IsValid && Membership.ValidateUser(model.UserName, model.Password))
+            if(ModelState.IsValid)
             {
-                LogInUser(model.UserName, model.RememberMe);
-                
-                if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
-                        && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                if (Membership.ValidateUser(model.UserName, model.Password))
                 {
-                    return Redirect(returnUrl);
+                    LogInUser(model.UserName, model.RememberMe);
+
+                    if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+                            && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Home");
+                    Logger.WarnFormat("User: {0} attempted login but failed", model.UserName);
                 }
             }
 
@@ -76,7 +92,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
 
         private void LogInUser(string userName, bool rememberMe)
         {
-            var user = adminManager.GetAdminByUserName(userName);
+            var user = _adminManager.GetAdminByUserName(userName);
 
             CustomPrincipalSerializeModel serializeModel = new CustomPrincipalSerializeModel();
             serializeModel.UserId = user.AdminId;
@@ -102,7 +118,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            adminManager.Dispose();
+            _adminManager.Dispose();
             base.Dispose(disposing);
         }
 

@@ -177,6 +177,7 @@
     <Compile Include="Infrastructure\ICustomPrincipal.cs" />
     <Compile Include="Installers\ControllersInstaller.cs" />
     <Compile Include="Installers\LoggerInstaller.cs" />
+    <Compile Include="Installers\ManagersInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
   </ItemGroup>
@@ -535,7 +536,9 @@
     <None Include="Content\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
     <None Include="Content\ckeditor\skins\moono\readme.md" />
     <Content Include="Views\Admin\ChangePassword.cshtml" />
-    <Content Include="log4net.config" />
+    <Content Include="log4net.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Domain\ExperimentalCMS.Domain.csproj">
