@@ -17,8 +17,13 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
     [Authorize]
     public class AdminController : Controller
     {
-        private IAdminManager adminManager = new AdminManager();
+        private IAdminManager _adminManager;
         private ExCMSContext db = new ExCMSContext();
+
+        public AdminController(IAdminManager adminManager)
+        {
+            _adminManager = adminManager;
+        }
 
         //
         // GET: /Admin/
@@ -56,12 +61,12 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         [HttpPost]
         public ActionResult Create(AdminCreateViewModel model)
         {
-            if (adminManager.IsDuplicatedUsername(model.UserName, 0))
+            if (_adminManager.IsDuplicatedUsername(model.UserName, 0))
             {
                 ModelState.AddModelError("UserName", "This user name have already existed on the system. Please try another one. ");
             }
 
-            if(adminManager.IsDuplicatedEmail(model.Email, 0))
+            if(_adminManager.IsDuplicatedEmail(model.Email, 0))
             {
                 ModelState.AddModelError("Email", "This email address have already existed on the system. Please try another one. ");
             }
@@ -71,7 +76,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
                     try
                     {
                         var adminModel = model.TransformToAdmin();
-                        adminModel = adminManager.CreateNewAdminAccount(adminModel);
+                        adminModel = _adminManager.CreateNewAdminAccount(adminModel);
                         if (adminModel != null)
                             return RedirectToAction("Index");
                     }
@@ -112,7 +117,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             if (ModelState.IsValid )
             {
                 var adminModel = model.TransformToAdmin();
-                var domainResponse = adminManager.EditAdmin(adminModel);
+                var domainResponse = _adminManager.EditAdmin(adminModel);
 
                 if(domainResponse.Success)
                     return RedirectToAction("Index", new { gsm = domainResponse.Messages.FirstOrDefault() });
@@ -152,7 +157,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             {
                 try
                 {
-                    var domainResponse = adminManager.ChangeAdminPassword(model.AdminId, model.ConfirmNewPassword);
+                    var domainResponse = _adminManager.ChangeAdminPassword(model.AdminId, model.ConfirmNewPassword);
                     if (domainResponse.Result.Success)
                     {
                         return RedirectToAction("Index", new { gsm = "Admin password has been successfully updated." });
@@ -176,7 +181,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         {
             errorMessage = string.Empty;
 
-            var domainResponse = adminManager.GetAdminById(id);
+            var domainResponse = _adminManager.GetAdminById(id);
 
             if (!domainResponse.Success)
             {
@@ -189,7 +194,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            adminManager.Dispose();
+            _adminManager.Dispose();
             base.Dispose(disposing);
         }
 

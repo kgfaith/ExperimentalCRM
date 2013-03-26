@@ -13,11 +13,11 @@ namespace ExperimentalCMS.Domain.Managers
 {
     public class AdminManager : IAdminManager, IDisposable
     {
-        private UnitOfWork uOW = new UnitOfWork();
+        private IUnitOfWork _uOW;
 
-        public AdminManager()
+        public AdminManager(IUnitOfWork uow)
         {
-
+            _uOW = uow;
         }
 
         public Admin CreateNewAdminAccount(Admin newAdmin)
@@ -28,8 +28,8 @@ namespace ExperimentalCMS.Domain.Managers
                     newAdmin.DateCreated = DateTime.Now;
 
                 newAdmin.Activated = true;
-                newAdmin = uOW.AdminRepo.Insert(newAdmin);
-                uOW.Save();
+                newAdmin = _uOW.AdminRepo.Insert(newAdmin);
+                _uOW.Save();
             }
 
             catch(Exception ex)
@@ -56,12 +56,12 @@ namespace ExperimentalCMS.Domain.Managers
 
             try
             {
-                var adminData = uOW.AdminRepo.GetByID(admin.AdminId);
+                var adminData = _uOW.AdminRepo.GetByID(admin.AdminId);
                 adminData.FirstName = admin.FirstName;
                 adminData.LastName = admin.LastName;
                 adminData.Email = admin.Email;
-                uOW.AdminRepo.Update(adminData);
-                uOW.Save();
+                _uOW.AdminRepo.Update(adminData);
+                _uOW.Save();
             }
 
             catch (Exception ex)
@@ -85,7 +85,7 @@ namespace ExperimentalCMS.Domain.Managers
             var response = new DomainResponse<Admin>();
             try
             {
-                response.Result = uOW.AdminRepo.GetByID(id);
+                response.Result = _uOW.AdminRepo.GetByID(id);
             }
             catch (Exception ex)
             {
@@ -108,7 +108,7 @@ namespace ExperimentalCMS.Domain.Managers
         {
             try
             {
-                return uOW.AdminRepo.Get(u => u.UserName == userName).SingleOrDefault();
+                return _uOW.AdminRepo.Get(u => u.UserName == userName).SingleOrDefault();
             }
             catch (Exception ex)
             {
@@ -121,11 +121,11 @@ namespace ExperimentalCMS.Domain.Managers
             Admin resultAdmin;
             if (currentUserId > 0)
             {
-                resultAdmin = uOW.AdminRepo.Get(u => string.Compare(u.UserName , userName, true) == 0 && u.AdminId != currentUserId).SingleOrDefault();
+                resultAdmin = _uOW.AdminRepo.Get(u => string.Compare(u.UserName , userName, true) == 0 && u.AdminId != currentUserId).SingleOrDefault();
             }
             else
             {
-                resultAdmin = uOW.AdminRepo.Get(u => string.Compare(u.UserName, userName, true) == 0).SingleOrDefault();
+                resultAdmin = _uOW.AdminRepo.Get(u => string.Compare(u.UserName, userName, true) == 0).SingleOrDefault();
             }
             return resultAdmin != null;
         }
@@ -135,11 +135,11 @@ namespace ExperimentalCMS.Domain.Managers
             Admin resultAdmin;
             if (currentUserId > 0)
             {
-                resultAdmin = uOW.AdminRepo.Get(u => string.Compare(u.Email, email, true) == 0 && u.AdminId != currentUserId).SingleOrDefault();
+                resultAdmin = _uOW.AdminRepo.Get(u => string.Compare(u.Email, email, true) == 0 && u.AdminId != currentUserId).SingleOrDefault();
             }
             else
             {
-                resultAdmin = uOW.AdminRepo.Get(u => string.Compare(u.Email, email, true) == 0).SingleOrDefault();
+                resultAdmin = _uOW.AdminRepo.Get(u => string.Compare(u.Email, email, true) == 0).SingleOrDefault();
             }
             return resultAdmin != null;
         }
@@ -152,12 +152,12 @@ namespace ExperimentalCMS.Domain.Managers
                     ,"There is an error trying to retrieve data"
                     ,new BooleanResult { Success = false });
 
-            var resultAdmin = uOW.AdminRepo.Get(u => u.AdminId == adminId).SingleOrDefault();
+            var resultAdmin = _uOW.AdminRepo.Get(u => u.AdminId == adminId).SingleOrDefault();
             resultAdmin.Password = newPassword;
             try
             {
-                uOW.AdminRepo.Update(resultAdmin); 
-                uOW.Save();
+                _uOW.AdminRepo.Update(resultAdmin); 
+                _uOW.Save();
             }
             catch(Exception ex)
             {
@@ -185,7 +185,7 @@ namespace ExperimentalCMS.Domain.Managers
 
         public void Dispose()
         {
-            uOW.Dispose();
+            _uOW.Dispose();
             GC.SuppressFinalize(this);
         }
 
