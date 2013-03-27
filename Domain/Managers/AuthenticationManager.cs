@@ -12,10 +12,20 @@ namespace ExperimentalCMS.Domain.Managers
 {
     public class AuthenticationManager : IAuthenticationManager
     {
-        private UnitOfWork uOW = new UnitOfWork();
+        private IUnitOfWork _uOW;
+
+        public AuthenticationManager()
+        {
+        }
+
+        public AuthenticationManager(IUnitOfWork uow)
+        {
+            _uOW = uow;
+        }
+
         public bool IsValidBackEndAdminUser(string username, string password, out Admin admin)
         {
-            admin = uOW.AdminRepo.Get(u => u.UserName == username).SingleOrDefault();
+            admin = _uOW.AdminRepo.Get(u => u.UserName == username).SingleOrDefault();
             if (admin != null && BCryptHelper.CheckPassword(password, admin.PasswordHash))
             {
                 return true;
@@ -25,7 +35,7 @@ namespace ExperimentalCMS.Domain.Managers
 
         public void Dispose()
         {
-            uOW.Dispose();
+            _uOW.Dispose();
             GC.SuppressFinalize(this);
         }
     }

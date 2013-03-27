@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web.Mvc;
+using ExperimentalCMS.Domain.Contracts;
 using ExperimentalCMS.Model;
 using ExperimentalCMS.Repositories.DataAccess;
 using ExperimentalCMS.ViewModels;
@@ -14,6 +16,14 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
     public class ArticleController : CmsBaseController
     {
         private ExCMSContext db = new ExCMSContext();
+        private IArticleManager _articleManager;
+        private IPlaceManager _placeManager;
+
+        public ArticleController(IArticleManager articleManager, IPlaceManager placeManager)
+        {
+            _articleManager = articleManager;
+            _placeManager = placeManager;
+        }
 
         public ActionResult Index()
         {
@@ -89,6 +99,16 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             db.Articles.Remove(article);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult QuickSearchPlace(AjaxSearchParams searchParams)
+        {
+            List<int> idsToExclude = new List<int>();
+            if (searchParams.Excludes != null)
+                idsToExclude.AddRange(searchParams.Excludes.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(artistIDToExclude => int.Parse(artistIDToExclude)));
+
+            var searchResults = _placeManager.SearchPlace(searchParams.Term, idsToExclude);
+            return Json(searchResults, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

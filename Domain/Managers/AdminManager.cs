@@ -171,18 +171,6 @@ namespace ExperimentalCMS.Domain.Managers
                     , "Password has been successfully updated.");
         }
 
-        //protected virtual void Dispose(bool disposing)
-        //{
-        //    if (!this.disposed)
-        //    {
-        //        if (disposing)
-        //        {
-        //            context.Dispose();
-        //        }
-        //    }
-        //    this.disposed = true;
-        //}
-
         public void Dispose()
         {
             _uOW.Dispose();

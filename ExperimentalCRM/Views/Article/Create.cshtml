@@ -1,4 +1,5 @@
-﻿@model ExperimentalCMS.Web.BackEnd.ViewModels.ArticleCreateViewModel
+﻿@using ExperimentalCMS.ViewModels;
+@model ArticleCreateViewModel
 @{
     ViewBag.Title = "Create";
 }
@@ -56,6 +57,14 @@
                 @Html.TextAreaFor(model => model.Content, new { @class = "mb10"})
                 @Html.ValidationMessageFor(model => model.Content)
             </div>
+            <div class="mt20"></div>
+            <h4>Related Places</h4>
+            <div id="PlaceOutputDiv" style="width:200px; margin-top:20px;"> </div>
+
+            <div class="editor-field">
+               <input type="text" placeholder="Search Places..." id="SearchPlaces" />
+            </div>
+
             <p class="mt15">
                 <input type="submit" value="Create" class="btn btn-primary" />
                 @Html.ActionLink("Back to List", "Index", null, new { @class = "btn" })

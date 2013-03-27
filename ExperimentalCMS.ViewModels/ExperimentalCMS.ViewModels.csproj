@@ -44,6 +44,7 @@
     <Compile Include="AdminChangePasswordViewModel.cs" />
     <Compile Include="AdminCreateViewModel.cs" />
     <Compile Include="AdminEditViewModel.cs" />
+    <Compile Include="AjaxSearchParams.cs" />
     <Compile Include="ArticleCreateViewModel.cs" />
     <Compile Include="CustomPrincipalSerializeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
