@@ -12,16 +12,16 @@ namespace ExperimentalCMS.Domain.Managers
 {
     public class AuthenticationManager : IAuthenticationManager
     {
-        private IUnitOfWork _uOW;
+        private IUnitOfWork _uOW = new UnitOfWork();
 
-        public AuthenticationManager()
-        {
-        }
+        //public AuthenticationManager()
+        //{
+        //}
 
-        public AuthenticationManager(IUnitOfWork uow)
-        {
-            _uOW = uow;
-        }
+        //public AuthenticationManager(IUnitOfWork uow)
+        //{
+        //    _uOW = uow;
+        //}
 
         public bool IsValidBackEndAdminUser(string username, string password, out Admin admin)
         {

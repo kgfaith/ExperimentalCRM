@@ -15,9 +15,8 @@ namespace ExperimentalCMS.Web.BackEnd.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(Component.For<IAdminManager>().ImplementedBy<AdminManager>().LifestyleTransient());
-            //container.Register(Component.For<IArticleManager>().ImplementedBy<ArticleManager>().LifestyleTransient());
-            //container.Register(Component.For<IPlaceManager>().ImplementedBy<PlaceManager>().LifestyleTransient());
-
+            container.Register(Component.For<IArticleManager>().ImplementedBy<ArticleManager>().LifestyleTransient());
+            container.Register(Component.For<IPlaceManager>().ImplementedBy<PlaceManager>().LifestyleTransient());
         }
     }
 }

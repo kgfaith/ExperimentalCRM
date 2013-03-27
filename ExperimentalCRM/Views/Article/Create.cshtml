@@ -63,6 +63,7 @@
 
             <div class="editor-field">
                <input type="text" placeholder="Search Places..." id="SearchPlaces" />
+                <input type="hidden" id="SelectedPlaces" class="hidden" />
             </div>
 
             <p class="mt15">
@@ -79,3 +80,11 @@
         CKEDITOR.replace("Content");
     </script>
 }
+
+<!-- jquery templates -->
+<script id="placeList" type="text/x-jquery-tmpl">
+	<div style=" padding: 7px 15px; border-bottom: solid 1px #999;">
+        <strong>${label}</strong> <br />
+        <strong>${value}</strong>
+	</div>
+</script>

@@ -15,6 +15,7 @@ using ExperimentalCMS.ViewModels;
 using ExperimentalCMS.Web.BackEnd.Infrastructure;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
+using System.Diagnostics;
 
 namespace ExperimentalCMS.Web.BackEnd
 {
@@ -47,6 +48,7 @@ namespace ExperimentalCMS.Web.BackEnd
 
         protected void Application_Start()
         {
+            //Debugger.Break();
             Database.SetInitializer<ExCMSContext>(new ExCrmInitializer());
             AreaRegistration.RegisterAllAreas();
 
