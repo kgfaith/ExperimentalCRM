@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 <div class="span8">
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Create", "Article", FormMethod.Post, new Dictionary<string, Object> {{ "id", "mainForm"}}))
     {
         @Html.ValidationSummary(true)
 
@@ -59,18 +59,19 @@
             </div>
             <div class="mt20"></div>
             <h4>Related Places</h4>
-            <div id="PlaceOutputDiv" style="width:200px; margin-top:20px;"> </div>
+            <div id="PlaceOutputDiv" style="width:284px;" class="mb20"> </div>
 
             <div class="editor-field">
-               <input type="text" placeholder="Search Places..." id="SearchPlaces" />
+               <input type="text" placeholder="Search Places..." id="SearchPlaces" class="input-xlarge" />
                 <input type="hidden" id="SelectedPlaces" class="hidden" />
             </div>
 
-            <p class="mt15">
+            <p class="mt15 mb300">
                 <input type="submit" value="Create" class="btn btn-primary" />
                 @Html.ActionLink("Back to List", "Index", null, new { @class = "btn" })
             </p>
         </fieldset>
+        <div id="dataHolderForFormSubmit" class="hidden"></div>
     }
 </div>
 @section Scripts {
@@ -78,13 +79,16 @@
     <script>
         //TODO: Hardcoding the name of textarea field.
         CKEDITOR.replace("Content");
+        var screenScript = PlaceCreate(jQuery);
+        screenScript.LetsDoIt();
     </script>
 }
 
 <!-- jquery templates -->
 <script id="placeList" type="text/x-jquery-tmpl">
-	<div style=" padding: 7px 15px; border-bottom: solid 1px #999;">
-        <strong>${label}</strong> <br />
-        <strong>${value}</strong>
+	<div class="metal-plate">
+        <button type="button" class="close">×</button>
+        <strong>${value}</strong>  : <strong>${label}</strong>  
+        <input type="hidden" class="hidden" value="${value}" />       
 	</div>
 </script>

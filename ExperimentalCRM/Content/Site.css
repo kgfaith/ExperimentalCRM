@@ -1,6 +1,9 @@
 ﻿a:focus{
 	outline: none;
 }
+h1, h2, h3, h4, h5, h6{
+    margin: 5px 0;
+}
 
 .btn:focus{
 	outline: none;
@@ -8,6 +11,47 @@
 
 .hidden{
     display: none;
+}
+
+select,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input {
+  display: inline-block;
+  padding: 4px 6px;
+  margin-bottom: 7px;
+  font-size: 12px;
+  line-height:normal;
+  height:auto;
+  color: #555555;
+  vertical-align: middle;
+  -webkit-border-radius: 2px;
+     -moz-border-radius: 2px;
+          border-radius: 2px;
+}
+
+label {
+    display: block;
+    margin-bottom: 2px;
+}
+
+label, input, button, select, textarea {
+    font-size: 12px;
+    font-weight: normal;
+    line-height: normal;
 }
 
 /* Layouts 
@@ -57,6 +101,14 @@
 
 legend{
     font-size: 18px;
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 15px;
+    line-height: normal;
+    color: #333333;
+    border: 0;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 /* Sign-in form 
@@ -145,6 +197,10 @@ legend{
     margin-bottom: 20px;
 }
 
+.mb300{
+    margin-bottom: 300px;
+}
+
 .mt10 {
     margin-top: 10px;
 }
@@ -191,4 +247,28 @@ legend{
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
+}
+
+/*UI elements
+=============================================*/
+.metal-plate
+{
+    padding: 8px 8px;
+    position: relative;
+    -moz-box-shadow: 0 1px 0 #fff inset;
+    -webkit-box-shadow: 0 1px 0 #fff inset;
+    background: #cfd1cf;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#ebebeb),to(#cfd1cf));
+    background-image: -moz-linear-gradient(top,#ebebeb,#cfd1cf);
+    background-image: -webkit-linear-gradient(top,#ebebeb,#cfd1cf);
+    background-image: -o-linear-gradient(top,#ebebeb,#cfd1cf);
+    background-image: -ms-linear-gradient(top,#ebebeb,#cfd1cf);
+    background-image: linear-gradient(top,#ebebeb,#cfd1cf);
+    filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#ffebebeb',endColorstr='#cfd1cf');
+    border: 1px solid #b6b6b6;
+    border-top: 1px solid #bfbfbf;
+    -moz-box-shadow: 0 0 3px rgba(0,0,0,.15);
+    -webkit-box-shadow: 0 0 3px rgba(0,0,0,.15);
+    box-shadow: 0 0 3px rgba(0,0,0,.15);
+    box-shadow: 0 1px 0 #fff inset;
 }

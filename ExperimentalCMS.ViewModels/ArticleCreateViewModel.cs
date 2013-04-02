@@ -44,6 +44,7 @@ namespace ExperimentalCMS.ViewModels
             articleObj.CreatedDate = CreatedDate;
             articleObj.LastUpdatedDate = LastUpdatedDate;
             articleObj.PublishDate = PublishDate;
+            articleObj.Places = Places;
             return articleObj;
         }
     }

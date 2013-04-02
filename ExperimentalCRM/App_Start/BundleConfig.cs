@@ -9,11 +9,17 @@ namespace ExperimentalCMS.Web.BackEnd.App_Start
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                 "~/Scripts/jquery-1.9.1.min.js",
-                "~/Scripts/bootstrap.js"
-                ));
+                "~/Scripts/jquery.ui.core.js",
+                "~/Scripts/jquery.ui.widget.js",
+                "~/Scripts/jquery.ui.position.js",
+                "~/Scripts/jquery.ui.menu.js",
+                "~/Scripts/jquery.ui.autocomplete.js",
+                "~/Scripts/jQuery.tmpl.min.js",
+                "~/Scripts/bootstrap.js",
+                "~/Scripts/site.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                "~/Scripts/jquery-ui-{version}.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+            //    "~/Scripts/jquery-ui-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                 "~/Scripts/jquery.unobtrusive*",
@@ -43,8 +49,7 @@ namespace ExperimentalCMS.Web.BackEnd.App_Start
                 "~/Content/themes/base/jquery.ui.tabs.css",
                 "~/Content/themes/base/jquery.ui.datepicker.css",
                 "~/Content/themes/base/jquery.ui.progressbar.css",
-                "~/Content/themes/base/jquery.ui.theme.css",
-                "~/Content/themes/base/bootstrap.js"));
+                "~/Content/themes/base/jquery.ui.theme.css"));
         }
     }
 }

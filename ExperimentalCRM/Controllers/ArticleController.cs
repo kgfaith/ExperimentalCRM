@@ -8,7 +8,7 @@ using ExperimentalCMS.Model;
 using ExperimentalCMS.Repositories.DataAccess;
 using ExperimentalCMS.ViewModels;
 using ExperimentalCMS.Web.BackEnd.Controllers.BaseController;
-//using ExperimentalCMS.Web.BackEnd.ViewModels;
+using ExperimentalCMS.Web.BackEnd.Extensions;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
@@ -50,11 +50,11 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         {
             if (ModelState.IsValid)
             {
-                var articleModel = article.TransformToArticle();
-                articleModel.LastUpdatedDate = DateTime.Now;
-                db.Articles.Add(articleModel);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var response = _articleManager.CreateNewArticle(article.TransformToArticle());
+                if(response.Success && response.Result.ArticleId > 0)
+                    return RedirectToAction("Index");
+                else
+                    ModelState.AddModelErrors("", response.Messages);
             }
 
             return View(article);
@@ -62,7 +62,8 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            Article article = db.Articles.Find(id);
+            string errorMessage;
+            Article article = GetArticleById(id, out errorMessage);
             if (article == null)
             {
                 return HttpNotFound();
@@ -107,8 +108,23 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             if (searchParams.Excludes != null)
                 idsToExclude.AddRange(searchParams.Excludes.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(artistIDToExclude => int.Parse(artistIDToExclude)));
 
-            var searchResults = _placeManager.SearchPlace(searchParams.Term, idsToExclude);
+            var searchResults = _placeManager.SearchPlace(searchParams.Term, idsToExclude).Result.Take(10).Select(p => new { label = p.PlaceName, value = p.PlaceId }); ;
             return Json(searchResults, JsonRequestBehavior.AllowGet);
+        }
+
+        private Article GetArticleById(int id, out string errorMessage)
+        {
+            errorMessage = string.Empty;
+
+            var domainResponse = _articleManager.GetArticleById(id);
+
+            if (!domainResponse.Success)
+            {
+                errorMessage = domainResponse.Messages.FirstOrDefault();
+                return null;
+            }
+
+            return domainResponse.Result;
         }
 
         protected override void Dispose(bool disposing)

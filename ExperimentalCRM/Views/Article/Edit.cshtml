@@ -1,20 +1,17 @@
-﻿@using System.Web.Optimization
-@model ExperimentalCMS.Model.Article
-
+﻿@using ExperimentalCMS.ViewModels;
+@model ArticleCreateViewModel
 @{
     ViewBag.Title = "Edit";
 }
+<div class="span8">
+    @using (Html.BeginForm("Edit", "Article", FormMethod.Post, new Dictionary<string, Object> {{ "id", "mainForm"}}))
+    {
+        @Html.ValidationSummary(true)
 
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
-
-    <fieldset>
-        <legend>Edit Article</legend>
-
-        @Html.HiddenFor(model => model.ArticleId)
-
-             <div class="row-fluid">
-                <div class="span6">
+        <fieldset>
+            <legend>Create Article</legend>
+            <div class="row-fluid">
+                <div class="span7">
                     <div class="editor-label">
                         @Html.LabelFor(model => model.ArticleName)
                     </div>
@@ -23,7 +20,7 @@
                         @Html.ValidationMessageFor(model => model.ArticleName)
                     </div>
                 </div>
-                <div class="span6">
+                <div class="span4">
                     <div class="editor-label">
                         @Html.LabelFor(model => model.CreatedDate)
                     </div>
@@ -34,7 +31,7 @@
                 </div>
             </div>
             <div class="row-fluid">
-                <div class="span6">
+                <div class="span7">
                     <div class="editor-label">
                         @Html.LabelFor(model => model.Title)
                     </div>
@@ -43,7 +40,7 @@
                         @Html.ValidationMessageFor(model => model.Title)
                     </div>
                 </div>
-                <div class="span6">
+                <div class="span4">
                     <div class="editor-label">
                         @Html.LabelFor(model => model.PublishDate)
                     </div>
@@ -60,16 +57,38 @@
                 @Html.TextAreaFor(model => model.Content, new { @class = "mb10"})
                 @Html.ValidationMessageFor(model => model.Content)
             </div>
-        <p>
-            <input type="submit" value="Save" class="btn btn-primary" /> @Html.ActionLink("Back to List", "Index", null, new { @class = "btn"})
-        </p>
-    </fieldset>
-}
+            <div class="mt20"></div>
+            <h4>Related Places</h4>
+            <div id="PlaceOutputDiv" style="width:284px;" class="mb20"> </div>
 
+            <div class="editor-field">
+               <input type="text" placeholder="Search Places..." id="SearchPlaces" class="input-xlarge" />
+                <input type="hidden" id="SelectedPlaces" class="hidden" />
+            </div>
+
+            <p class="mt15 mb300">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn" })
+            </p>
+        </fieldset>
+        <div id="dataHolderForFormSubmit" class="hidden"></div>
+    }
+</div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
         //TODO: Hardcoding the name of textarea field.
         CKEDITOR.replace("Content");
+        var screenScript = PlaceCreate(jQuery);
+        screenScript.LetsDoIt();
     </script>
 }
+
+<!-- jquery templates -->
+<script id="placeList" type="text/x-jquery-tmpl">
+	<div class="metal-plate">
+        <button type="button" class="close">×</button>
+        <strong>${value}</strong>  : <strong>${label}</strong>  
+        <input type="hidden" class="hidden" value="${value}" />       
+	</div>
+</script>

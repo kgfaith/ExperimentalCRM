@@ -11,7 +11,7 @@
         @Styles.Render("~/Content/css")
         @Styles.Render("~/Content/themes/base/css")
         @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/jqueryui")
+        @*@Scripts.Render("~/bundles/jqueryui")*@
 
         <meta name="viewport" content="width=device-width" />
     </head>
@@ -43,8 +43,8 @@
              @RenderBody()
           </div><!--/row-->
 
-          
-            <footer id="footer" class="navbar-fixed-bottom">
+          @*class="navbar-fixed-bottom"*@
+            <footer id="footer" >
                 <p>© HelloWorldCms.com 2013</p>
             </footer>
           </div>
