@@ -63,12 +63,14 @@ namespace ExperimentalCMS.Domain.Managers
             var response = new DomainResponse<BooleanResult>();
             try
             {
-                var articleData = _uOW.ArticleRepo.GetByID(article.ArticleId);
-                //articleData.ArticleName = article.ArticleName;
-                //articleData.Title = article.Title;
-                //articleData.CreatedDate = article.PublishDate;
-                //articleData.LastUpdatedDate = article.LastUpdatedDate;
-                //_uOW.AdminRepo.Update(articleData);
+                var articleData = _uOW.ArticleRepo.Get(filter: ai => ai.ArticleId == article.ArticleId, includeProperties: "Places").FirstOrDefault();
+                articleData.ArticleName = article.ArticleName ?? articleData.ArticleName;
+                articleData.Title = article.Title ?? articleData.Title;
+                articleData.CreatedDate = article.PublishDate;
+                articleData.LastUpdatedDate = article.LastUpdatedDate;
+                articleData.PublishDate = article.PublishDate;
+                articleData.Content = article.Content;
+                _uOW.ArticleRepo.Update(articleData);
                 _uOW.Save();
             }
 
