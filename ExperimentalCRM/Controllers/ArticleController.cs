@@ -68,7 +68,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             {
                 return HttpNotFound();
             }
-            return View(article);
+            return View(article.MapToArticleCreateViewModel());
         }
 
         [HttpPost]

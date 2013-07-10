@@ -16,11 +16,12 @@ namespace ExperimentalCMS.Web.BackEnd.App_Start
                 "~/Scripts/jquery.ui.autocomplete.js",
                 "~/Scripts/jQuery.tmpl.min.js",
                 "~/Scripts/bootstrap.js",
-                "~/Scripts/site.js"));
+                "~/Scripts/site.js",
+                "~/Scripts/jquery.globalize/globalize.js",
+                "~/Scripts/jquery.globalize/cultures/globalize.culture.en-GB.js"
+                ));
 
-            //bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-            //    "~/Scripts/jquery-ui-{version}.js"));
-
+      
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                 "~/Scripts/jquery.unobtrusive*",
                 "~/Scripts/jquery.validate*",

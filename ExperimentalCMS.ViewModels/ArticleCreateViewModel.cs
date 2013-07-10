@@ -23,13 +23,13 @@ namespace ExperimentalCMS.ViewModels
         [AllowHtml]
         public string Content { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime CreatedDate { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime LastUpdatedDate { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime PublishDate { get; set; }
 
         public ICollection<Place> Places { get; set; }

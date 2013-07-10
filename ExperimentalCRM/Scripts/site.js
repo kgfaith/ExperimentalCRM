@@ -125,3 +125,30 @@ var PlaceCreate = function ($) {
     };
 }
 
+/*====================Custom Validator =======================*/
+$(document).ready(function () {
+    $.validator.methods.number = function (value, element) {
+        return this.optional(element) || !isNaN(Globalize.parseFloat(value));
+    }
+
+    $(function () {
+        Globalize.culture('en-GB');
+    });
+
+    $.validator.addMethod('date',
+       function (value, element, params) {
+           if (this.optional(element)) {
+               return true;
+           }
+
+           var ok = true;
+           try {
+                var sometihng = Globalize.parseDate(value, 'd', 'en-GB');
+           }
+           catch (err) {
+               ok = false;
+           }
+           return ok;
+       });
+});
+
