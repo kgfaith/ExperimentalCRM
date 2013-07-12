@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<ExperimentalCMS.Model.Article>
+@using ExperimentalCMS.Web.BackEnd.Utility;
 @{
     ViewBag.Title = "Articles";
 }
@@ -14,6 +15,12 @@
     </div>
     <div class="row-fluid">
         <div class="span6">
+            @if(TempData[Constants.TempdataKeys.EditArticleSuccessKey] != null)
+            {
+                <div style=" padding: 20px; width: 100%;">
+                    Article has been updated successfully.
+                </div>
+            }
             <table class="table table-striped">
                 <tr>
                     <th>

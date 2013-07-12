@@ -39,6 +39,12 @@ namespace ExperimentalCMS.Repositories.Repositories
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        public Article GetArticleById(int id)
+        {
+            var article = Get(x => x.ArticleId == id,null, "Places");
+            return article.FirstOrDefault();
+        }
     }
 }
 

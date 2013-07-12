@@ -112,7 +112,10 @@ var PlaceCreate = function ($) {
         });
 
         $('#mainForm').submit(function () {
-            var placeIdArray = dom_SelectedPlaces.val().split(',');
+            var selectedPlacesStr = dom_SelectedPlaces.val();
+            if (selectedPlacesStr.length == 0)
+                return true;
+            var placeIdArray = selectedPlacesStr.split(',');
             var dataHolder = $('#dataHolderForFormSubmit');
             for (var i = 0; i < placeIdArray.length; i++) {
                 ahboo.createInputForData(dataHolder, 'Places[' + i + '].PlaceId', placeIdArray[i]);

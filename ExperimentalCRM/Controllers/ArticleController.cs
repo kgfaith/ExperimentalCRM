@@ -9,15 +9,19 @@ using ExperimentalCMS.Repositories.DataAccess;
 using ExperimentalCMS.ViewModels;
 using ExperimentalCMS.Web.BackEnd.Controllers.BaseController;
 using ExperimentalCMS.Web.BackEnd.Extensions;
+using ExperimentalCMS.Web.BackEnd.Utility;
+using MvcContrib.Filters;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
     [Authorize]
+    [ModelStateToTempData]
     public class ArticleController : CmsBaseController
     {
         private ExCMSContext db = new ExCMSContext();
         private IArticleManager _articleManager;
         private IPlaceManager _placeManager;
+
 
         public ArticleController(IArticleManager articleManager, IPlaceManager placeManager)
         {
@@ -72,15 +76,23 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Article article)
+        public ActionResult Edit(ArticleCreateViewModel model)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(article).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var response = _articleManager.EditArticle(model.TransformToArticle());
+
+                if (response.Success)
+                {
+                    TempData[Constants.TempdataKeys.EditArticleSuccessKey] = true;
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelErrors("", response.Messages);
+                }
             }
-            return View(article);
+            return RedirectToAction("Edit");
         }
 
         public ActionResult Delete(int id = 0)

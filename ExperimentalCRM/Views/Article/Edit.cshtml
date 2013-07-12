@@ -6,12 +6,13 @@
 <div class="span8">
     @using (Html.BeginForm("Edit", "Article", FormMethod.Post, new Dictionary<string, Object> {{ "id", "mainForm"}}))
     {
-        @Html.ValidationSummary(true)
-
+        @Html.ValidationSummary()
+        
         <fieldset>
             <legend>Edit Article</legend>
             <div class="row-fluid">
                 <div class="span7">
+                    @Html.HiddenFor(m => m.ArticleId);
                     <div class="editor-label">
                         @Html.LabelFor(model => model.ArticleName)
                     </div>
@@ -59,7 +60,22 @@
             </div>
             <div class="mt20"></div>
             <h4>Related Places</h4>
-            <div id="PlaceOutputDiv" style="width:284px;" class="mb20"> </div>
+           @* <div id="PlaceOutputDiv" style="width:284px;" class="mb20"> </div>*@
+            <div id="PlaceOutputDiv" style="width: 284px;" class="mb20">
+                <div class="metal-plate">
+                    <button type="button" class="close">×</button>
+                    <strong>4</strong>  : <strong>Ngapali</strong>
+                    <input type="hidden" class="hidden" value="4">
+                </div>
+                @foreach (var place in Model.Places)
+                {
+                    <div class="metal-plate">
+                    <button type="button" class="close">×</button>
+                    <strong>@place.PlaceId</strong>  : <strong>@place.PlaceName</strong>
+                    <input type="hidden" class="hidden" value="@place.PlaceId">
+                </div>
+                }
+            </div>
 
             <div class="editor-field">
                <input type="text" placeholder="Search Places..." id="SearchPlaces" class="input-xlarge" />

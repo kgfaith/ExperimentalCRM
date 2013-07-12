@@ -9,6 +9,6 @@ namespace ExperimentalCMS.Repositories.Contracts
 {
     public interface IArticleRepository : IGenericRepository<Article>
     {
-
+        Article GetArticleById(int id);
     }
 }

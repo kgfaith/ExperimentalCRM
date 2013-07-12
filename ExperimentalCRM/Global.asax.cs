@@ -48,7 +48,7 @@ namespace ExperimentalCMS.Web.BackEnd
 
         protected void Application_Start()
         {
-            //Debugger.Break();
+            DataAnnotationsModelValidatorProvider.AddImplicitRequiredAttributeForValueTypes = false;
             Database.SetInitializer<ExCMSContext>(new ExCrmInitializer());
             AreaRegistration.RegisterAllAreas();
 

@@ -66,9 +66,9 @@ namespace ExperimentalCMS.Domain.Managers
                 var articleData = _uOW.ArticleRepo.Get(filter: ai => ai.ArticleId == article.ArticleId, includeProperties: "Places").FirstOrDefault();
                 articleData.ArticleName = article.ArticleName ?? articleData.ArticleName;
                 articleData.Title = article.Title ?? articleData.Title;
-                articleData.CreatedDate = article.PublishDate;
-                articleData.LastUpdatedDate = article.LastUpdatedDate;
-                articleData.PublishDate = article.PublishDate;
+                articleData.CreatedDate = article.PublishDate != DateTime.MinValue ? article.PublishDate : articleData.CreatedDate;
+                articleData.LastUpdatedDate = article.LastUpdatedDate != DateTime.MinValue ? article.LastUpdatedDate : articleData.LastUpdatedDate;
+                articleData.PublishDate = article.PublishDate != DateTime.MinValue ? article.PublishDate : articleData.PublishDate;
                 articleData.Content = article.Content;
                 _uOW.ArticleRepo.Update(articleData);
                 _uOW.Save();
@@ -96,7 +96,7 @@ namespace ExperimentalCMS.Domain.Managers
             var response = new DomainResponse<Article>();
             try
             {
-                response.Result = _uOW.ArticleRepo.GetByID(id);
+                response.Result = _uOW.ArticleRepo.GetArticleById(id);
             }
             catch (Exception ex)
             {
