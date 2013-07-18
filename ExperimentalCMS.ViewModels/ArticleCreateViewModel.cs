@@ -34,6 +34,8 @@ namespace ExperimentalCMS.ViewModels
 
         public ICollection<Place> Places { get; set; }
 
+        public string PlacesIdsString { get; set; }
+
         public Article TransformToArticle()
         {
             Article articleObj = new Article();

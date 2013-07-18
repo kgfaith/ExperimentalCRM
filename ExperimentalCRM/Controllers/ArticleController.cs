@@ -54,7 +54,8 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = _articleManager.CreateNewArticle(article.TransformToArticle());
+                var articleObj = PrepareArticleViewModelToUpdate(article);
+                var response = _articleManager.CreateNewArticle(articleObj);
                 if(response.Success && response.Result.ArticleId > 0)
                     return RedirectToAction("Index");
                 else
@@ -62,6 +63,20 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             }
 
             return View(article);
+        }
+
+        private Article PrepareArticleViewModelToUpdate(ArticleCreateViewModel viewModel)
+        {
+            var articleIds = !string.IsNullOrEmpty(viewModel.PlacesIdsString) ? viewModel.PlacesIdsString.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries) : null;
+            var articleObj = viewModel.TransformToArticle();
+            foreach (var id in articleIds)
+            {
+                var place = new Place { PlaceId = int.Parse(id) };
+                if(articleObj.Places == null)
+                    articleObj.Places = new List<Place>();
+                articleObj.Places.Add(place);
+            }
+            return articleObj;
         }
 
         public ActionResult Edit(int id = 0)
@@ -80,7 +95,17 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = _articleManager.EditArticle(model.TransformToArticle());
+                var articleIds = !string.IsNullOrEmpty(model.PlacesIdsString) ? model.PlacesIdsString.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries) : null;
+                var articleObj = model.TransformToArticle();
+                foreach (var id in articleIds)
+                {
+                    var place = new Place { PlaceId = int.Parse(id) };
+                    if (articleObj.Places == null)
+                        articleObj.Places = new List<Place>();
+                    articleObj.Places.Add(place);
+                }
+
+                var response = _articleManager.EditArticle(articleObj);
 
                 if (response.Success)
                 {

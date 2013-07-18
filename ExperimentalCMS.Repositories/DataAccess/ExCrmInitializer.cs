@@ -30,10 +30,10 @@ namespace ExperimentalCMS.Repositories.DataAccess
 
             var places = new List<Place>
                              {
-                                 new Place{ PlaceName = "Bagan", Description = "Description of bagan", PlaceType = placeTypes[0]},
-                                 new Place{ PlaceName = "Mandalay", Description = "Description of mandalay", PlaceType = placeTypes[0]},
-                                 new Place{ PlaceName = "Taungyi", Description = "Description of taungyi", PlaceType = placeTypes[0]},
-                                 new Place{ PlaceName = "Ngapali", Description = "Description of ngapali", PlaceType = placeTypes[0]},
+                                 new Place{ PlaceName = "Bagan", Description = "Description of bagan", PlaceType = placeTypes[0], PlaceId = placeTypes[0].PlaceTypeId, InternalRanking = 1, },
+                                 new Place{ PlaceName = "Mandalay", Description = "Description of mandalay", PlaceType = placeTypes[0], PlaceId = placeTypes[0].PlaceTypeId, InternalRanking = 1},
+                                 new Place{ PlaceName = "Taungyi", Description = "Description of taungyi", PlaceType = placeTypes[0], PlaceId = placeTypes[0].PlaceTypeId, InternalRanking = 1},
+                                 new Place{ PlaceName = "Ngapali", Description = "Description of ngapali", PlaceType = placeTypes[0], PlaceId = placeTypes[0].PlaceTypeId, InternalRanking = 1},
                              };
 
             places.ForEach(s => context.Places.Add(s));

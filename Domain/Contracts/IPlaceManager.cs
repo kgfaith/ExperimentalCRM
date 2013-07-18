@@ -13,6 +13,7 @@ namespace ExperimentalCMS.Domain.Contracts
         DomainResponse<Place> CreateNewPlace(Place newPlace);
         DomainResponse<BooleanResult> EditPlace(Place place);
         IEnumerable<Place> GetAllPlaceList();
+        DomainResponse<IEnumerable<PlaceType>> GetPlaceTypeList();
         DomainResponse<Place> GetPlaceById(int id);
         bool DeletPlaceById(int id);
         DomainResponse<IEnumerable<Place>> SearchPlace(string searchTerm, IEnumerable<int> placeIdsToExclude);

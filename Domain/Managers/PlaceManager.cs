@@ -29,6 +29,22 @@ namespace ExperimentalCMS.Domain.Managers
             throw new NotImplementedException();
         }
 
+        public DomainResponse<IEnumerable<PlaceType>> GetPlaceTypeList()
+        {
+            var response = new DomainResponse<IEnumerable<PlaceType>>();
+            try
+            {
+                response.Result = _uOW.PlaceTypeRepo.Get().ToArray();
+            }
+            catch (Exception ex)
+            {
+                return response.ReturnFailResponse(new[] { ex.Message }
+                       , "There is an error trying to retrieve data", null);
+            }
+
+            return response.ReturnSuccessResponse(response.Result, null, null);
+        }
+
         public IEnumerable<Place> GetAllPlaceList()
         {
             throw new NotImplementedException();

@@ -2,8 +2,10 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using ExperimentalCMS.Domain.Contracts;
 using ExperimentalCMS.Model;
 using ExperimentalCMS.Repositories.DataAccess;
+using ExperimentalCMS.ViewModels;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
@@ -11,6 +13,15 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
     public class PlaceController : Controller
     {
         private ExCMSContext db = new ExCMSContext();
+
+        private IArticleManager _articleManager;
+        private IPlaceManager _placeManager;
+
+        public PlaceController(IArticleManager articleManager, IPlaceManager placeManager)
+        {
+            _articleManager = articleManager;
+            _placeManager = placeManager;
+        }
 
         //
         // GET: /Place/
@@ -39,8 +50,18 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.PlaceTypeId = new SelectList(db.PlaceTypes, "PlaceTypeId", "PlaceTypeName");
+            ViewBag.PlaceTypeId = PopulatePlaceTypesSelectList();
+
             return View();
+        }
+
+        private SelectList PopulatePlaceTypesSelectList()
+        {
+            var placeTypeList = _placeManager.GetPlaceTypeList();
+            if (placeTypeList.Success && placeTypeList.Result.Count() > 0)
+                return new SelectList(placeTypeList.Result.Select(x => new SelectListItem { Text = x.PlaceTypeName, Value = x.PlaceTypeId.ToString() }), "Value", "Text");
+
+            return null;
         }
 
         //
@@ -78,7 +99,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         // POST: /Place/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Place place)
+        public ActionResult Edit(PlaceViewModel place)
         {
             if (ModelState.IsValid)
             {

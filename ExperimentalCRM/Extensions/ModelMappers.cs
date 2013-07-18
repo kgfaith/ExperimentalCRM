@@ -11,7 +11,7 @@ namespace ExperimentalCMS.Web.BackEnd.Extensions
     {
         public static ArticleCreateViewModel MapToArticleCreateViewModel(this Article article)
         {
-            return new ArticleCreateViewModel
+            var obj = new ArticleCreateViewModel
                         {
                             ArticleId = article.ArticleId,
                             ArticleName = article.ArticleName,
@@ -20,8 +20,15 @@ namespace ExperimentalCMS.Web.BackEnd.Extensions
                             CreatedDate = article.CreatedDate,
                             LastUpdatedDate = article.LastUpdatedDate.Value,
                             PublishDate = article.PublishDate,
-                            Places = article.Places
+                            Places = article.Places                     
                         };
+            string str = string.Empty;
+            foreach (var place in article.Places)
+            {
+                str += place.PlaceId.ToString() + ',';
+            }
+            obj.PlacesIdsString = str;
+            return obj;
         }
     }
 }

@@ -1,10 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using MaxLengthAttribute = System.ComponentModel.DataAnnotations.MaxLengthAttribute;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ExperimentalCMS.Model;
 
-namespace ExperimentalCMS.Model
+namespace ExperimentalCMS.ViewModels
 {
-    public class Place
+    public class PlaceViewModel
     {
         public int PlaceId { get; set; }
 

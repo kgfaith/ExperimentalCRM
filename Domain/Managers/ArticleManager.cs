@@ -70,6 +70,7 @@ namespace ExperimentalCMS.Domain.Managers
                 articleData.LastUpdatedDate = article.LastUpdatedDate != DateTime.MinValue ? article.LastUpdatedDate : articleData.LastUpdatedDate;
                 articleData.PublishDate = article.PublishDate != DateTime.MinValue ? article.PublishDate : articleData.PublishDate;
                 articleData.Content = article.Content;
+                UpdateArticlePlaces(article, articleData);
                 _uOW.ArticleRepo.Update(articleData);
                 _uOW.Save();
             }
@@ -84,6 +85,26 @@ namespace ExperimentalCMS.Domain.Managers
             return response.ReturnSuccessResponse(new BooleanResult { Success = true }
                     , new[] { "Admin data has been successfully updated." }
                     , "Admin data has been successfully updated.");
+        }
+
+        private void UpdateArticlePlaces(Article newArticle, Article articaleToUpdate)
+        {
+            var places = _uOW.PlaceRepo.Get();
+            var selectedIdsAry = newArticle.Places.Select(x => x.PlaceId).ToArray();
+            var existingIdsAry = articaleToUpdate.Places.Select(x => x.PlaceId).ToArray();
+            foreach (Place place in places)
+            {
+                if (selectedIdsAry.Contains(place.PlaceId))
+                {
+                    if(!existingIdsAry.Contains(place.PlaceId))
+                        articaleToUpdate.Places.Add(place);
+                }
+                else
+                {
+                    if (existingIdsAry.Contains(place.PlaceId))
+                        articaleToUpdate.Places.Remove(place);
+                }
+            }
         }
 
         public IEnumerable<Article> GetAllArticleList()

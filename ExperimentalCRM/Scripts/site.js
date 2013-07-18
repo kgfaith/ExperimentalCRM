@@ -94,7 +94,7 @@ var PlaceCreate = function ($) {
         dom_SelectedPlaceContainer.delegate('.close', 'click', function () {
             var parent = $(this).parent();
             var placeId = parent.children("input:hidden").val();
-            var idArray = dom_SelectedPlaceContainer.val().split(',');
+            var idArray = dom_SelectedPlaces.val().split(',');
             var len = idArray.length;
             var newIDList;
             for (var i = 0; i < len; i++) {
@@ -115,11 +115,11 @@ var PlaceCreate = function ($) {
             var selectedPlacesStr = dom_SelectedPlaces.val();
             if (selectedPlacesStr.length == 0)
                 return true;
-            var placeIdArray = selectedPlacesStr.split(',');
-            var dataHolder = $('#dataHolderForFormSubmit');
-            for (var i = 0; i < placeIdArray.length; i++) {
-                ahboo.createInputForData(dataHolder, 'Places[' + i + '].PlaceId', placeIdArray[i]);
-            }
+            //var placeIdArray = selectedPlacesStr.split(',');
+            //var dataHolder = $('#dataHolderForFormSubmit');
+            //for (var i = 0; i < placeIdArray.length; i++) {
+            //    ahboo.createInputForData(dataHolder, 'Places[' + i + '].PlaceId', placeIdArray[i]);
+            //}
             return true;
         });
     }

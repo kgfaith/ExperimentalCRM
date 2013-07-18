@@ -47,6 +47,7 @@
     <Compile Include="AjaxSearchParams.cs" />
     <Compile Include="ArticleCreateViewModel.cs" />
     <Compile Include="CustomPrincipalSerializeModel.cs" />
+    <Compile Include="PlaceViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
