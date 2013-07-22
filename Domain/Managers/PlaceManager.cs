@@ -21,7 +21,42 @@ namespace ExperimentalCMS.Domain.Managers
 
         public DomainResponse<Place> CreateNewPlace(Place newPlace)
         {
-            throw new NotImplementedException();
+            var response = new DomainResponse<Place>();
+            var tempRelatedPlaces = newPlace.RelatedPlaces;
+            newPlace.RelatedPlaces = new List<Place>();
+            return null;
+            //newPlace.LastUpdatedDate = DateTime.Now;
+            //try
+            //{
+            //    newArticle = _uOW.ArticleRepo.Insert(newArticle);
+            //    _uOW.Save();
+            //    foreach (Place place in tempRelatedPlaces)
+            //    {
+            //        var tempPlace = _uOW.PlaceRepo.GetByID(place.PlaceId);
+            //        newArticle.Places.Add(tempPlace);
+            //    }
+            //    _uOW.Save();
+            //}
+            //catch (Exception ex)
+            //{
+            //    return response.ReturnFailResponse(new[] { ex.Message }
+            //           , "There is an error trying to create a new article."
+            //           , null);
+            //}
+
+            //if (newArticle.ArticleId > 0)
+            //{
+
+            //    return response.ReturnSuccessResponse(newArticle
+            //            , new[] { "New article has been successfully created." }
+            //            , "New article has been successfully created.");
+            //}
+            //else
+            //{
+            //    return response.ReturnFailResponse(new[] { "Error occur while trying to create new article" }
+            //           , "There is an error trying to save data"
+            //           , null);
+            //}
         }
 
         public DomainResponse<BooleanResult> EditPlace(Place place)
