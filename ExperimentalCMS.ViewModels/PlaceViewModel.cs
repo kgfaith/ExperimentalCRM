@@ -25,5 +25,19 @@ namespace ExperimentalCMS.ViewModels
         public ICollection<Article> Articles { get; set; }
         public ICollection<Picture> Pictures { get; set; }
         public ICollection<Place> RelatedPlaces { get; set; }
+
+        public string RelatedArticleIds { get; set; }
+        public string RelatedPlaceIds { get; set; }
+
+        public Place TransformToPlaceObject()
+        {
+            Place placeObj = new Place();
+            placeObj.PlaceId = PlaceId;
+            placeObj.PlaceName = PlaceName;
+            placeObj.Description = Description;
+            placeObj.InternalRanking = InternalRanking;
+            placeObj.PlaceTypeId = PlaceTypeId;
+            return placeObj;
+        }
     }
 }

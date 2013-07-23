@@ -1,11 +1,15 @@
-﻿using System.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using ExperimentalCMS.Domain.Contracts;
 using ExperimentalCMS.Model;
 using ExperimentalCMS.Repositories.DataAccess;
+using ExperimentalCMS.Web.BackEnd.Extensions;
 using ExperimentalCMS.ViewModels;
+using ExperimentalCMS.Web.BackEnd.Utility;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
@@ -68,17 +72,42 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         // POST: /Place/Create
 
         [HttpPost]
-        public ActionResult Create(Place place)
+        public ActionResult Create(PlaceViewModel model)
         {
             if (ModelState.IsValid)
             {
-                db.Places.Add(place);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var placeObj = PreparePlaceViewModelToUpdate(model);
+                var response = _placeManager.CreateNewPlace(placeObj);
+                if (response.Success && response.Result.PlaceId > 0)
+                    return RedirectToAction("Index");
+                else
+                    ModelState.AddModelErrors("", response.Messages);
             }
+            ViewBag.PlaceTypeId = PopulatePlaceTypesSelectList();
+            return View(model);
+        }
 
-            ViewBag.PlaceTypeId = new SelectList(db.PlaceTypes, "PlaceTypeId", "PlaceTypeName", place.PlaceTypeId);
-            return View(place);
+        private Place PreparePlaceViewModelToUpdate(PlaceViewModel viewModel)
+        {
+            var articleIds = !string.IsNullOrEmpty(viewModel.RelatedArticleIds) ? viewModel.RelatedArticleIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries) : null;
+            var placeIds = !string.IsNullOrEmpty(viewModel.RelatedPlaceIds) ? viewModel.RelatedPlaceIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries) : null;
+
+            var placeObj = viewModel.TransformToPlaceObject();
+            foreach (var id in articleIds)
+            {
+                var article = new Article { ArticleId = int.Parse(id) };
+                if (placeObj.Articles == null)
+                    placeObj.Articles = new List<Article>();
+                placeObj.Articles.Add(article);
+            }
+            foreach (var id in placeIds)
+            {
+                var place = new Place { PlaceId = int.Parse(id) };
+                if (placeObj.RelatedPlaces == null)
+                    placeObj.RelatedPlaces = new List<Place>();
+                placeObj.RelatedPlaces.Add(place);
+            }
+            return placeObj;
         }
 
         //
@@ -103,12 +132,20 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(place).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var placeObj = PreparePlaceViewModelToUpdate(place);
+                var response = _placeManager.EditPlace(placeObj);
+
+                if (response.Success)
+                {
+                    TempData[Constants.TempdataKeys.EditArticleSuccessKey] = true;
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelErrors("", response.Messages);
+                }
             }
-            ViewBag.PlaceTypeId = new SelectList(db.PlaceTypes, "PlaceTypeId", "PlaceTypeName", place.PlaceTypeId);
-            return View(place);
+            return RedirectToAction("Edit");
         }
 
         //
