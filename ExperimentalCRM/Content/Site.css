@@ -272,3 +272,15 @@ legend{
     box-shadow: 0 0 3px rgba(0,0,0,.15);
     box-shadow: 0 1px 0 #fff inset;
 }
+
+/*Page elements
+=============================================*/
+#RelatedArticleContainer table { margin-top: 20px; width: 100%; height: auto; font-size: 11px; }
+#RelatedArticleContainer table td, #RelatedArticleContainer table th { padding: 7px;  }
+#RelatedArticleContainer table th:first-child { width:7%; }
+/*#RelatedArticleContainer table td:first-child, #RelatedArticleContainer table th:first-child { border-left: solid 1px #e6e6e6; }*/
+/*#RelatedArticleContainer table td, #RelatedArticleContainer table th { border-right: solid 1px #e6e6e6; }*/
+#RelatedArticleContainer table th { background: #e6e6e6;}
+#RelatedArticleContainer table th.id, #RelatedArticleContainer table td.id  { width:15%; text-align:center;}
+#RelatedArticleContainer table tbody tr:hover{ background: #FFFFCC;border-bottom: solid 1px #ccc;}
+#RelatedArticleContainer table tbody tr { border-bottom: solid 1px #e6e6e6;}

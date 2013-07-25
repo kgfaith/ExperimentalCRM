@@ -50,7 +50,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             {
                 if (Membership.ValidateUser(model.UserName, model.Password))
                 {
-                    LogInUser(model.UserName, model.RememberMe);
+                    LogInUser(model.UserName, true);
 
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                             && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
