@@ -149,6 +149,16 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             return Json(searchResults, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult JsonQuickSearchArticle(AjaxSearchParams searchParams)
+        {
+            List<int> idsToExclude = new List<int>();
+            if (searchParams.Excludes != null)
+                idsToExclude.AddRange(searchParams.Excludes.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(artistIDToExclude => int.Parse(artistIDToExclude)));
+
+            var searchResults = _articleManager.SearchArticls(searchParams.Term, idsToExclude).Result.Take(10).Select(a => new { label = a.ArticleName , value = a.ArticleId });
+            return Json(searchResults, JsonRequestBehavior.AllowGet);
+        }
+
         private Article GetArticleById(int id, out string errorMessage)
         {
             errorMessage = string.Empty;

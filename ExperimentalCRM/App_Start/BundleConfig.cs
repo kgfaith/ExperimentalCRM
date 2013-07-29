@@ -16,7 +16,7 @@ namespace ExperimentalCMS.Web.BackEnd.App_Start
                 "~/Scripts/jquery.ui.autocomplete.js",
                 "~/Scripts/jQuery.tmpl.min.js",
                 "~/Scripts/bootstrap.js",
-                "~/Scripts/site.js",
+                "~/Scripts/Application/function.core.js",
                 "~/Scripts/jquery.globalize/globalize.js",
                 "~/Scripts/jquery.globalize/cultures/globalize.culture.en-GB.js"
                 ));
@@ -51,6 +51,11 @@ namespace ExperimentalCMS.Web.BackEnd.App_Start
                 "~/Content/themes/base/jquery.ui.datepicker.css",
                 "~/Content/themes/base/jquery.ui.progressbar.css",
                 "~/Content/themes/base/jquery.ui.theme.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/EditPlace").Include(
+                "~/Scripts/Application/function.associatewithplace.js",
+                "~/Scripts/Application/function.associatewitharticle.js"
+                ));
         }
     }
 }

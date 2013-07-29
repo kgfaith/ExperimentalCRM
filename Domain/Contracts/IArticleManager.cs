@@ -15,6 +15,7 @@ namespace ExperimentalCMS.Domain.Contracts
         IEnumerable<Article> GetAllArticleList();
         DomainResponse<Article> GetArticleById(int id);
         bool DeleteArticleById(int id);
+        DomainResponse<IEnumerable<Article>> SearchArticls(string searchTerm, IEnumerable<int> articleIdsToExclude);
         void Dispose();
     }
 }

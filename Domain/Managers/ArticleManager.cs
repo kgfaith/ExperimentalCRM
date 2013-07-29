@@ -137,6 +137,23 @@ namespace ExperimentalCMS.Domain.Managers
             throw new NotImplementedException();
         }
 
+        public DomainResponse<IEnumerable<Article>> SearchArticls(string searchTerm, IEnumerable<int> articleIdsToExclude)
+        {
+            var response = new DomainResponse<IEnumerable<Article>>();
+            try
+            {
+                var articles = _uOW.ArticleRepo.Get(p => !articleIdsToExclude.Contains(p.ArticleId) && p.ArticleName.Contains(searchTerm));
+                response.Result = articles.ToArray();
+            }
+            catch (Exception ex)
+            {
+                return response.ReturnFailResponse(new[] { ex.Message }
+                       , "There is an error trying to retrieve data", null);
+            }
+
+            return response.ReturnSuccessResponse(response.Result, null, null);
+        }
+
         public void Dispose()
         {
             throw new NotImplementedException();

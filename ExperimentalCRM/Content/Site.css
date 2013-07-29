@@ -253,6 +253,7 @@ legend{
 =============================================*/
 .metal-plate
 {
+    width: 266px;
     padding: 8px 8px;
     position: relative;
     -moz-box-shadow: 0 1px 0 #fff inset;
@@ -275,12 +276,21 @@ legend{
 
 /*Page elements
 =============================================*/
-#RelatedArticleContainer table { margin-top: 20px; width: 100%; height: auto; font-size: 11px; }
+/*======/Place/Create========================*/
+#RelatedArticleContainer table { width: 100%; height: auto; font-size: 11px; }
 #RelatedArticleContainer table td, #RelatedArticleContainer table th { padding: 7px;  }
-#RelatedArticleContainer table th:first-child { width:7%; }
-/*#RelatedArticleContainer table td:first-child, #RelatedArticleContainer table th:first-child { border-left: solid 1px #e6e6e6; }*/
-/*#RelatedArticleContainer table td, #RelatedArticleContainer table th { border-right: solid 1px #e6e6e6; }*/
+#RelatedArticleContainer table th:first-child { width:5%; }
 #RelatedArticleContainer table th { background: #e6e6e6;}
-#RelatedArticleContainer table th.id, #RelatedArticleContainer table td.id  { width:15%; text-align:center;}
+#RelatedArticleContainer table th.id, #RelatedArticleContainer table td.id  { width:8%; text-align:center;}
+#RelatedArticleContainer table td.control  { width:5%; text-align:center;}
 #RelatedArticleContainer table tbody tr:hover{ background: #FFFFCC;border-bottom: solid 1px #ccc;}
 #RelatedArticleContainer table tbody tr { border-bottom: solid 1px #e6e6e6;}
+#RelatedArticleContainer .selected-article-table tr:first-child { border-top: solid 3px #ccc; }
+
+.plus-icon { display: block; width: 16px; height: 16px; background: url("../Content/images/plus-icon.png") 0px 0px no-repeat; cursor: pointer;}
+.article-search-result { width: 611px; min-height:100px; max-height: 250px;  overflow:scroll; margin-top: 10px; }
+.cross-icon{ display: block; width: 10px; height: 10px; background: url("../Content/images/cross_16.png") 0px 0px no-repeat; cursor: pointer;}
+
+
+/*======Login================================*/
+.form-signin input{ font-size: 16px; }

@@ -403,8 +403,10 @@
     <Content Include="Content\ckeditor\skins\moono\images\close.png" />
     <Content Include="Content\ckeditor\skins\moono\images\mini.png" />
     <Content Include="Content\ckeditor\styles.js" />
+    <Content Include="Content\images\cross_16.png" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
+    <Content Include="Content\images\plus-icon.png" />
     <Content Include="Content\Styles.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -435,6 +437,8 @@
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\Application\function.associatewitharticle.js" />
+    <Content Include="Scripts\Application\function.associatewithplace.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
@@ -812,7 +816,7 @@
     <Content Include="Scripts\knockout-2.0.0.debug.js" />
     <Content Include="Scripts\knockout-2.0.0.js" />
     <Content Include="Scripts\modernizr-2.0.6-development-only.js" />
-    <Content Include="Scripts\site.js" />
+    <Content Include="Scripts\Application\function.core.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
