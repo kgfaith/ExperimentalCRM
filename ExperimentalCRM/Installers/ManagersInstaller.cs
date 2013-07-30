@@ -17,6 +17,7 @@ namespace ExperimentalCMS.Web.BackEnd.Installers
             container.Register(Component.For<IAdminManager>().ImplementedBy<AdminManager>().LifestyleTransient());
             container.Register(Component.For<IArticleManager>().ImplementedBy<ArticleManager>().LifestyleTransient());
             container.Register(Component.For<IPlaceManager>().ImplementedBy<PlaceManager>().LifestyleTransient());
+            container.Register(Component.For<IPhotoManager>().ImplementedBy<PhotoManager>().LifestyleTransient());
         }
     }
 }

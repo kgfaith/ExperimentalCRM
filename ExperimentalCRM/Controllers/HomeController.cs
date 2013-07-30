@@ -1,16 +1,23 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using ExperimentalCMS.Domain.Contracts;
 using ExperimentalCMS.Repositories.DataAccess;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
     public class HomeController : Controller
     {
-        private ExCMSContext db = new ExCMSContext();
+        private IPhotoManager _photoManager;
+
+        public HomeController(IPhotoManager photoManager)
+        {
+            _photoManager = photoManager;
+        }
+
         public ActionResult Index()
         {
-
-            return View(db.Articles.FirstOrDefault());
+            _photoManager.GetOnePhotoInfoFromFlickr();
+            return View();
         }
 
         public ActionResult About()
@@ -22,6 +29,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
 
         public ActionResult Contact()
         {
+
             ViewBag.Message = "Your quintessential contact page.";
 
             return View();
