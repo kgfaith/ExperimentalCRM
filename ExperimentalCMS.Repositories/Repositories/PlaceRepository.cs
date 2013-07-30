@@ -34,6 +34,12 @@ namespace ExperimentalCMS.Repositories.Repositories
             this.disposed = true;
         }
 
+        public Place GetPlaceById(int id)
+        {
+            var obj = Get(x => x.PlaceId == id, null, "RelatedPlaces,Articles");
+            return obj.FirstOrDefault();
+        }
+
         public void Dispose()
         {
             Dispose(true);

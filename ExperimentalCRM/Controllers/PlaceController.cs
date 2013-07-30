@@ -59,11 +59,11 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             return View();
         }
 
-        private SelectList PopulatePlaceTypesSelectList()
+        private SelectList PopulatePlaceTypesSelectList(object selectedValue = null)
         {
             var placeTypeList = _placeManager.GetPlaceTypeList();
             if (placeTypeList.Success && placeTypeList.Result.Count() > 0)
-                return new SelectList(placeTypeList.Result.Select(x => new SelectListItem { Text = x.PlaceTypeName, Value = x.PlaceTypeId.ToString() }), "Value", "Text");
+                return new SelectList(placeTypeList.Result.Select(x => new SelectListItem { Text = x.PlaceTypeName, Value = x.PlaceTypeId.ToString() }), "Value", "Text", selectedValue);
 
             return null;
         }
@@ -115,13 +115,14 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            Place place = db.Places.Find(id);
+            string errorMessage;
+            Place place = GetPlaceById(id, out errorMessage);
             if (place == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.PlaceTypeId = new SelectList(db.PlaceTypes, "PlaceTypeId", "PlaceTypeName", place.PlaceTypeId);
-            return View(place);
+            ViewBag.PlaceTypeId = PopulatePlaceTypesSelectList(place.PlaceTypeId);
+            return View(place.MapToPlaceViewModel());
         }
 
         //
@@ -145,6 +146,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
                     ModelState.AddModelErrors("", response.Messages);
                 }
             }
+            ViewBag.PlaceTypeId = PopulatePlaceTypesSelectList(place.PlaceTypeId);
             return RedirectToAction("Edit");
         }
 
@@ -171,6 +173,21 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             db.Places.Remove(place);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        private Place GetPlaceById(int id, out string errorMessage)
+        {
+            errorMessage = string.Empty;
+
+            var domainResponse = _placeManager.GetPlaceById(id);
+
+            if (!domainResponse.Success)
+            {
+                errorMessage = domainResponse.Messages.FirstOrDefault();
+                return null;
+            }
+
+            return domainResponse.Result;
         }
 
         protected override void Dispose(bool disposing)

@@ -3,58 +3,119 @@
 @{
     ViewBag.Title = "Edit";
 }
-
 <div class="span8">
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>Edit Place</legend>
+        <fieldset>
+            <legend>Edit Place</legend>
 
-        @Html.HiddenFor(model => model.PlaceId)
+            @Html.HiddenFor(model => model.PlaceId)
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.PlaceName)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.PlaceName)
-            @Html.ValidationMessageFor(model => model.PlaceName)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.PlaceName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.PlaceName)
+                @Html.ValidationMessageFor(model => model.PlaceName)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.PlaceTypeId, "PlaceType")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("PlaceTypeId", String.Empty)
-            @Html.ValidationMessageFor(model => model.PlaceTypeId)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.PlaceTypeId, "PlaceType")
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("PlaceTypeId", String.Empty)
+                @Html.ValidationMessageFor(model => model.PlaceTypeId)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.InternalRanking, "PlaceType")
-        </div>
-        <div class="editor-field">
-             @Html.EditorFor(model => model.InternalRanking)
-            @Html.ValidationMessageFor(model => model.InternalRanking)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.InternalRanking)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.InternalRanking)
+                @Html.ValidationMessageFor(model => model.InternalRanking)
+            </div>
 
-         <div class="editor-label">
-            @Html.LabelFor(model => model.Description)
-        </div>
-        <div class="editor-field">
-            @Html.TextAreaFor(model => model.Description, new { @class = "mb10"})
-            @Html.ValidationMessageFor(model => model.Description)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Description)
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.Description, new { @class = "mb10" })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+            <div class="mt20">
+                <div class="row-fluid">
+                    <div class="span5">
+                        <div >
+                            <h4>Related Places</h4>
+                            <div id="PlaceOutputDiv" class="mb20">
+                                @foreach (var place in Model.RelatedPlaces)
+                                {
+                                    <div class="metal-plate">
+                                        <button type="button" class="close">×</button>
+                                        <strong>@place.PlaceId</strong>  : <strong>@place.PlaceName</strong>
+                                        <input type="hidden" class="hidden" value="@place.PlaceId">
+                                    </div>
+                                }
+                            </div>
 
-        <p class="mt15 mb300">
-            <input type="submit" value="Save" class="btn btn-primary" />  
-            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn"})
-        </p>
-    </fieldset>
-}
+                            <div class="editor-field">
+                                <input type="text" placeholder="Search Places..." id="SearchPlaces" class="input-xlarge" />
+                                <input type="hidden" id="SelectedPlaces" name="RelatedPlaceIds" class="hidden" value="@Model.RelatedPlaceIds" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span7" id="RelatedArticleContainer">
+                        <h4>Related Articles</h4>
+                        <div id="ArticleOutputDiv" class="mb20">
+                            <table class="selected-article-table">
+                                <tbody>
+                                    @foreach (var item in Model.Articles)
+                                    {
+                                        <tr>
+                                            <td class="id">@item.ArticleId</td>
+                                            <td>@item.ArticleName
+                                                <input type="hidden" value="@item.ArticleId" />
+                                            </td>
+                                            <td class="control"><span class="cross-icon"></span></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="editor-field">
+                            <input type="text" placeholder="Search Articles..." id="SearchArticles" class="input-xlarge" />
+                            <input type="hidden" id="SelectedArticles" name="RelatedArticleIds" class="hidden" value="@Model.RelatedArticleIds" />
+                        </div>
+                        <div class="article-search-result">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th class="id">id</th>
+                                    <th>Title</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="mt15 mb300">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn" })
+            </p>
+        </fieldset>
+    }
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/EditPlace")
     <script>
         //TODO: Hardcoding the name of textarea field.
         CKEDITOR.replace("Description");
@@ -62,3 +123,30 @@
         screenScript.LetsDoIt();
     </script>
 }
+
+<!-- jquery templates -->
+<script id="placeList" type="text/x-jquery-tmpl">
+	<div class="metal-plate">
+        <button type="button" class="close">×</button>
+        <strong>${value}</strong>  : <strong>${label}</strong>  
+        <input type="hidden" class="hidden" value="${value}" />       
+	</div>
+</script>
+<script id="articleSearchList" type="text/x-jquery-tmpl">
+    <tr>
+        <td><span class="plus-icon"></span></td>
+        <td class="id"><span class="value">${value}</span></td>
+        <td><span class="lbl">${label}</span>
+            <input type="hidden" value="${value}" /> 
+        </td>
+    </tr>
+</script>
+<script id="articleSelectedList" type="text/x-jquery-tmpl">
+    <tr>
+        <td class="id">${value}</td>
+        <td>${label}
+            <input type="hidden" value="${value}" /> 
+        </td>
+        <td class="control"><span class="cross-icon"></span></td>
+    </tr>
+</script>

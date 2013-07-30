@@ -4,19 +4,21 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using ExperimentalCMS.Model;
 
 namespace ExperimentalCMS.ViewModels
 {
     public class PlaceViewModel
     {
-        public int PlaceId { get; set; }
+        public int? PlaceId { get; set; }
 
         [Display(Name = "Place Name")]
         [MaxLength(100, ErrorMessage = "{1} can not be more than {0} string length")]
         public string PlaceName { get; set; }
 
         [MaxLength(25001)]
+        [AllowHtml]
         public string Description { get; set; }
 
         public int InternalRanking { get; set; }
@@ -32,7 +34,7 @@ namespace ExperimentalCMS.ViewModels
         public Place TransformToPlaceObject()
         {
             Place placeObj = new Place();
-            placeObj.PlaceId = PlaceId;
+            placeObj.PlaceId = PlaceId.HasValue ? PlaceId.Value : 0;
             placeObj.PlaceName = PlaceName;
             placeObj.Description = Description;
             placeObj.InternalRanking = InternalRanking;

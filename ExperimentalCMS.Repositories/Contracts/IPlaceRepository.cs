@@ -9,6 +9,6 @@ namespace ExperimentalCMS.Repositories.Contracts
 {
     public interface IPlaceRepository : IGenericRepository<Place>
     {
-
+        Place GetPlaceById(int id);
     }
 }
