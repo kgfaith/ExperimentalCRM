@@ -170,6 +170,7 @@
     <Compile Include="Controllers\BaseController\CmsBaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlaceController.cs" />
+    <Compile Include="Extensions\CustomWebViewPage.cs" />
     <Compile Include="Extensions\ModelMappers.cs" />
     <Compile Include="Infrastructure\CustomControllerFactory.cs" />
     <Compile Include="Extensions\ErrorMessageExtension.cs" />
