@@ -24,9 +24,10 @@ namespace ExperimentalCMS.Domain.Managers
             string secret = "8eb5af964c3881b5";
             Flickr flickr = new Flickr(apikey,secret);
             flickr.InstanceCacheDisabled = true;
-            PhotoSearchOptions searchOptions = new PhotoSearchOptions();
-            searchOptions.Tags = "myanmar,bagan";
-            PhotoCollection microsoftPhotos = flickr.PhotosSearch(searchOptions);
+            //PhotoSearchOptions searchOptions = new PhotoSearchOptions();
+            //searchOptions.Tags = "myanmar,bagan";
+            //PhotoCollection microsoftPhotos = flickr.PhotosSearch(searchOptions);
+            var something = flickr.PhotosGetInfo("9419291586");
         }
     }
 }

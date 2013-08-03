@@ -9,5 +9,7 @@ namespace ExperimentalCMS.Domain.Contracts
     public interface IPhotoManager
     {
         void GetOnePhotoInfoFromFlickr();
+        //void ValidatePhotoByPhotoId(string photoId);
+        //void SearchPhotoByTagNames(string tags);
     }
 }
