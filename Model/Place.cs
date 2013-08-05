@@ -19,7 +19,8 @@ namespace ExperimentalCMS.Model
         public int PlaceTypeId { get; set; }
         public PlaceType PlaceType { get; set; }
         public ICollection<Article> Articles { get; set; }
-        public ICollection<Picture> Pictures { get; set; }
+        public ICollection<Picture> SlideshowPictures { get; set; }
+        public ICollection<Picture> PictureGallery { get; set; }
         public ICollection<Place> RelatedPlaces { get; set; }
     }
 }

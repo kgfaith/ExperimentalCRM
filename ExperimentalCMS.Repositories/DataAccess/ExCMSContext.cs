@@ -34,11 +34,7 @@ namespace ExperimentalCMS.Repositories.DataAccess
                 .Map(t => t.MapLeftKey("PlaceId")
                     .MapRightKey("ArticleId")
                     .ToTable("PlaceArticle"));
-            modelBuilder.Entity<Picture>()
-                .HasMany(c => c.Places).WithMany(i => i.Pictures)
-                .Map(t => t.MapLeftKey("PictureId")
-                    .MapRightKey("PlaceId")
-                    .ToTable("PicturePlace"));
+            
         }
     }
 }

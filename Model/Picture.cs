@@ -22,6 +22,8 @@ namespace ExperimentalCMS.Model
         public int PictureSourceId { get; set; }
         public PictureSource PictureSource { get; set; }
 
-        public ICollection<Place> Places { get; set; }
+        public int PlaceId { get; set; }
+        public virtual Place Place { get; set; }
+
     }
 }
