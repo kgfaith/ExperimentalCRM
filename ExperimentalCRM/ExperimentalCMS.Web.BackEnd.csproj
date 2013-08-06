@@ -169,6 +169,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController\CmsBaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\PlaceController.cs" />
     <Compile Include="Extensions\ModelMappers.cs" />
     <Compile Include="Infrastructure\CustomControllerFactory.cs" />

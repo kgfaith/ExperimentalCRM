@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Admin.cs" />
     <Compile Include="Article.cs" />
+    <Compile Include="FlickrPhoto.cs" />
     <Compile Include="Picture.cs" />
     <Compile Include="PictureSource.cs" />
     <Compile Include="Place.cs" />

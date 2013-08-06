@@ -7,16 +7,15 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
     public class HomeController : Controller
     {
-        private IPhotoManager _photoManager;
-
-        public HomeController(IPhotoManager photoManager)
+       
+        public HomeController()
         {
-            _photoManager = photoManager;
+            
         }
 
         public ActionResult Index()
         {
-            _photoManager.GetOnePhotoInfoFromFlickr();
+            //var obj = _photoManager.GetOnePhotoInfoFromFlickr("9419291586");
             return View();
         }
 
