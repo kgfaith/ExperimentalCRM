@@ -10,6 +10,8 @@ using ExperimentalCMS.Repositories.DataAccess;
 using ExperimentalCMS.Web.BackEnd.Extensions;
 using ExperimentalCMS.ViewModels;
 using ExperimentalCMS.Web.BackEnd.Utility;
+using System.Web;
+using System.IO;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
@@ -188,6 +190,34 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             }
 
             return domainResponse.Result;
+        }
+
+        [HttpPost]
+        public ActionResult UploadImage(HttpPostedFileBase file)
+        {
+            UploadFile(file);
+            return Content(file.FileName);
+        }
+
+        public void UploadFile(HttpPostedFileBase file)
+        {
+            System.IO.File.WriteAllBytes(Server.MapPath("~/Content/Pictures/" + file.FileName), ReadData(file.InputStream));
+        }
+
+        private byte[] ReadData(Stream stream)
+        {
+            var buffer = new byte[16 * 1024];
+
+            using (var ms = new MemoryStream())
+            {
+                int read;
+                while ((read = stream.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    ms.Write(buffer, 0, read);
+                }
+
+                return ms.ToArray();
+            }
         }
 
         protected override void Dispose(bool disposing)

@@ -48,9 +48,9 @@
             <div class="mt20">
                 <div class="row-fluid">
                     <div class="span5">
-                        <div >
+                        <div>
                             <h4>Related Places</h4>
-                            <div id="PlaceOutputDiv"  class="mb20"></div>
+                            <div id="PlaceOutputDiv" class="mb20"></div>
 
                             <div class="editor-field">
                                 <input type="text" placeholder="Search Places..." id="SearchPlaces" class="input-xlarge" />
@@ -72,27 +72,46 @@
                             <input type="hidden" id="SelectedArticles" name="RelatedArticleIds" class="hidden" value="" />
                         </div>
                         <div class="article-search-result">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th class="id">id</th>
-                                    <th>Title</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th class="id">id</th>
+                                        <th>Title</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
+            </div> 
+            <div class="row-fluid mt20" id="SlideShowPicDiv" style="display:none;">
+                <div class="span10">
+                    <h4>Slideshow Pictures</h4>
+                    <div id="PlaceOutputDiv" class="mb20"></div>
+                    <div class="editor-field">
+                        <input type="hidden" id="SelectedSlideShowPictures" name="RelatedSlideShowPictures" class="hidden" value="" />
+                    </div>
+
+                </div>
+               
+
             </div>
             <p class="mt15 mb300">
                 <input type="submit" value="Create" class="btn btn-primary" />
-                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn" })
+
+                <input type="button" value="Add Slideshow Pictures" class="btn" id="AddSlideshowBtn" />
+
+                 @Html.ActionLink("« Back to List", "Index", null, new { @class = "btn" })
             </p>
         </fieldset>
     }
+</div>
+
+<div id="AssociateWithPicturesDialog" title="Add slideshow pictures">
+	@Html.Partial("_AttachPictures")
 </div>
 
 @section Scripts {
@@ -108,18 +127,18 @@
 
 <!-- jquery templates -->
 <script id="placeList" type="text/x-jquery-tmpl">
-	<div class="metal-plate">
+    <div class="metal-plate">
         <button type="button" class="close">×</button>
-        <strong>${value}</strong>  : <strong>${label}</strong>  
-        <input type="hidden" class="hidden" value="${value}" />       
-	</div>
+        <strong>${value}</strong>  : <strong>${label}</strong>
+        <input type="hidden" class="hidden" value="${value}" />
+    </div>
 </script>
 <script id="articleSearchList" type="text/x-jquery-tmpl">
     <tr>
         <td><span class="plus-icon"></span></td>
         <td class="id"><span class="value">${value}</span></td>
         <td><span class="lbl">${label}</span>
-            <input type="hidden" value="${value}" /> 
+            <input type="hidden" value="${value}" />
         </td>
     </tr>
 </script>
@@ -127,7 +146,7 @@
     <tr>
         <td class="id">${value}</td>
         <td>${label}
-            <input type="hidden" value="${value}" /> 
+            <input type="hidden" value="${value}" />
         </td>
         <td class="control"><span class="cross-icon"></span></td>
     </tr>

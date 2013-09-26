@@ -8,17 +8,14 @@ namespace ExperimentalCMS.Web.BackEnd.App_Start
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                "~/Scripts/jquery-1.9.1.min.js",
-                "~/Scripts/jquery.ui.core.js",
-                "~/Scripts/jquery.ui.widget.js",
-                "~/Scripts/jquery.ui.position.js",
-                "~/Scripts/jquery.ui.menu.js",
-                "~/Scripts/jquery.ui.autocomplete.js",
-                "~/Scripts/jQuery.tmpl.min.js",
+                "~/Scripts/jquery-1.9.1.js",
+                "~/Scripts/jquery-ui-1.10.3.custom.js",
+                "~/Scripts/jQuery.tmpl.js",
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/Application/function.core.js",
                 "~/Scripts/jquery.globalize/globalize.js",
-                "~/Scripts/jquery.globalize/cultures/globalize.culture.en-GB.js"
+                "~/Scripts/jquery.globalize/cultures/globalize.culture.en-GB.js",
+                "~/Scripts/knockout-2.3.0.js"
                 ));
 
       
@@ -39,23 +36,57 @@ namespace ExperimentalCMS.Web.BackEnd.App_Start
                 "~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
-                "~/Content/themes/base/jquery.ui.core.css",
-                "~/Content/themes/base/jquery.ui.resizable.css",
-                "~/Content/themes/base/jquery.ui.selectable.css",
-                "~/Content/themes/base/jquery.ui.accordion.css",
-                "~/Content/themes/base/jquery.ui.autocomplete.css",
-                "~/Content/themes/base/jquery.ui.button.css",
-                "~/Content/themes/base/jquery.ui.dialog.css",
-                "~/Content/themes/base/jquery.ui.slider.css",
-                "~/Content/themes/base/jquery.ui.tabs.css",
-                "~/Content/themes/base/jquery.ui.datepicker.css",
-                "~/Content/themes/base/jquery.ui.progressbar.css",
-                "~/Content/themes/base/jquery.ui.theme.css"));
+                "~/Content/themes/base/jquery-ui-1.10.3.custom.css"
+                ));
 
             bundles.Add(new ScriptBundle("~/bundles/EditPlace").Include(
                 "~/Scripts/Application/function.associatewithplace.js",
-                "~/Scripts/Application/function.associatewitharticle.js"
+                "~/Scripts/Application/function.associatewitharticle.js",
+                "~/Scripts/Application/function.associatewithpictures.js",
+                "~/Scripts/Application/KoModels/ko.photo.model.js",
+                "~/Scripts/Application/KoViewModels/ko.selectpictures.viewmodel.js"
                 ));
         }
     }
 }
+
+/*
+		private static BundleCollection UserIndexJavaScript(this BundleCollection bundles)
+		{
+			var usersBundle = new ScriptBundle("~/Bundles/UserListing") {Orderer = new AsIsBundleOrderer()}
+				.Include("~/Scripts/Application/BundleConfigs/UserListing.js",
+				         "~/Scripts/Application/functions.clipboard.js",
+				         "~/Scripts/Application/functions.customForms.js",
+				         "~/Scripts/Application/functions.tableActions.js",
+				         "~/Scripts/Application/functions.bulkActions.js",
+				         "~/Scripts/Application/functions.ajaxPageRefresh.js",
+				         "~/Scripts/Application/users-list-filter.js",
+				         "~/Scripts/Application/functions.quickSearch.js",
+				         "~/Scripts/Application/functions.simSettings.js",
+				         "~/Scripts/Application/functions.bulkSimSettingsOverlay.js",
+				         "~/Scripts/Application/functions.associateWithSimOverlay.js",
+				         "~/Scripts/Application/functions.deleteUsersOverlay.js",
+                         "~/Scripts/knockout-{version}.js",
+                         "~/Scripts/Application/ko.userlist.js",
+                         "~/Scripts/Application/functions.intervalController.js"
+                         );
+
+			bundles.Add(usersBundle);
+			return bundles;
+		}
+
+		private static BundleCollection GroupIndexJavaScript(this BundleCollection bundles)
+		{
+			var groupsBundle = new ScriptBundle("~/Bundles/GroupListing") {Orderer = new AsIsBundleOrderer()}
+				.Include("~/Scripts/Application/BundleConfigs/GroupListing.js",
+				         "~/Scripts/Application/functions.clipboard.js",
+				         "~/Scripts/Application/functions.customForms.js",
+				         "~/Scripts/Application/functions.tableActions.js",
+				         "~/Scripts/Application/functions.bulkActions.js",
+				         "~/Scripts/Application/functions.ajaxPageRefresh.js",
+				         "~/Scripts/Application/groups-list-filter.js");
+
+			bundles.Add(groupsBundle);
+			return bundles;
+		}
+*/
