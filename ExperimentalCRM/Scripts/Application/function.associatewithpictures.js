@@ -3,7 +3,7 @@
 
     $associateWithPicturesDialog.dialog({
         autoOpen: false,
-        height: 300,
+        height: 400,
         width: 580,
         modal: true,
         show: "puff",

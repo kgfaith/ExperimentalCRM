@@ -3,12 +3,10 @@
 window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
 
     var mainSelectedPics = ko.observableArray();
-    var dialogSelectedPics = ko.observableArray();
     var isNewPhoto =  ko.observable(false);
     var isFlickrPhoto = ko.observable(false);
     var onOptionPage = ko.observable(true);
-    var newNomralPhoto = ko.observable();
-    var newFlickrPhoto = ko.observable();
+    var newPhotoData = ko.observable();
     var searchString = ko.observable();
     var searchResultPic = ko.observableArray();
 
@@ -57,18 +55,15 @@ window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
     };
 
     function initialize() {
-        newNomralPhoto(new photoModel());
-        newFlickrPhoto(new photoModel());
+        newPhotoData(new photoModel());
     }
     initialize();
 
     return {
         mainSelectedPics: mainSelectedPics,
-        dialogSelectedPics: dialogSelectedPics,
         isNewPhoto: isNewPhoto,
         isFlickrPhoto: isFlickrPhoto,
-        newNomralPhoto: newNomralPhoto,
-        newFlickrPhoto : newFlickrPhoto,
+        newPhotoData: newPhotoData,
         searchString: searchString,
         searchResultPic: searchResultPic,
         onOptionPage: onOptionPage,
