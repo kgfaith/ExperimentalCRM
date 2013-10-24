@@ -13,9 +13,19 @@ var photoModel = function(data) {
         self.pictureSourceId = ko.observable(data.pictureSourceId);
         self.pictureSourceName = ko.observable(data.pictureSourceName);
         self.errorMessage = ko.observable();
-
+        
         self.toJson = function () {
             return ko.toJSON(self);
+        };
+
+        self.populateDataForModel = function (data) {
+            self.pictureId(data.PictureId);
+            self.fileName(data.PictureId);
+            self.flickrUrl(data.Url);
+            self.ownerName(data.OwnerName);
+            self.title(data.Title);
+            self.description(data.Description);
+
         };
     };
 

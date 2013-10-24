@@ -218,6 +218,17 @@ legend{
     margin-top: 20px;
 }
 
+/* Float
+=============================================*/
+.fl { float: left; }
+.fr { float: right; }
+
+/* Clear 
+=============================================*/
+.cl { clear: left; }
+.cb { clear: both; }
+.cr { clear: right; }
+
 /* Form elements 
 =============================================*/
 

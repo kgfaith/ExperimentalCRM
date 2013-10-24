@@ -5,10 +5,22 @@ window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
     var mainSelectedPics = ko.observableArray();
     var isNewPhoto =  ko.observable(false);
     var isFlickrPhoto = ko.observable(false);
+    var showAllField = ko.observable(false);
     var onOptionPage = ko.observable(true);
     var newPhotoData = ko.observable();
     var searchString = ko.observable();
     var searchResultPic = ko.observableArray();
+
+    isFlickrPhoto.ForEditing = ko.computed({
+        read: function () {
+            return isFlickrPhoto().toString();
+        },
+        write: function (newValue) {
+            isFlickrPhoto(newValue === "true");
+        },
+        owner: this
+    });
+
 
     //datacontext.getUserDetails(userDetails, errorMessage, null);
     var chooseAddNewPhoto = function () {
@@ -63,6 +75,7 @@ window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
         mainSelectedPics: mainSelectedPics,
         isNewPhoto: isNewPhoto,
         isFlickrPhoto: isFlickrPhoto,
+        showAllField: showAllField,
         newPhotoData: newPhotoData,
         searchString: searchString,
         searchResultPic: searchResultPic,

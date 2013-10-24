@@ -33,6 +33,7 @@ namespace ExperimentalCMS.Domain.Managers
             try
             {
                 photoInfo = flickr.PhotosGetInfo(photoId);
+                flickrPhoto.PictureId = photoInfo.PhotoId; 
                 flickrPhoto.OwnerName = photoInfo.OwnerRealName;
                 flickrPhoto.Title = photoInfo.Title;
                 flickrPhoto.Description = photoInfo.Description;
