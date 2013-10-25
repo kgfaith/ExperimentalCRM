@@ -46,7 +46,7 @@
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="FlickrNet">
-      <HintPath>..\..\..\..\Downloads\FlickrNet-3.5.0\FlickrNet.dll</HintPath>
+      <HintPath>..\packages\FlickrNet.3.8.0\lib\net20\FlickrNet.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="FlickrNet.chm" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
