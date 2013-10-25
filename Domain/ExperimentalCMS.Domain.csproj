@@ -69,6 +69,7 @@
     <Compile Include="Managers\AuthenticationManager.cs" />
     <Compile Include="Managers\PhotoManager.cs" />
     <Compile Include="Managers\PlaceManager.cs" />
+    <Compile Include="Mappers\FlickrToPhotoMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\BooleanResult.cs" />
     <Compile Include="Utility\Crypto.cs" />

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ExperimentalCMS.Domain.Contracts;
+using ExperimentalCMS.Model;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
@@ -20,6 +21,12 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         {
             var photoInfo = _photoManager.GetOnePhotoInfoFromFlickr(photoId);
             return Json(photoInfo, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult JsonSaveNewFlickrPhoto(FlickrPhoto flickrPhoto)
+        {
+            //var photoInfo = _photoManager.GetOnePhotoInfoFromFlickr(photoId);
+            return Json(null, JsonRequestBehavior.AllowGet);
         }
 
     }

@@ -48,9 +48,11 @@ namespace ExperimentalCMS.Domain.Managers
             }
             return flickrPhoto;
         }
+
+        public bool AddNewPhoto(FlickrPhoto flickrPhoto)
+        {
+
+            return true;
+        }
     }
 }
-
-//PhotoSearchOptions searchOptions = new PhotoSearchOptions();
-//searchOptions.Tags = "myanmar,bagan";
-//PhotoCollection microsoftPhotos = flickr.PhotosSearch(searchOptions);
