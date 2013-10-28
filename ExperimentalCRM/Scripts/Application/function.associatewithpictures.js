@@ -1,6 +1,7 @@
 ﻿(function ($) {
-    var isAjaxRequestOnGoing = false;
-    $associateWithPicturesDialog = $('#AssociateWithPicturesDialog');
+    var isAjaxRequestOnGoing = false,
+    $associateWithPicturesDialog = $('#AssociateWithPicturesDialog'),
+    $newPhotoFormValidator = new customFormValidator($('#newphoto-form'));
 
     $associateWithPicturesDialog.dialog({
         autoOpen: false,
@@ -10,6 +11,7 @@
         show: "puff",
         buttons: null,
         close: function () {
+            window.selectPictures.selectPicturesViewModel.resetViewModel();
         }
     });
 
@@ -24,7 +26,11 @@
     $(document).keydown(function (e) {
         if (e.keyCode == ctrlKey) ctrlDown = true;
     }).keyup(function (e) {
-        if (e.keyCode == ctrlKey) ctrlDown = false;
+        if (e.keyCode == ctrlKey) {
+            setTimeout(function () {
+                ctrlDown = false;
+            }, 1500);
+        }
     });
 
     //$(".no-copy-paste").keydown(function (e) {
@@ -45,8 +51,15 @@
             var n = flickrUrl.match(patt);
             if (n != null) {
                 if (n.length == 2 && n[1] != '') {
+                    $newPhotoFormValidator.addError({
+                        "FlickrUrl": null
+                    });
                     sendFlickrAjaxRequest(n[1], flickrUrl);
                 }
+            } else {
+                $newPhotoFormValidator.addError({
+                    "FlickrUrl": "Invalid Flickr url"
+                });
             }
         }
     }

@@ -40,6 +40,7 @@ namespace ExperimentalCMS.Web.BackEnd.App_Start
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/EditPlace").Include(
+                "~/Scripts/Application/function.customformerrors.js",
                 "~/Scripts/Application/function.associatewithplace.js",
                 "~/Scripts/Application/function.associatewitharticle.js",
                 "~/Scripts/Application/function.associatewithpictures.js",

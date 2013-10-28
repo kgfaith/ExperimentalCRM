@@ -444,6 +444,7 @@
     <Content Include="Scripts\Application\function.associatewithpictures.js" />
     <Content Include="Scripts\Application\function.associatewithplace.js" />
     <Content Include="Scripts\Application\function.core.js" />
+    <Content Include="Scripts\Application\function.customformerrors.js" />
     <Content Include="Scripts\Application\KoModels\ko.photo.model.js" />
     <Content Include="Scripts\Application\KoViewModels\ko.selectpictures.viewmodel.js" />
     <Content Include="Scripts\bootstrap.js" />

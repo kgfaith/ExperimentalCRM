@@ -23,6 +23,14 @@ window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
         owner: this
     });
 
+    var resetViewModel = function () {
+        isNewPhoto(false);
+        isFlickrPhoto(false);
+        showAllField(false);
+        onOptionPage(true);
+        newPhotoData(new photoModel());
+    };
+
     var chooseAddNewPhoto = function () {
         onOptionPage(false);
         isNewPhoto(true);
@@ -86,6 +94,7 @@ window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
         searchString: searchString,
         searchResultPic: searchResultPic,
         onOptionPage: onOptionPage,
+        resetViewModel: resetViewModel,
 
         chooseAddNewPhoto: chooseAddNewPhoto,
         chooseAddExistingPhoto: chooseAddExistingPhoto,
