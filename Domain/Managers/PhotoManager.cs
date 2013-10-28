@@ -34,7 +34,7 @@ namespace ExperimentalCMS.Domain.Managers
             {
                 photoInfo = flickr.PhotosGetInfo(photoId);
                 flickrPhoto.PictureId = photoInfo.PhotoId; 
-                flickrPhoto.OwnerName = photoInfo.OwnerRealName;
+                flickrPhoto.OwnerName = !string.IsNullOrWhiteSpace(photoInfo.OwnerRealName) ? photoInfo.OwnerRealName : photoInfo.OwnerUserName;
                 flickrPhoto.Title = photoInfo.Title;
                 flickrPhoto.Description = photoInfo.Description;
                 flickrPhoto.AvailablePublic = photoInfo.IsPublic;

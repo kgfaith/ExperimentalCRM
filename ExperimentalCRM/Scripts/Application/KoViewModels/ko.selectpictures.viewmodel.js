@@ -17,16 +17,17 @@ window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
         },
         write: function (newValue) {
             isFlickrPhoto(newValue === "true");
+            if(newValue != "true")
+                chooseAddNormalPhoto();
         },
         owner: this
     });
 
-
-    //datacontext.getUserDetails(userDetails, errorMessage, null);
     var chooseAddNewPhoto = function () {
         onOptionPage(false);
         isNewPhoto(true);
         isFlickrPhoto(false);
+        
     };
 
     var chooseAddExistingPhoto = function () {
@@ -39,6 +40,8 @@ window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
         onOptionPage(true);
         isNewPhoto(false);
         isFlickrPhoto(false);
+        newPhotoData(new photoModel());
+        showAllField(false);
     };
 
     var search = function () {
@@ -51,12 +54,15 @@ window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
         onOptionPage(false);
         isNewPhoto(true);
         isFlickrPhoto(true);
+        newPhotoData(new photoModel());
     };
 
     var chooseAddNormalPhoto = function () {
         onOptionPage(false);
         isNewPhoto(true);
         isFlickrPhoto(false);
+        newPhotoData(new photoModel());
+        showAllField(false);
     };
 
     var SaveNormalPhoto = function () {
@@ -95,30 +101,3 @@ window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
 
 // Initiate the Knockout bindings
 ko.applyBindings(window.selectPictures.selectPicturesViewModel, $("#AssociateWithPicturesDialog").get(0));
-
-
-/*
-- MainPageSelectedPics
-
-- ViewModelForDialog
-	- SelectedPics  []{phototype}
-	- IsNewPhoto 
-	- IsFlickrPhoto
-	- AddingPhotoInfo    {phototype}
-	- SearchString 
-	- SearchResultPic  []  {phototype}
-	
-
-	functions
-		- chooseAddNewPhoto
-		- chooseAddExistingPhoto
-		- search
-		- addToSelection
-		- chooseAddFlickrPhoto
-		- chooseAddNormalPhoto
-		- SaveNormalPhoto
-		- SaveFlickrPhoto
-
-
-
-*/

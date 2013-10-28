@@ -1,41 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ExperimentalCMS.ViewModels.Enums;
 
 namespace ExperimentalCMS.ViewModels
 {
-    class PhotoViewModel
+    public class PhotoViewModel
     {
-        //self.pictureId = ko.observable(data.pictureId);
-        //self.fileName = ko.observable(data.fileName);
-        //self.flickrUrl = ko.observable(data.flickrUrl);
-        //self.ownerName = ko.observable(data.ownerName);
-        //self.title = ko.observable(data.title);
-        //self.description = ko.observable(data.description);
-        //self.pictureSourceId = ko.observable(data.pictureSourceId);
-        //self.pictureSourceName = ko.observable(data.pictureSourceName);
-        //self.errorMessage = ko.observable();
+        public string PictureId { get; set; }
 
-        //public string PictureId { get; set; }
+        [MaxLength(50)]
+        [Required]
+        [Display(Name = "File Name")]
+        public string FileName { get; set; }
 
-        //[MaxLength(50)]
-        //public string FileName { get; set; }
+        [Display(Name = "Flickr Url")]
+        public string FlickrUrl { get; set; }
 
-        //[MaxLength(200)]
-        //public string OwnerName { get; set; }
+        [MaxLength(50)]
+        [Display(Name = "Owner Name")]
+        public string OwnerName { get; set; }
 
-        //[MaxLength(500)]
-        //public string Title { get; set; }
+        [MaxLength(500)]
+        [Display(Name = "Picture Title")]
+        public string Title { get; set; }
 
-        //[MaxLength(5000)]
-        //public string Description { get; set; }
+        [MaxLength(5000)]
+        public string Description { get; set; }
 
-        //public int PictureSourceId { get; set; }
-        //public PictureSource PictureSource { get; set; }
+        public PhotoSource PhotoSource { get; set; }
 
-        //public int PlaceId { get; set; }
-        //public virtual Place Place { get; set; }
+        
     }
 }

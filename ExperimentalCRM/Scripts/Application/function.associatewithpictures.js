@@ -8,14 +8,7 @@
         width: 580,
         modal: true,
         show: "puff",
-        buttons: {
-            Save: function () {
-    
-            },
-            Cancel: function () {
-                $(this).dialog("close");
-            }
-        },
+        buttons: null,
         close: function () {
         }
     });
@@ -24,10 +17,25 @@
         $associateWithPicturesDialog.dialog("open");
     });
 
+    //Detect Ctrl+V
+    var ctrlDown = false;
+    var ctrlKey = 17, vKey = 86, cKey = 67;
+
+    $(document).keydown(function (e) {
+        if (e.keyCode == ctrlKey) ctrlDown = true;
+    }).keyup(function (e) {
+        if (e.keyCode == ctrlKey) ctrlDown = false;
+    });
+
+    //$(".no-copy-paste").keydown(function (e) {
+    //    if (ctrlDown && (e.keyCode == vKey || e.keyCode == cKey)) return false;
+    //});
+
     $(document).on('keyup', 'input#newpic_url', getFlickrPicInfo);
 
     function getFlickrPicInfo(e) {
-        if (!isAjaxRequestOnGoing) {
+        var isCtrlV = (ctrlDown && e.keyCode == vKey);
+        if (!isAjaxRequestOnGoing && isCtrlV) {
             var flickrUrl = e.currentTarget.value;
             //check url len less than 30
             if (flickrUrl.length < 30) return false;
