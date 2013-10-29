@@ -103,11 +103,13 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
 
             string userData = serializer.Serialize(serializeModel);
 
+            //TODO: Refactor and absract authenication class 
+            double timeout = FormsAuthentication.Timeout.TotalMinutes;
             FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
                      1,
                      user.Email,
                      DateTime.Now,
-                     DateTime.Now.AddMinutes(15),
+                     DateTime.Now.AddMinutes(timeout),
                      rememberMe,
                      userData);
 

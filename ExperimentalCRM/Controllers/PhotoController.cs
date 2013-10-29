@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ExperimentalCMS.Domain.Contracts;
 using ExperimentalCMS.Model;
+using ExperimentalCMS.ViewModels;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
@@ -23,7 +24,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             return Json(photoInfo, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult JsonSaveNewFlickrPhoto(FlickrPhoto flickrPhoto)
+        public ActionResult JsonSaveNewFlickrPhoto(PhotoViewModel newFlickrPhoto)
         {
             //var photoInfo = _photoManager.GetOnePhotoInfoFromFlickr(photoId);
             return Json(null, JsonRequestBehavior.AllowGet);
