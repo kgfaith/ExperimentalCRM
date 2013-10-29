@@ -29,6 +29,10 @@
                         @*<button type="button" class="btn fr" data-bind="click: backToOption">Back</button>*@
 
                         <form method="post" id="newphoto-form">
+                            <div data-bind="visible: !newPhotoData().isImageUrlNull()" style="display:none;">
+                                <img data-bind="attr: { src: newPhotoData().imageUrl}" width="150" height="100" >
+                            </div>
+
                             <label class="radio inline">
                                 <input type="radio" name="addFlickrPhoto" id="addNormalPhoto" value="false" checked data-bind="checked: isFlickrPhoto.ForEditing ">
                                 Add normal photo

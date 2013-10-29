@@ -17,5 +17,7 @@ namespace ExperimentalCMS.Model
         public string Description { get; set; }
 
         public bool AvailablePublic { get; set; }
+
+        public string SmallImageUrl { get; set; }
     }
 }

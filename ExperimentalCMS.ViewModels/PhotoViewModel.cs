@@ -20,6 +20,8 @@ namespace ExperimentalCMS.ViewModels
         [Display(Name = "Flickr Url")]
         public string FlickrUrl { get; set; }
 
+        public string ImageUrl { get; set; }
+
         [MaxLength(50)]
         [Display(Name = "Owner Name")]
         public string OwnerName { get; set; }

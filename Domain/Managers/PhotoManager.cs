@@ -38,6 +38,7 @@ namespace ExperimentalCMS.Domain.Managers
                 flickrPhoto.Title = photoInfo.Title;
                 flickrPhoto.Description = photoInfo.Description;
                 flickrPhoto.AvailablePublic = photoInfo.IsPublic;
+                flickrPhoto.SmallImageUrl = photoInfo.Small320Url;
             }
             catch (Exception ex)
             {
