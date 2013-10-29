@@ -24,7 +24,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             return Json(photoInfo, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult JsonSaveNewFlickrPhoto(PhotoViewModel newFlickrPhoto)
+        public ActionResult JsonAddNewPhoto(PhotoViewModel newFlickrPhoto)
         {
             //var photoInfo = _photoManager.GetOnePhotoInfoFromFlickr(photoId);
             return Json(null, JsonRequestBehavior.AllowGet);

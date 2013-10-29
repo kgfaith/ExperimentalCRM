@@ -29,10 +29,7 @@
                         @*<button type="button" class="btn fr" data-bind="click: backToOption">Back</button>*@
 
                         <form method="post" id="newphoto-form">
-                            <div data-bind="visible: !newPhotoData().isImageUrlNull()" style="display:none;">
-                                <img data-bind="attr: { src: newPhotoData().imageUrl}" width="150" height="100" >
-                            </div>
-
+                            
                             <label class="radio inline">
                                 <input type="radio" name="addFlickrPhoto" id="addNormalPhoto" value="false" checked data-bind="checked: isFlickrPhoto.ForEditing ">
                                 Add normal photo
@@ -42,49 +39,78 @@
                                 Add Flickr photo
                             </label>
 
-                            <div class="mt20"></div>
-                            <div class="editor-label" data-bind="visible: isFlickrPhoto()">
+                            <div class="editor-label mt20" data-bind="visible: isFlickrPhoto()">
                                 @Html.LabelFor(model => model.FlickrUrl)
                             </div>
-                            <div class="editor-field" data-bind="visible: isFlickrPhoto()">
+                            <div class="editor-field urlbox" data-bind="visible: isFlickrPhoto()">
                                 @*<input type="text" id="newpic_url" placeholder="Flickr url" class="input-xlarge">*@
-                                @Html.TextBoxFor(model => model.FlickrUrl, new Dictionary<string, Object> { { "id", "newpic_url" }, { "class", "input-xlarge" }, { "placeholder", "Flickr url"}, { "data-bind", "value: newPhotoData().flickrUrl" } })
+                                @Html.TextBoxFor(model => model.FlickrUrl, new Dictionary<string, Object> { { "id", "newpic_url" }, { "class", "fl" }, { "placeholder", "Flickr url" }, { "data-bind", "value: newPhotoData().flickrUrl" } })
                                 @Html.ValidationMessageFor(model => model.FlickrUrl)
+                                <!-- Ajax loader icon -->
+                                <div id="floatingCirclesG" class="fl" style="display:none;">
+                                    <div class="f_circleG" id="frotateG_01">
+                                    </div>
+                                    <div class="f_circleG" id="frotateG_02">
+                                    </div>
+                                    <div class="f_circleG" id="frotateG_03">
+                                    </div>
+                                    <div class="f_circleG" id="frotateG_04">
+                                    </div>
+                                    <div class="f_circleG" id="frotateG_05">
+                                    </div>
+                                    <div class="f_circleG" id="frotateG_06">
+                                    </div>
+                                    <div class="f_circleG" id="frotateG_07">
+                                    </div>
+                                    <div class="f_circleG" id="frotateG_08">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt20 row-fluid cl" data-bind="visible: !isFlickrPhoto() || (isFlickrPhoto() && showAllField())">
+                            
+                                <div class="span6">
+
+                                    <div class="editor-label" data-bind="visible: !isFlickrPhoto() || (isFlickrPhoto() && showAllField())">
+                                        @*<label class="control-label" for="normalpicture_filename">File Name</label>*@
+                                        @Html.LabelFor(model => model.FileName)
+                                    </div>
+                                    <div class="editor-field" data-bind="visible: !isFlickrPhoto() || (isFlickrPhoto() && showAllField())">
+                                        @Html.TextBoxFor(model => model.FileName, new Dictionary<string, Object> { { "id", "normalpicture_filename" }, { "data-bind", "value: newPhotoData().fileName" }, { "placeholder", "File Name" } })
+                                        @Html.ValidationMessageFor(model => model.FileName)
+                                    </div>
+
+                                    <div class="editor-label" data-bind="visible: !isFlickrPhoto() || (isFlickrPhoto() && showAllField())">
+                                        @Html.LabelFor(model => model.OwnerName)
+                                    </div>
+                                    <div class="editor-field" data-bind="visible: !isFlickrPhoto() || (isFlickrPhoto() && showAllField())">
+                                        @Html.TextBoxFor(model => model.OwnerName, new Dictionary<string, Object> { { "id", "normalpicture_ownername" }, { "data-bind", "value: newPhotoData().ownerName" }, { "placeholder", "Owner Name" } })
+                                        @Html.ValidationMessageFor(model => model.OwnerName)
+                                    </div>
+
+                                    <div class="editor-label" data-bind="visible: !isFlickrPhoto() || (isFlickrPhoto() && showAllField())">
+                                        @Html.LabelFor(model => model.Title)
+                                    </div>
+                                    <div class="editor-field" data-bind="visible: !isFlickrPhoto() || (isFlickrPhoto() && showAllField())">
+                                        @Html.TextBoxFor(model => model.Title, new Dictionary<string, Object> { { "id", "normalpicture_pictitle" }, { "data-bind", "value: newPhotoData().title" }, { "placeholder", "Picture Title" } })
+                                        @Html.ValidationMessageFor(model => model.Title)
+                                    </div>
+
+                                    <div class="editor-label" data-bind="visible: !isFlickrPhoto() || (isFlickrPhoto() && showAllField())">
+                                        @Html.LabelFor(model => model.Description)
+                                    </div>
+                                    <div class="editor-field" data-bind="visible: !isFlickrPhoto() || (isFlickrPhoto() && showAllField())">
+                                        @Html.TextBoxFor(model => model.Description, new Dictionary<string, Object> { { "id", "normalpicture_picdescription" }, { "data-bind", "value: newPhotoData().description" }, { "placeholder", "Description" } })
+                                        @Html.ValidationMessageFor(model => model.Description)
+                                    </div>
+                                </div>
+                            <div class="span6">
+                                <div class="mt20" data-bind="visible: !newPhotoData().isImageUrlNull()" style="display: none;">
+                                    <img data-bind="attr: { src: newPhotoData().imageUrl }" style="width:260px; border-radius: 0.3125em;">
+                                </div>
+                            </div>
                             </div>
 
-                            <div class="editor-label"  data-bind="visible: !isFlickrPhoto() || (isFlickrPhoto() && showAllField())">
-                                @*<label class="control-label" for="normalpicture_filename">File Name</label>*@
-                                @Html.LabelFor(model => model.FileName)
-                            </div>
-                            <div class="editor-field" data-bind="visible: !isFlickrPhoto() || (isFlickrPhoto() && showAllField())">
-                                @Html.TextBoxFor(model => model.FileName, new Dictionary<string, Object> { { "id", "normalpicture_filename" }, { "data-bind", "value: newPhotoData().fileName" }, { "placeholder", "File Name"} })
-                                @Html.ValidationMessageFor(model => model.FileName)
-                            </div>
-
-                            <div class="editor-label" data-bind="visible: !isFlickrPhoto() || (isFlickrPhoto() && showAllField())">
-                                @Html.LabelFor(model => model.OwnerName)
-                            </div>
-                            <div class="editor-field" data-bind="visible: !isFlickrPhoto() || (isFlickrPhoto() && showAllField())">
-                                @Html.TextBoxFor(model => model.OwnerName, new Dictionary<string, Object> { { "id", "normalpicture_ownername" }, { "data-bind", "value: newPhotoData().ownerName" }, { "placeholder", "Owner Name"} })
-                                @Html.ValidationMessageFor(model => model.OwnerName)
-                            </div>
-
-                            <div class="editor-label" data-bind="visible: !isFlickrPhoto() || (isFlickrPhoto() && showAllField())">
-                                @Html.LabelFor(model => model.Title)
-                            </div>
-                            <div class="editor-field" data-bind="visible: !isFlickrPhoto() || (isFlickrPhoto() && showAllField())">
-                                @Html.TextBoxFor(model => model.Title, new Dictionary<string, Object> { { "id", "normalpicture_pictitle" }, { "data-bind", "value: newPhotoData().title" }, { "placeholder", "Picture Title"} })
-                                @Html.ValidationMessageFor(model => model.Title)
-                            </div>
-
-                            <div class="editor-label" data-bind="visible: !isFlickrPhoto() || (isFlickrPhoto() && showAllField())">
-                                @Html.LabelFor(model => model.Description)
-                            </div>
-                            <div class="editor-field" data-bind="visible: !isFlickrPhoto() || (isFlickrPhoto() && showAllField())">
-                                @Html.TextBoxFor(model => model.Description, new Dictionary<string, Object> { { "id", "normalpicture_picdescription" }, { "data-bind", "value: newPhotoData().description" }, { "placeholder", "Description"} })
-                                @Html.ValidationMessageFor(model => model.Description)
-                            </div>
-                            <p class="mt15">
+                            <p class="mt20 cl">
                                 <input type="submit" value="Create" class="btn btn-primary" />
                                 <button type="button" class="btn" data-bind="click: backToOption">Back</button>
                             </p>

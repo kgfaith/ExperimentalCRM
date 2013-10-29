@@ -1,7 +1,9 @@
 ﻿(function ($) {
     var isAjaxRequestOnGoing = false,
     $associateWithPicturesDialog = $('#AssociateWithPicturesDialog'),
-    $newPhotoFormValidator = new customFormValidator($('#newphoto-form'));
+    $newPhotoFormValidator = new customFormValidator($('#newphoto-form')),
+    $ajaxLoader = $('#floatingCirclesG');
+    $ajaxLoader.hide();
 
     $associateWithPicturesDialog.dialog({
         autoOpen: false,
@@ -79,10 +81,10 @@
             error: function (xhr, status, error) {
             },
             complete: function () {
-                isAjaxRequestOnGoing = false;
+                $ajaxLoader.hide();
             }
         };
-        isAjaxRequestOnGoing = true;
+        $ajaxLoader.show();
         $.ajax(options);
     }
 

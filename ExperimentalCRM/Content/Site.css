@@ -218,6 +218,14 @@ legend{
     margin-top: 20px;
 }
 
+.mt30 {
+    margin-top: 30px;
+}
+
+.mt35 {
+    margin-top: 35px;
+}
+
 /* Float
 =============================================*/
 .fl { float: left; }
@@ -290,6 +298,178 @@ legend{
     box-shadow: 0 1px 0 #fff inset;
 }
 
+/*Ajax loader
+=================================================*/
+#floatingCirclesG{
+position:relative;
+width:30px;
+height:30px;
+-moz-transform:scale(0.6);
+-webkit-transform:scale(0.6);
+-o-transform:scale(0.6);
+-ms-transform:scale(0.6);
+transform:scale(0.6);
+}
+
+.f_circleG{
+position:absolute;
+background-color:#EEEEEE;
+height:5px;
+width:5px;
+-moz-border-radius:3px;
+-moz-animation-name:f_fadeG;
+-moz-animation-duration:0.64s;
+-moz-animation-iteration-count:infinite;
+-moz-animation-direction:linear;
+-webkit-border-radius:3px;
+-webkit-animation-name:f_fadeG;
+-webkit-animation-duration:0.64s;
+-webkit-animation-iteration-count:infinite;
+-webkit-animation-direction:linear;
+-o-border-radius:3px;
+-o-animation-name:f_fadeG;
+-o-animation-duration:0.64s;
+-o-animation-iteration-count:infinite;
+-o-animation-direction:linear;
+-ms-border-radius:3px;
+-ms-animation-name:f_fadeG;
+-ms-animation-duration:0.64s;
+-ms-animation-iteration-count:infinite;
+-ms-animation-direction:linear;
+border-radius:3px;
+animation-name:f_fadeG;
+animation-duration:0.64s;
+animation-iteration-count:infinite;
+animation-direction:linear;
+}
+
+#frotateG_01{
+left:0;
+top:12px;
+-moz-animation-delay:0.24s;
+-webkit-animation-delay:0.24s;
+-o-animation-delay:0.24s;
+-ms-animation-delay:0.24s;
+animation-delay:0.24s;
+}
+
+#frotateG_02{
+left:4px;
+top:4px;
+-moz-animation-delay:0.32s;
+-webkit-animation-delay:0.32s;
+-o-animation-delay:0.32s;
+-ms-animation-delay:0.32s;
+animation-delay:0.32s;
+}
+
+#frotateG_03{
+left:12px;
+top:0;
+-moz-animation-delay:0.4s;
+-webkit-animation-delay:0.4s;
+-o-animation-delay:0.4s;
+-ms-animation-delay:0.4s;
+animation-delay:0.4s;
+}
+
+#frotateG_04{
+right:4px;
+top:4px;
+-moz-animation-delay:0.48s;
+-webkit-animation-delay:0.48s;
+-o-animation-delay:0.48s;
+-ms-animation-delay:0.48s;
+animation-delay:0.48s;
+}
+
+#frotateG_05{
+right:0;
+top:12px;
+-moz-animation-delay:0.56s;
+-webkit-animation-delay:0.56s;
+-o-animation-delay:0.56s;
+-ms-animation-delay:0.56s;
+animation-delay:0.56s;
+}
+
+#frotateG_06{
+right:4px;
+bottom:4px;
+-moz-animation-delay:0.64s;
+-webkit-animation-delay:0.64s;
+-o-animation-delay:0.64s;
+-ms-animation-delay:0.64s;
+animation-delay:0.64s;
+}
+
+#frotateG_07{
+left:12px;
+bottom:0;
+-moz-animation-delay:0.72s;
+-webkit-animation-delay:0.72s;
+-o-animation-delay:0.72s;
+-ms-animation-delay:0.72s;
+animation-delay:0.72s;
+}
+
+#frotateG_08{
+left:4px;
+bottom:4px;
+-moz-animation-delay:0.8s;
+-webkit-animation-delay:0.8s;
+-o-animation-delay:0.8s;
+-ms-animation-delay:0.8s;
+animation-delay:0.8s;
+}
+
+@-moz-keyframes f_fadeG{
+0%{
+background-color:#000000}
+
+100%{
+background-color:#EEEEEE}
+
+}
+
+@-webkit-keyframes f_fadeG{
+0%{
+background-color:#000000}
+
+100%{
+background-color:#EEEEEE}
+
+}
+
+@-o-keyframes f_fadeG{
+0%{
+background-color:#000000}
+
+100%{
+background-color:#EEEEEE}
+
+}
+
+@-ms-keyframes f_fadeG{
+0%{
+background-color:#000000}
+
+100%{
+background-color:#EEEEEE}
+
+}
+
+@keyframes f_fadeG{
+0%{
+background-color:#000000}
+
+100%{
+background-color:#EEEEEE}
+
+}
+
+
+
 /*Page elements
 =============================================*/
 /*======/Place/Create========================*/
@@ -307,6 +487,8 @@ legend{
 .article-search-result { width: 611px; min-height:100px; max-height: 250px;  overflow:scroll; margin-top: 10px; }
 .cross-icon{ display: block; width: 10px; height: 10px; background: url("../Content/images/cross_16.png") 0px 0px no-repeat; cursor: pointer;}
 
+.urlbox { display: block; height:30px; width:auto;}
+.urlbox > input[type="text"] { width: 500px;}
 
 /*======Login================================*/
 .form-signin input{ font-size: 16px; }
