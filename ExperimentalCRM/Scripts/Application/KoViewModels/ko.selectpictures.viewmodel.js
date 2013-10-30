@@ -1,4 +1,5 @@
 ﻿window.selectPictures = window.selectPictures || {};
+window.photo = window.photo || {};
 
 window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
 
@@ -56,6 +57,7 @@ window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
     };
 
     var addToSelection = function () {
+        
     };
 
     var chooseAddFlickrPhoto = function () {
@@ -73,12 +75,36 @@ window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
         showAllField(false);
     };
 
-    var SaveNormalPhoto = function () {
+    var saveNormalPhoto = function (data) {
+
     };
 
-
-    var SaveFlickrPhoto = function () {
+    var saveFlickrPhoto = function (data) {
+        datacontext.saveNewPhoto(data, saveSccessful);
     };
+
+    var savePhoto = function (formElement) {
+        var $form = $(formElement);
+        if ($form.valid()) {
+            var formData = $form.serializeObject();
+            var url = newPhotoData().flickrUrl();
+            if (url != '') {
+                formData.SourceId = 2;
+                saveFlickrPhoto(formData);
+            } else {
+                formData.SourceId = 1;
+                saveNormalPhoto(formData);
+            }
+        }
+    };
+
+    function saveSccessful(data) {
+        if (data.newPhotoId > 0) {
+            $('#AssociateWithPicturesDialog').dialog("close");
+            var photoOb = new photoModel(data);
+            mainSelectedPics.push(photoOb);
+        }
+    }
 
     function initialize() {
         newPhotoData(new photoModel());
@@ -102,11 +128,10 @@ window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
         addToSelection: addToSelection,
         chooseAddFlickrPhoto: chooseAddFlickrPhoto,
         chooseAddNormalPhoto: chooseAddNormalPhoto,
-        SaveNormalPhoto: SaveNormalPhoto,
-        SaveFlickrPhoto: SaveFlickrPhoto,
+        savePhoto : savePhoto, 
         backToOption: backToOption
     };
-})(ko, null);
+})(ko, photo.datacontext);
 
 // Initiate the Knockout bindings
 ko.applyBindings(window.selectPictures.selectPicturesViewModel, $("#AssociateWithPicturesDialog").get(0));

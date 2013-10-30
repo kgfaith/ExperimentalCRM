@@ -28,7 +28,7 @@
                     <div class="span12">
                         @*<button type="button" class="btn fr" data-bind="click: backToOption">Back</button>*@
 
-                        <form method="post" id="newphoto-form">
+                        <form method="post" id="newphoto-form" data-bind="submit: savePhoto">
                             
                             <label class="radio inline">
                                 <input type="radio" name="addFlickrPhoto" id="addNormalPhoto" value="false" checked data-bind="checked: isFlickrPhoto.ForEditing ">

@@ -50,10 +50,18 @@ namespace ExperimentalCMS.Domain.Managers
             return flickrPhoto;
         }
 
-        public bool AddNewPhoto(FlickrPhoto flickrPhoto)
+        public Picture AddNewPhoto(Picture photo)
         {
-
-            return true;
+            try
+            {
+                photo = _uOW.PictureRepo.Insert(photo);
+                _uOW.Save();
+            }
+            catch (Exception ex)
+            {
+                return photo;
+            }
+            return photo;
         }
     }
 }

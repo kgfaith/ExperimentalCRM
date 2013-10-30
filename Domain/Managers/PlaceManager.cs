@@ -52,7 +52,6 @@ namespace ExperimentalCMS.Domain.Managers
 
             if (newPlace.PlaceId > 0)
             {
-
                 return response.ReturnSuccessResponse(newPlace
                         , new[] { "New article has been successfully created." }
                         , "New article has been successfully created.");

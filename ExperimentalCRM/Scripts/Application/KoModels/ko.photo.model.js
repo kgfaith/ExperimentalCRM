@@ -36,29 +36,3 @@ var photoModel = function(data) {
         };
     };
 
-
-/*
-- MainPageSelectedPics
-
-- ViewModelForDialog
-	- SelectedPics  []{phototype}
-	- IsNewPhoto 
-	- IsFlickrPhoto
-	- AddingPhotoInfo    {phototype}
-	- SearchString 
-	- SearchResultPic  []  {phototype}
-	
-
-	functions
-		- chooseAddNewPhoto
-		- chooseAddExistingPhoto
-		- search
-		- addToSelection
-		- chooseAddFlickrPhoto
-		- chooseAddNormalPhoto
-		- SaveNormalPhoto
-		- SaveFlickrPhoto
-
-
-
-*/

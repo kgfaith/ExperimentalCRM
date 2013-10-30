@@ -1,14 +1,16 @@
-﻿window.selectPictures = window.selectPictures || {};
+﻿window.photo = window.photo || {};
 
-window.selectPictures.datacontext = (function () {
+window.photo.datacontext = (function () {
 
-    function saveNewPhoto(newPhoto)
+    function saveNewPhoto(newPhoto, callBack)
     {
+        var something = "something";
         $.ajax({
             type: "POST",
-            url: url,
+            url: "/Photo/JsonAddNewPhoto",
             data: newPhoto,
-            success: function () {
+            success: function (data) {
+                callBack(data);
             },
             dataType: "json",
             traditional: true,

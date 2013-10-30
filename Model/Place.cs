@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using MaxLengthAttribute = System.ComponentModel.DataAnnotations.MaxLengthAttribute;
 
 namespace ExperimentalCMS.Model
@@ -17,10 +18,14 @@ namespace ExperimentalCMS.Model
 
         public int InternalRanking { get; set; }
         public int PlaceTypeId { get; set; }
-        public PlaceType PlaceType { get; set; }
-        public ICollection<Article> Articles { get; set; }
-        public ICollection<Picture> SlideshowPictures { get; set; }
-        public ICollection<Picture> PictureGallery { get; set; }
-        public ICollection<Place> RelatedPlaces { get; set; }
+        public virtual PlaceType PlaceType { get; set; }
+        public virtual ICollection<Article> Articles { get; set; }
+        public virtual ICollection<Place> RelatedPlaces { get; set; }
+
+        [InverseProperty("SlideShowPlaces")]
+        public virtual ICollection<Picture> SlideshowPictures { get; set; }
+
+        [InverseProperty("GalleryPlaces")]
+        public virtual ICollection<Picture> PictureGallery { get; set; }
     }
 }

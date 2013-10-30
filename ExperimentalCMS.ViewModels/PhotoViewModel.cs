@@ -33,7 +33,7 @@ namespace ExperimentalCMS.ViewModels
         [MaxLength(5000)]
         public string Description { get; set; }
 
-        public PhotoSource PhotoSource { get; set; }
+        public int SourceId { get; set; }
 
         
     }

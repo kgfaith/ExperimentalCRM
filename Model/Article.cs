@@ -33,6 +33,6 @@ namespace ExperimentalCMS.Model
         [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public DateTime PublishDate { get; set; }
 
-        public ICollection<Place> Places { get; set; }
+        public virtual ICollection<Place> Places { get; set; }
     }
 }

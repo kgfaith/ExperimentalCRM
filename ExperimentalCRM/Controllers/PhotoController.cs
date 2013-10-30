@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using ExperimentalCMS.Domain.Contracts;
 using ExperimentalCMS.Model;
 using ExperimentalCMS.ViewModels;
+using ExperimentalCMS.Web.BackEnd.Mappers;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
@@ -24,10 +25,10 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             return Json(photoInfo, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult JsonAddNewPhoto(PhotoViewModel newFlickrPhoto)
+        public ActionResult JsonAddNewPhoto(PhotoViewModel newPhoto)
         {
-            //var photoInfo = _photoManager.GetOnePhotoInfoFromFlickr(photoId);
-            return Json(null, JsonRequestBehavior.AllowGet);
+            var result = _photoManager.AddNewPhoto(new PhotoViewModelMapper().Map(newPhoto));
+            return Json(new PhotoViewModelMapper().Map(result), JsonRequestBehavior.AllowGet);
         }
 
     }

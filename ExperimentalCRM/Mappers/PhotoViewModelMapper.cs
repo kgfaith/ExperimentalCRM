@@ -21,8 +21,21 @@ namespace ExperimentalCMS.Web.BackEnd.Mappers
                                     OwnerName = viewModel.OwnerName,
                                     Title = viewModel.Title,
                                     Description = viewModel.Description,
-                                    PictureSourceId = 2
+                                    PictureSourceId = viewModel.SourceId
                                 };
+            return picture;
+        }
+
+        internal PhotoViewModel Map(Picture pic)
+        {
+            var picture = new PhotoViewModel
+            {
+                FileName = pic.FileName,
+                OwnerName = pic.OwnerName,
+                Title = pic.Title,
+                Description = pic.Description,
+                SourceId = pic.PictureSourceId
+            };
             return picture;
         }
     }

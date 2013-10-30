@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExperimentalCMS.Model
 {
@@ -20,10 +21,12 @@ namespace ExperimentalCMS.Model
         public string Description { get; set; }
 
         public int PictureSourceId { get; set; }
-        public PictureSource PictureSource { get; set; }
+        public virtual PictureSource PictureSource { get; set; }
 
-        public int PlaceId { get; set; }
-        public virtual Place Place { get; set; }
+        [InverseProperty("SlideshowPictures")]
+        public virtual ICollection<Place> SlideShowPlaces { get; set; }
 
+        [InverseProperty("PictureGallery")]
+        public virtual ICollection<Place> GalleryPlaces { get; set; }
     }
 }

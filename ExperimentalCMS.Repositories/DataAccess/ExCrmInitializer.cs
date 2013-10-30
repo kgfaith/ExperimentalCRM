@@ -55,10 +55,10 @@ namespace ExperimentalCMS.Repositories.DataAccess
 
             var pictures = new List<Picture>
                                {
-                                   new Picture{ FileName = "BaganFile", OwnerName = "Ko Kyaw Gyi", Title = "Bagan photo", Description = "Description of bagan photo", PictureSource = pictureSources[0], Place = places[0]}, 
-                                   new Picture{ FileName = "Mandalay", OwnerName = "SuperKg", Title = "Mandalay photo", Description = "Description of mandalay photo", PictureSource = pictureSources[0], Place = places[0]},
-                                   new Picture{ FileName = "Taungyi", OwnerName = "Cool kg", Title = "Taungyi photo", Description = "Description of taungyi photo", PictureSource = pictureSources[1], Place = places[0]},
-                                   new Picture{ FileName = "Ngapali", OwnerName = "SuperCool Kyaw Gyi", Title = "Ngapali photo", Description = "Description of ngapali photo", PictureSource = pictureSources[1], Place = places[0]},
+                                   new Picture{ FileName = "BaganFile", OwnerName = "Ko Kyaw Gyi", Title = "Bagan photo", Description = "Description of bagan photo", PictureSource = pictureSources[0]}, 
+                                   new Picture{ FileName = "Mandalay", OwnerName = "SuperKg", Title = "Mandalay photo", Description = "Description of mandalay photo", PictureSource = pictureSources[0]},
+                                   new Picture{ FileName = "Taungyi", OwnerName = "Cool kg", Title = "Taungyi photo", Description = "Description of taungyi photo", PictureSource = pictureSources[1]},
+                                   new Picture{ FileName = "Ngapali", OwnerName = "SuperCool Kyaw Gyi", Title = "Ngapali photo", Description = "Description of ngapali photo", PictureSource = pictureSources[1]},
                                };
             pictures.ForEach(s => context.Pictures.Add(s));
             context.SaveChanges();

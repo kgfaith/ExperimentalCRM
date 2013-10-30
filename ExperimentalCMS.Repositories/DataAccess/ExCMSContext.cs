@@ -34,6 +34,26 @@ namespace ExperimentalCMS.Repositories.DataAccess
                 .Map(t => t.MapLeftKey("PlaceId")
                     .MapRightKey("ArticleId")
                     .ToTable("PlaceArticle"));
+
+            modelBuilder.Entity<Place>()
+                .HasMany(u => u.PictureGallery)
+                .WithMany(t => t.GalleryPlaces)
+                .Map(x =>
+                {
+                    x.MapLeftKey("PlaceId");
+                    x.MapRightKey("PictureId");
+                    x.ToTable("PlacesGalleries");
+                });
+
+            modelBuilder.Entity<Place>()
+                .HasMany(u => u.SlideshowPictures)
+                .WithMany(t => t.SlideShowPlaces)
+                .Map(x =>
+                {
+                    x.MapLeftKey("PlaceId");
+                    x.MapRightKey("PictureId");
+                    x.ToTable("PlacesSlideshows");
+                });
             
         }
     }

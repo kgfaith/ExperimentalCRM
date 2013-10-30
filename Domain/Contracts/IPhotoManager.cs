@@ -9,7 +9,7 @@ namespace ExperimentalCMS.Domain.Contracts
 {
     public interface IPhotoManager
     {
-        bool AddNewPhoto(FlickrPhoto flickrPhoto);
+        Picture AddNewPhoto(Picture photo);
         FlickrPhoto GetOnePhotoInfoFromFlickr(string photoId);
         //void ValidatePhotoByPhotoId(string photoId);
         //void SearchPhotoByTagNames(string tags);
