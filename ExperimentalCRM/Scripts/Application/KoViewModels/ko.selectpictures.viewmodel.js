@@ -3,7 +3,11 @@ window.photo = window.photo || {};
 
 window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
 
-    var mainSelectedPics = ko.observableArray();
+    var mainSelectedPics = ko.observableArray([
+    { fileName: "Bungle", imageUrl : "http://semantic-ui.com/images/demo/photo.jpg" },
+    { fileName: "George", imageUrl: "http://semantic-ui.com/images/demo/photo.jpg" },
+    { fileName: "Zippy", imageUrl: "http://semantic-ui.com/images/demo/photo.jpg" }
+    ]);
     var isNewPhoto =  ko.observable(false);
     var isFlickrPhoto = ko.observable(false);
     var showAllField = ko.observable(false);
@@ -99,10 +103,14 @@ window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
     };
 
     function saveSccessful(data) {
-        if (data.newPhotoId > 0) {
+        if (data.PictureId > 0) {
             $('#AssociateWithPicturesDialog').dialog("close");
             var photoOb = new photoModel(data);
             mainSelectedPics.push(photoOb);
+            var ary = mainSelectedPics();
+            var i = ary[0];
+            var a = i.fileName();
+            var something = "something";
         }
     }
 
@@ -134,4 +142,4 @@ window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
 })(ko, photo.datacontext);
 
 // Initiate the Knockout bindings
-ko.applyBindings(window.selectPictures.selectPicturesViewModel, $("#AssociateWithPicturesDialog").get(0));
+ko.applyBindings(window.selectPictures.selectPicturesViewModel);

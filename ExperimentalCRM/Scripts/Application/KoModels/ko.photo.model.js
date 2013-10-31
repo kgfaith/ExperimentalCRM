@@ -4,21 +4,21 @@ var photoModel = function(data) {
         var self = this;
         data = data || {};
 
-        self.pictureId = ko.observable(data.pictureId);
-        self.fileName = ko.observable(data.fileName);
-        self.flickrUrl = ko.observable(data.flickrUrl);
-        self.imageUrl = ko.observable(data.imageUrl);
+        self.pictureId = ko.observable(data.PictureId);
+        self.fileName = ko.observable(data.FileName);
+        self.flickrUrl = ko.observable(data.FlickrUrl);
+        self.imageUrl = ko.observable(data.ImageUrl);
         self.isImageUrlNull = ko.computed(function () {
             var str = self.imageUrl();
             var isNull = (typeof str == 'undefined' || str == '');
             return isNull;
         }, this);
 
-        self.ownerName = ko.observable(data.ownerName);
-        self.title = ko.observable(data.title);
-        self.description = ko.observable(data.description);
-        self.pictureSourceId = ko.observable(data.pictureSourceId);
-        self.pictureSourceName = ko.observable(data.pictureSourceName);
+        self.ownerName = ko.observable(data.OwnerName);
+        self.title = ko.observable(data.Title);
+        self.description = ko.observable(data.Description);
+        self.pictureSourceId = ko.observable(data.PictureSourceId);
+        self.pictureSourceName = ko.observable(data.PictureSourceName);
         self.errorMessage = ko.observable();
         
         self.toJson = function () {

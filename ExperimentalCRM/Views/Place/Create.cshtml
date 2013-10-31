@@ -87,10 +87,12 @@
                     </div>
                 </div>
             </div> 
-            <div class="row-fluid mt20" id="SlideShowPicDiv" style="display:none;">
+            <div class="row-fluid mt20" id="SlideShowPicDiv" >
                 <div class="span10">
                     <h4>Slideshow Pictures</h4>
-                    <div id="PlaceOutputDiv" class="mb20"></div>
+                    <div class="mb20" data-bind="template: { name: 'selected-picture-kotemp', foreach: mainSelectedPics }" >
+
+                    </div>
                     <div class="editor-field">
                         <input type="hidden" id="SelectedSlideShowPictures" name="RelatedSlideShowPictures" class="hidden" value="" />
                     </div>
@@ -150,4 +152,12 @@
         </td>
         <td class="control"><span class="cross-icon"></span></td>
     </tr>
+</script>
+
+<!--  == Knockout templates ==  -->
+<script type="text/html" id="selected-picture-kotemp">
+    <div class="fl">
+        <h2><!--ko text: fileName--><!--/ko--></h2>
+        <img data-bind="attr: { src: imageUrl }" style="width:260px; border-radius: 0.3125em;">
+    </div>
 </script>

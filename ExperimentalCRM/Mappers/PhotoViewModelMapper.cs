@@ -30,6 +30,7 @@ namespace ExperimentalCMS.Web.BackEnd.Mappers
         {
             var picture = new PhotoViewModel
             {
+                PictureId = pic.PictureId.ToString(),
                 FileName = pic.FileName,
                 OwnerName = pic.OwnerName,
                 Title = pic.Title,
