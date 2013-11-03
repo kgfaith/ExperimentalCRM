@@ -21,7 +21,8 @@ namespace ExperimentalCMS.Web.BackEnd.Mappers
                                     OwnerName = viewModel.OwnerName,
                                     Title = viewModel.Title,
                                     Description = viewModel.Description,
-                                    PictureSourceId = viewModel.SourceId
+                                    PictureSourceId = viewModel.SourceId,
+                                    ImageUrl = viewModel.ImageUrl
                                 };
             return picture;
         }
@@ -35,7 +36,8 @@ namespace ExperimentalCMS.Web.BackEnd.Mappers
                 OwnerName = pic.OwnerName,
                 Title = pic.Title,
                 Description = pic.Description,
-                SourceId = pic.PictureSourceId
+                SourceId = pic.PictureSourceId,
+                ImageUrl = pic.ImageUrl
             };
             return picture;
         }

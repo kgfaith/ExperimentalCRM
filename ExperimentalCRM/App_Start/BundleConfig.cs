@@ -46,7 +46,7 @@ namespace ExperimentalCMS.Web.BackEnd.App_Start
                 "~/Scripts/Application/function.associatewitharticle.js",
                 "~/Scripts/Application/function.associatewithpictures.js",
                 "~/Scripts/Application/KoModels/ko.photo.model.js",
-                "~/Scripts/Application/KoViewModels/ko.selectpictures.viewmodel.js"
+                "~/Scripts/Application/KoViewModels/ko.selectpictures.viewmodel.js"                
                 ));
         }
     }

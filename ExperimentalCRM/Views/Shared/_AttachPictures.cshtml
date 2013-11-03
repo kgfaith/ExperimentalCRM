@@ -103,12 +103,23 @@
                                         @Html.ValidationMessageFor(model => model.Description)
                                     </div>
                                 </div>
-                            <div class="span6">
+                            <div class="span6" data-bind="visible: isFlickrPhoto()">
                                 <div class="mt20" data-bind="visible: !newPhotoData().isImageUrlNull()" style="display: none;">
                                     <img data-bind="attr: { src: newPhotoData().imageUrl }" style="width:260px; border-radius: 0.3125em;">
-
+                                    @Html.HiddenFor(model => model.ImageUrl,new Dictionary<string, Object> { { "data-bind", "value: newPhotoData().imageUrl" } })
                                 </div>
                             </div>
+
+                            <div class="span6" data-bind="visible: !isFlickrPhoto()">
+                                <div id="dropbox">
+                                    <span class="message">Drop images here to upload.
+                                <br />
+                                        <i>(they will only be visible to you)</i></span>
+                                </div>
+                                <div id="imgGallery">
+                                </div>
+                            </div>
+
                             </div>
 
                             <p class="mt20 cl">

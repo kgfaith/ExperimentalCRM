@@ -157,7 +157,9 @@
 <!--  == Knockout templates ==  -->
 <script type="text/html" id="selected-picture-kotemp">
     <div class="fl">
-        <h2><!--ko text: fileName--><!--/ko--></h2>
-        <img data-bind="attr: { src: imageUrl }" style="width:260px; border-radius: 0.3125em;">
+        <h4><!--ko text: title--><!--/ko--></h4>
+        <div  style="width:260px; max-height: 300px; border-radius: 0.3125em; overflow:hidden; margin-right: 20px;">
+        <img data-bind="attr: { src: imageUrl }" style="width:260px;">
+        </div>
     </div>
 </script>

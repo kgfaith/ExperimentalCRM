@@ -20,6 +20,9 @@ namespace ExperimentalCMS.Model
         [MaxLength(5000)]
         public string Description { get; set; }
 
+        [MaxLength(500)]
+        public string ImageUrl { get; set; }
+
         public int PictureSourceId { get; set; }
         public virtual PictureSource PictureSource { get; set; }
 

@@ -3,11 +3,7 @@ window.photo = window.photo || {};
 
 window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
 
-    var mainSelectedPics = ko.observableArray([
-    { fileName: "Bungle", imageUrl : "http://semantic-ui.com/images/demo/photo.jpg" },
-    { fileName: "George", imageUrl: "http://semantic-ui.com/images/demo/photo.jpg" },
-    { fileName: "Zippy", imageUrl: "http://semantic-ui.com/images/demo/photo.jpg" }
-    ]);
+    var mainSelectedPics = ko.observableArray();
     var isNewPhoto =  ko.observable(false);
     var isFlickrPhoto = ko.observable(false);
     var showAllField = ko.observable(false);

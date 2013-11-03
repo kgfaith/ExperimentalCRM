@@ -10,6 +10,9 @@
         maxfiles: 5,
         maxfilesize: 2, // in mb
         url: '/Place/UploadImage',
+        data: {
+            id: 23,
+        },
  
         uploadFinished: function (i, file, response) {
             $.data(file).addClass('done');
