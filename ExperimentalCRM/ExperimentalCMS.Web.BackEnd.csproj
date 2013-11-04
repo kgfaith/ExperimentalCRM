@@ -446,6 +446,12 @@
     <Content Include="Scripts\Application\function.associatewithplace.js" />
     <Content Include="Scripts\Application\function.core.js" />
     <Content Include="Scripts\Application\function.customformerrors.js" />
+    <Content Include="Scripts\canvas-to-blob.min.js" />
+    <Content Include="Scripts\jquery.fileupload-image.js" />
+    <Content Include="Scripts\jquery.fileupload-process.js" />
+    <Content Include="Scripts\jquery.fileupload-validate.js" />
+    <Content Include="Scripts\jquery.fileupload.js" />
+    <Content Include="Scripts\jquery.iframe-transport.js" />
     <Content Include="Scripts\Application\KoDatacontext\ko.photo.datacontext.js" />
     <Content Include="Scripts\Application\KoModels\ko.photo.model.js" />
     <Content Include="Scripts\Application\KoViewModels\ko.selectpictures.viewmodel.js" />
@@ -812,9 +818,9 @@
     <Content Include="Scripts\jquery.globalize\globalize.js" />
     <Content Include="Scripts\jQuery.tmpl.js" />
     <Content Include="Scripts\jQuery.tmpl.min.js" />
+    <Content Include="Scripts\jquery.ui.widget.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Scripts\Application\function.dragdropfileupload.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -822,6 +828,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.3.0.debug.js" />
     <Content Include="Scripts\knockout-2.3.0.js" />
+    <Content Include="Scripts\load-image.min.js" />
     <Content Include="Scripts\modernizr-2.0.6-development-only.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">

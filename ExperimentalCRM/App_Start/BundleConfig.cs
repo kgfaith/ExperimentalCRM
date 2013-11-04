@@ -10,6 +10,7 @@ namespace ExperimentalCMS.Web.BackEnd.App_Start
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                 "~/Scripts/jquery-1.9.1.js",
                 "~/Scripts/jquery-ui-1.10.3.custom.js",
+                "~/Scripts/jquery.ui.widget.js",
                 "~/Scripts/jQuery.tmpl.js",
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/Application/function.core.js",
@@ -33,20 +34,28 @@ namespace ExperimentalCMS.Web.BackEnd.App_Start
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
                 "~/Content/bootstrap-responsive.css",
-                "~/Content/site.css"));
+                "~/Content/site.css",
+                "~/Content/jquery.fileupload.css"
+                ));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                 "~/Content/themes/base/jquery-ui-1.10.3.custom.css"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/EditPlace").Include(
+                "~/Scripts/load-image.min.js",
+                "~/Scripts/jquery.fileupload.js" ,
+                "~/Scripts/jquery.fileupload-process.js",
+                "~/Scripts/jquery.iframe-transport.js",
+                "~/Scripts/jquery.fileupload-image.js",
+                "~/Scripts/jquery.fileupload-validate.js",
                 "~/Scripts/Application/KoDatacontext/ko.photo.datacontext.js",
                 "~/Scripts/Application/function.customformerrors.js",
                 "~/Scripts/Application/function.associatewithplace.js",
                 "~/Scripts/Application/function.associatewitharticle.js",
                 "~/Scripts/Application/function.associatewithpictures.js",
                 "~/Scripts/Application/KoModels/ko.photo.model.js",
-                "~/Scripts/Application/KoViewModels/ko.selectpictures.viewmodel.js"                
+                "~/Scripts/Application/KoViewModels/ko.selectpictures.viewmodel.js"
                 ));
         }
     }
