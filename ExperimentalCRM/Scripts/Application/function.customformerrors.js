@@ -1,6 +1,6 @@
 ﻿var customFormValidator = function ($form) {
-    var validator = $form.validate();
-    validator.settings.showErrors = showErrors;
+    var validator = null;//$form.validate();
+    //validator.settings.showErrors = showErrors;
 
     function addError(errors) {
         validator.showErrors(errors);

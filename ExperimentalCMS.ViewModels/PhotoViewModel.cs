@@ -24,6 +24,7 @@ namespace ExperimentalCMS.ViewModels
 
         [MaxLength(50)]
         [Display(Name = "Owner Name")]
+        [Required]
         public string OwnerName { get; set; }
 
         [MaxLength(500)]

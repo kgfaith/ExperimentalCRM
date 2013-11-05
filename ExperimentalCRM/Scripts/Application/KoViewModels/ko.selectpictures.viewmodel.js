@@ -85,16 +85,19 @@ window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
 
     var savePhoto = function (formElement) {
         var $form = $(formElement);
+        $form.validate();
+        var s = $form.valid();
         if ($form.valid()) {
             var formData = $form.serializeObject();
             var url = newPhotoData().flickrUrl();
-            if (url != '') {
+            if (typeof url != 'undefined' && url != '') {
                 formData.SourceId = 2;
                 saveFlickrPhoto(formData);
-            } else {
-                formData.SourceId = 1;
-                saveNormalPhoto(formData);
             }
+            //else {
+            //    formData.SourceId = 1;
+            //    saveNormalPhoto(formData);
+            //}
         }
     };
 

@@ -871,6 +871,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Attributes\" />
     <Folder Include="Content\Pictures\" />
+    <Folder Include="Content\Upload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
