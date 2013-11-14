@@ -70,14 +70,12 @@
                             
                                 <div class="span6">
 
-                                    <div class="editor-label" data-bind="visible: !isFlickrPhoto() || (isFlickrPhoto() && showAllField())">
-                                        @*<label class="control-label" for="normalpicture_filename">File Name</label>*@
+                                @*    <div class="editor-label" data-bind="visible: !isFlickrPhoto() || (isFlickrPhoto() && showAllField())">
                                         @Html.LabelFor(model => model.FileName)
                                     </div>
                                     <div class="editor-field" data-bind="visible: !isFlickrPhoto() || (isFlickrPhoto() && showAllField())">
-                                        @Html.TextBoxFor(model => model.FileName, new Dictionary<string, Object> { { "id", "normalpicture_filename" }, { "data-bind", "value: newPhotoData().fileName" }, { "placeholder", "File Name" } })
-                                        @Html.ValidationMessageFor(model => model.FileName)
-                                    </div>
+                                        @Html.HiddenFor(model => model.FileName,new Dictionary<string, Object> { { "data-bind", "value: newPhotoData().fileName" } })
+                                    </div>*@
 
                                     <div class="editor-label" data-bind="visible: !isFlickrPhoto() || (isFlickrPhoto() && showAllField())">
                                         @Html.LabelFor(model => model.OwnerName)
@@ -107,6 +105,7 @@
                                 <div class="mt20" data-bind="visible: !newPhotoData().isImageUrlNull()" style="display: none;">
                                     <img data-bind="attr: { src: newPhotoData().imageUrl }" style="width:260px; border-radius: 0.3125em;">
                                     @Html.HiddenFor(model => model.ImageUrl,new Dictionary<string, Object> { { "data-bind", "value: newPhotoData().imageUrl" } })
+                                    @Html.HiddenFor(model => model.FileName,new Dictionary<string, Object> { { "data-bind", "value: newPhotoData().fileName" } })
                                 </div>
                             </div>
 

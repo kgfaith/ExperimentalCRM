@@ -13,7 +13,6 @@ namespace ExperimentalCMS.ViewModels
         public string PictureId { get; set; }
 
         [MaxLength(50)]
-        [Required]
         [Display(Name = "File Name")]
         public string FileName { get; set; }
 

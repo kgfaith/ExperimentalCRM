@@ -26,15 +26,31 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             return Json(photoInfo, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult JsonAddNewPhoto(PhotoViewModel newPhoto)
+        [HttpPost]
+        public ActionResult JsonAddNewNormalPhoto(PhotoViewModel newPhoto)
+        {
+
+            var uploadResult = UploadFiles();
+            if (uploadResult.Count > 0)
+            {
+                newPhoto.FileName = uploadResult[0].name;
+                newPhoto.ImageUrl = uploadResult[0].url;
+                var result = _photoManager.AddNewPhoto(new PhotoViewModelMapper().Map(newPhoto));
+                if (result.PictureId > 0)
+                    uploadResult[0].createdPicture = result;
+            }
+            return Json(uploadResult, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult JsonAddNewFlickrPhoto(PhotoViewModel newPhoto)
         {
             var result = _photoManager.AddNewPhoto(new PhotoViewModelMapper().Map(newPhoto));
-            return Json(new PhotoViewModelMapper().Map(result), JsonRequestBehavior.AllowGet);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         //DONT USE THIS IF YOU NEED TO ALLOW LARGE FILES UPLOADS
-        [HttpPost]
-        public ActionResult UploadFiles()
+        private List<ViewDataUploadFilesResult> UploadFiles()
         {
             var r = new List<ViewDataUploadFilesResult>();
 
@@ -52,13 +68,10 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
                     UploadPartialFile(headers["X-File-Name"], Request, statuses);
                 }
 
-                JsonResult result = Json(statuses);
-                result.ContentType = "text/plain";
-
-                return result;
+                return statuses;
             }
+            return r;
 
-            return Json(r);
         }
 
         private string EncodeFile(string fileName)
@@ -94,7 +107,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
                 name = fileName,
                 size = file.ContentLength,
                 type = file.ContentType,
-                url = "/Photo/Download/" + fileName,
+                url = "~/Content/Upload/" + fileName,
                 delete_url = "/Photo/Delete/" + fileName,
                 thumbnail_url = @"data:image/png;base64," + EncodeFile(fullName),
                 delete_type = "GET",
@@ -109,16 +122,18 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             {
                 var file = request.Files[i];
 
-                var fullPath = Path.Combine(Server.MapPath("~/Content/Upload/"), Path.GetFileName(file.FileName));
+                var fileExtension = System.IO.Path.GetExtension(file.FileName);
+                var guidFileName = Guid.NewGuid() + fileExtension;
+                var fullPath = Path.Combine(Server.MapPath("~/Content/Upload/"), guidFileName);
 
                 file.SaveAs(fullPath);
 
                 statuses.Add(new ViewDataUploadFilesResult()
                 {
-                    name = file.FileName,
+                    name = guidFileName,
                     size = file.ContentLength,
                     type = file.ContentType,
-                    url = "/Photo/Download/" + file.FileName,
+                    url = Url.Content("~/Content/Upload/" + guidFileName),
                     delete_url = "/Photo/Delete/" + file.FileName,
                     thumbnail_url = @"data:image/png;base64," + EncodeFile(fullPath),
                     delete_type = "GET",
@@ -136,6 +151,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         public string delete_url { get; set; }
         public string thumbnail_url { get; set; }
         public string delete_type { get; set; }
+        public Picture createdPicture { get; set; }
     }
 }
         /*[HttpPost]

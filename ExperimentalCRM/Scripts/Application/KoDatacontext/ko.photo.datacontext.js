@@ -4,10 +4,9 @@ window.photo.datacontext = (function () {
 
     function saveNewPhoto(newPhoto, callBack)
     {
-        var something = "something";
         $.ajax({
             type: "POST",
-            url: "/Photo/JsonAddNewPhoto",
+            url: "/Photo/JsonAddNewFlickrPhoto",
             data: newPhoto,
             success: function (data) {
                 callBack(data);

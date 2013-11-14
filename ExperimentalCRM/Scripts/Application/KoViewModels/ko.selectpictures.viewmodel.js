@@ -83,6 +83,11 @@ window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
         datacontext.saveNewPhoto(data, saveSccessful);
     };
 
+    var addSelectedPicture = function (data) {
+        var photoOb = new photoModel(data);
+        mainSelectedPics.push(photoOb);
+    };
+
     var savePhoto = function (formElement) {
         var $form = $(formElement);
         $form.validate();
@@ -106,10 +111,6 @@ window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
             $('#AssociateWithPicturesDialog').dialog("close");
             var photoOb = new photoModel(data);
             mainSelectedPics.push(photoOb);
-            var ary = mainSelectedPics();
-            var i = ary[0];
-            var a = i.fileName();
-            var something = "something";
         }
     }
 
@@ -136,7 +137,8 @@ window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
         chooseAddFlickrPhoto: chooseAddFlickrPhoto,
         chooseAddNormalPhoto: chooseAddNormalPhoto,
         savePhoto : savePhoto, 
-        backToOption: backToOption
+        backToOption: backToOption,
+        addSelectedPicture: addSelectedPicture
     };
 })(ko, photo.datacontext);
 
