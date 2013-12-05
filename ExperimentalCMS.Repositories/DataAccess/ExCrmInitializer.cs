@@ -47,18 +47,18 @@ namespace ExperimentalCMS.Repositories.DataAccess
 
             var pictureSources = new List<PictureSource>
                                      {
+                                         new PictureSource{ SourceName = "Normal"},
                                          new PictureSource{ SourceName = "Flickr"},
-                                         new PictureSource{ SourceName = "Instagram"},
                                      };
             pictureSources.ForEach(s => context.PictureSources.Add(s));
             context.SaveChanges();
 
             var pictures = new List<Picture>
                                {
-                                   new Picture{ FileName = "BaganFile", OwnerName = "Ko Kyaw Gyi", Title = "Bagan photo", Description = "Description of bagan photo", PictureSource = pictureSources[0]}, 
-                                   new Picture{ FileName = "Mandalay", OwnerName = "SuperKg", Title = "Mandalay photo", Description = "Description of mandalay photo", PictureSource = pictureSources[0]},
-                                   new Picture{ FileName = "Taungyi", OwnerName = "Cool kg", Title = "Taungyi photo", Description = "Description of taungyi photo", PictureSource = pictureSources[1]},
-                                   new Picture{ FileName = "Ngapali", OwnerName = "SuperCool Kyaw Gyi", Title = "Ngapali photo", Description = "Description of ngapali photo", PictureSource = pictureSources[1]},
+                                   new Picture{ FileName = "1c3e2fcb-25ba-4695-a3e3-a4cb2eb5ffdd.jpg", OwnerName = "Ko Kyaw Gyi", Title = "Bagan Kalaw photo", Description = "Description Kalaw of bagan photo", PictureSource = pictureSources[0], ImageUrl = "/Content/Upload/1dcf528b-cec4-476b-959e-55e2892c051c.jpg"}, 
+                                   new Picture{ FileName = "1dcf528b-cec4-476b-959e-55e2892c051c.jpg", OwnerName = "SuperKg", Title = "Mandalay Kalaw photo", Description = "Description Kalaw of mandalay photo", PictureSource = pictureSources[0], ImageUrl = "/Content/Upload/1dcf528b-cec4-476b-959e-55e2892c051c.jpg"},
+                                   new Picture{ FileName = "7430026648", OwnerName = "Cool kg", Title = "Taungyi Bagan photo", Description = "Description of taungyi Kalaw photo", PictureSource = pictureSources[1], ImageUrl = "http://farm6.staticflickr.com/5071/7430026378_6068a6fb77.jpg"},
+                                   new Picture{ FileName = "8966469", OwnerName = "SuperCool Kyaw Gyi", Title = "Ngapali photo", Description = "Description of ngapali photo", PictureSource = pictureSources[1], ImageUrl = "http://farm1.staticflickr.com/4/8966469_3ce6afca40.jpg"},
                                };
             pictures.ForEach(s => context.Pictures.Add(s));
             context.SaveChanges();

@@ -17,8 +17,25 @@
 
         <div class="row-fluid" id="attach-existing-pics" data-bind="visible: (!onOptionPage() && !isNewPhoto())">
             <div class="span12">
-                attach existing pictures
-                <button type="button" class="btn" data-bind="click: backToOption">Back</button>
+                <div class="row-fluid">
+                    <div class="span12 pic-searchbox-row">
+                        <input class="input-xxlarge" type="text" placeholder="Search picture title or description" id="search-pictures-box">
+                    </div>
+                </div>
+                <div class="row-fluid pic-searchresult-row">
+                    <div class="span12" data-bind="template: { name: 'searchresult-picture-kotemp', foreach: searchResultPics }">
+
+                    </div>
+                        
+                </div>
+                <div class="row-fluid">
+                    <div class="pic-searchcontrol-row">
+                        <form method="post" id="search-picture-form" data-bind="submit: addToSelectedPictureList">
+                            <input type="submit" value="Choose Pictures" class="btn btn-primary" id="submit-selectedPics" />
+                            <button type="button" class="btn" data-bind="click: backToOption">Back</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -146,3 +163,12 @@
     </div>
 
 </div>
+<!--  == Knockout templates ==  -->
+<script type="text/html" id="searchresult-picture-kotemp">
+    <div class="fl">
+        <h6><!--ko text: title--><!--/ko--></h6>
+        <div   data-bind="attr: { class : ('pic-result-box ' + ( isSelected() ? ' selected' : '')) }, click: $root.selectSearchResult">
+        <img data-bind="attr: { src: imageUrl }" style="width:260px;">
+        </div>
+    </div>
+</script>@*class="pic-result-box"*@

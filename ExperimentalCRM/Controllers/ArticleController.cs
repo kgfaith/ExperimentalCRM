@@ -145,7 +145,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             if (searchParams.Excludes != null)
                 idsToExclude.AddRange(searchParams.Excludes.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(artistIDToExclude => int.Parse(artistIDToExclude)));
 
-            var searchResults = _placeManager.SearchPlace(searchParams.Term, idsToExclude).Result.Take(10).Select(p => new { label = p.PlaceName, value = p.PlaceId }); ;
+            var searchResults = _placeManager.SearchPlace(searchParams.Term, idsToExclude).Result.Take(10).Select(p => new { label = p.PlaceName, value = p.PlaceId });
             return Json(searchResults, JsonRequestBehavior.AllowGet);
         }
 

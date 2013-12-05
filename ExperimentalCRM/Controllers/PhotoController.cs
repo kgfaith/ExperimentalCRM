@@ -26,6 +26,17 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             return Json(photoInfo, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult JsonQuickSearchPictures(AjaxSearchParams searchParams)
+        {
+            List<int> idsToExclude = new List<int>();
+            if (searchParams.Excludes != null)
+                idsToExclude.AddRange(searchParams.Excludes.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(artistIDToExclude => int.Parse(artistIDToExclude)));
+
+            var modelMapper = new PhotoViewModelMapper();
+            var searchResults = _photoManager.SearchPictures(searchParams.Term, idsToExclude).Result.Take(10).Select(x => modelMapper.Map(x, Url));
+            return Json(searchResults, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public ActionResult JsonAddNewNormalPhoto(PhotoViewModel newPhoto)
         {

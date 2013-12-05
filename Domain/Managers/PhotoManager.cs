@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ExperimentalCMS.Domain.Contracts;
+using ExperimentalCMS.Domain.Utility;
 using ExperimentalCMS.Model;
 using ExperimentalCMS.Repositories;
 using FlickrNet;
@@ -22,6 +23,23 @@ namespace ExperimentalCMS.Domain.Managers
             _uOW = uow;
             _apiKey = apiKey;
             _secret = secret;
+        }
+
+        public DomainResponse<IEnumerable<Picture>> SearchPictures(string searchTerm, IEnumerable<int> articleIdsToExclude)
+        {
+            var response = new DomainResponse<IEnumerable<Picture>>();
+            try
+            {
+                var pictures = _uOW.PictureRepo.Get(p => !articleIdsToExclude.Contains(p.PictureId) && (p.Title.Contains(searchTerm) || p.Description.Contains(searchTerm)));
+                response.Result = pictures.ToArray();
+            }
+            catch (Exception ex)
+            {
+                return response.ReturnFailResponse(new[] { ex.Message }
+                       , "There is an error trying to retrieve data", null);
+            }
+
+            return response.ReturnSuccessResponse(response.Result, null, null);
         }
 
         public FlickrPhoto GetOnePhotoInfoFromFlickr(string photoId)

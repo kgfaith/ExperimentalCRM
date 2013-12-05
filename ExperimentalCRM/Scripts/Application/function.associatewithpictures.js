@@ -2,19 +2,42 @@
     var isAjaxRequestOnGoing = false,
     $associateWithPicturesDialog = $('#AssociateWithPicturesDialog'),
     $newPhotoFormValidator = new customFormValidator($('#newphoto-form')),
+    $searchPictureBox = $('#search-pictures-box'),
+    $selectedPictureBox = $('#SelectedSlideShowPictures'),
     $ajaxLoader = $('#floatingCirclesG');
     $ajaxLoader.hide();
 
+    $searchPictureBox.on('keyup', function () {
+        var idToExclude = window.selectPictures.selectPicturesViewModel.selectedPicIdsString();
+        $.ajax({
+            url: '/Photo/JsonQuickSearchPictures',
+            dataType: 'json',
+            data: {
+                Term: $searchPictureBox.val(),
+                Excludes: idToExclude
+            },
+            success: function (data) {
+                window.selectPictures.selectPicturesViewModel.clearSearchResult();
+                for (var i = 0; i < data.length; i++) {
+                    window.selectPictures.selectPicturesViewModel.addSearchResultPicture(data[i]);
+                }
+            }
+        });
+    });
+
     $associateWithPicturesDialog.dialog({
         autoOpen: false,
-        height: 500,
-        width: 580,
+        height: 620,
+        width: 850,
         modal: true,
         //show: "puff",
         buttons: null,
         close: function () {
             window.selectPictures.selectPicturesViewModel.resetViewModel();
             $('#files').html('');
+            $searchPictureBox.val('');
+            var selectedIds = window.selectPictures.selectPicturesViewModel.selectedPicIdsString();
+            $selectedPictureBox.val(selectedIds);
         }
     });
 

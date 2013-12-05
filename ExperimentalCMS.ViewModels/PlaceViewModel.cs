@@ -22,14 +22,22 @@ namespace ExperimentalCMS.ViewModels
         public string Description { get; set; }
 
         public int InternalRanking { get; set; }
+
+        [Required]
+        public float Latitude { get; set; }
+
+        [Required]
+        public float Longitude { get; set; }
+
         public int PlaceTypeId { get; set; }
         public PlaceType PlaceType { get; set; }
         public ICollection<Article> Articles { get; set; }
-        public ICollection<Picture> Pictures { get; set; }
+        public ICollection<Picture> SlideShowPictures { get; set; }
         public ICollection<Place> RelatedPlaces { get; set; }
 
         public string RelatedArticleIds { get; set; }
         public string RelatedPlaceIds { get; set; }
+        public string RelatedSlideShowPictureIds { get; set; }
 
         public Place TransformToPlaceObject()
         {
@@ -39,6 +47,8 @@ namespace ExperimentalCMS.ViewModels
             placeObj.Description = Description;
             placeObj.InternalRanking = InternalRanking;
             placeObj.PlaceTypeId = PlaceTypeId;
+            placeObj.Latitude = Latitude;
+            placeObj.Longitude = Longitude;
             return placeObj;
         }
     }

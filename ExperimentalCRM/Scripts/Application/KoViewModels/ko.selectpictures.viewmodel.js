@@ -10,7 +10,7 @@ window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
     var onOptionPage = ko.observable(true);
     var newPhotoData = ko.observable();
     var searchString = ko.observable();
-    var searchResultPic = ko.observableArray();
+    var searchResultPics = ko.observableArray();
 
     isFlickrPhoto.ForEditing = ko.computed({
         read: function () {
@@ -30,6 +30,7 @@ window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
         showAllField(false);
         onOptionPage(true);
         newPhotoData(new photoModel());
+        searchResultPics([]);
     };
 
     var chooseAddNewPhoto = function () {
@@ -46,11 +47,7 @@ window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
     };
 
     var backToOption = function () {
-        onOptionPage(true);
-        isNewPhoto(false);
-        isFlickrPhoto(false);
-        newPhotoData(new photoModel());
-        showAllField(false);
+        resetViewModel();
     };
 
     var search = function () {
@@ -83,6 +80,15 @@ window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
         datacontext.saveNewPhoto(data, saveSccessful);
     };
 
+    var addSearchResultPicture = function (data) {
+        var photoOb = new photoModel(data);
+        searchResultPics.push(photoOb);
+    };
+
+    var clearSearchResult = function () {
+        searchResultPics([]);
+    };
+
     var addSelectedPicture = function (data) {
         var photoOb = new photoModel(data);
         mainSelectedPics.push(photoOb);
@@ -106,11 +112,57 @@ window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
         }
     };
 
+    var selectedPicIdsString = ko.computed(function () {
+        var str = "";
+        ko.utils.arrayForEach(mainSelectedPics(), function (pic) {
+            str += pic.pictureId() + ',';
+        });
+        return str;
+    });
+
+    var selectSearchResult = function (photo) {
+        if (photo.isSelected())
+            photo.isSelected(false);
+        else {
+            photo.isSelected(true);
+        }
+    };
+
+    var removePictureFromSelectedList = function (photo) {
+        mainSelectedPics.remove(photo);
+        $('#SelectedSlideShowPictures').val(selectedPicIdsString());
+    };
+
+    var addToSelectedPictureList = function () {
+        ko.utils.arrayForEach(searchResultPics(), function (pic) {
+            if (pic.isSelected()) {
+                mainSelectedPics.push(pic);
+            }
+        });
+        searchResultPics([]);
+        $('#AssociateWithPicturesDialog').dialog("close");
+    }
+
+    var pageLoad = function (currentSlideShowPics) {
+        if (typeof currentSlideShowPics != 'undefined') {
+            if (currentSlideShowPics != null) {
+                if (currentSlideShowPics.length > 0) {
+                    ko.utils.arrayForEach(currentSlideShowPics, function (pic) {
+                        var photoOb = new photoModel(pic);
+                        mainSelectedPics.push(photoOb);
+                    });
+                    $('#SelectedSlideShowPictures').val(selectedPicIdsString());
+                }
+            }
+        }
+    }
+
     function saveSccessful(data) {
         if (data.PictureId > 0) {
-            $('#AssociateWithPicturesDialog').dialog("close");
             var photoOb = new photoModel(data);
             mainSelectedPics.push(photoOb);
+            $('#AssociateWithPicturesDialog').dialog("close");
+            
         }
     }
 
@@ -126,9 +178,10 @@ window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
         showAllField: showAllField,
         newPhotoData: newPhotoData,
         searchString: searchString,
-        searchResultPic: searchResultPic,
+        searchResultPics: searchResultPics,
         onOptionPage: onOptionPage,
         resetViewModel: resetViewModel,
+        selectedPicIdsString: selectedPicIdsString,
 
         chooseAddNewPhoto: chooseAddNewPhoto,
         chooseAddExistingPhoto: chooseAddExistingPhoto,
@@ -138,9 +191,20 @@ window.selectPictures.selectPicturesViewModel = (function (ko, datacontext) {
         chooseAddNormalPhoto: chooseAddNormalPhoto,
         savePhoto : savePhoto, 
         backToOption: backToOption,
-        addSelectedPicture: addSelectedPicture
+        addSelectedPicture: addSelectedPicture,
+        clearSearchResult: clearSearchResult,
+        addSearchResultPicture: addSearchResultPicture,
+        selectSearchResult: selectSearchResult,
+        addToSelectedPictureList: addToSelectedPictureList,
+        removePictureFromSelectedList: removePictureFromSelectedList,
+        pageLoad: pageLoad
     };
 })(ko, photo.datacontext);
 
 // Initiate the Knockout bindings
 ko.applyBindings(window.selectPictures.selectPicturesViewModel);
+
+if (typeof viewModelSlideshowPics == 'undefined')
+    var viewModelSlideshowPics;
+
+window.selectPictures.selectPicturesViewModel.pageLoad(viewModelSlideshowPics);

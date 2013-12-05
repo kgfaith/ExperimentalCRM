@@ -22,10 +22,12 @@ namespace ExperimentalCMS.Domain.Managers
         public DomainResponse<Place> CreateNewPlace(Place newPlace)
         {
             var response = new DomainResponse<Place>();
-            var tempRelatedPlaces = newPlace.RelatedPlaces;
-            var tempArticles = newPlace.Articles;
+            var tempRelatedPlaces = newPlace.RelatedPlaces != null? newPlace.RelatedPlaces : new List<Place>();
+            var tempArticles = newPlace.Articles != null ? newPlace.Articles : new List<Article>();
+            var tempSlideShowPics = newPlace.SlideshowPictures != null ? newPlace.SlideshowPictures : new List<Picture>();
             newPlace.RelatedPlaces = new List<Place>();
             newPlace.Articles = new List<Article>();
+            newPlace.SlideshowPictures = new List<Picture>();
 
             try
             {
@@ -40,6 +42,11 @@ namespace ExperimentalCMS.Domain.Managers
                 {
                     var tempArticle = _uOW.ArticleRepo.GetByID(article.ArticleId);
                     newPlace.Articles.Add(tempArticle);
+                }
+                foreach (Picture picture in tempSlideShowPics)
+                {
+                    var tempPicture = _uOW.PictureRepo.GetByID(picture.PictureId);
+                    newPlace.SlideshowPictures.Add(tempPicture);
                 }
                 _uOW.Save();
             }
@@ -78,6 +85,7 @@ namespace ExperimentalCMS.Domain.Managers
 
                 UpdateRelatedPlaces(newPlace, placeData);
                 UpdateRelatedArticles(newPlace, placeData);
+                UpdateRelatedSlideshowPictures(newPlace, placeData);
                 _uOW.PlaceRepo.Update(placeData);
                 _uOW.Save();
             }
@@ -94,11 +102,33 @@ namespace ExperimentalCMS.Domain.Managers
                     , "Admin data has been successfully updated.");
         }
 
+        private void UpdateRelatedSlideshowPictures(Place newPlace, Place placeToUpdate)
+        {
+            var pictures = _uOW.PictureRepo.Get();
+            var selectedIdsAry = newPlace.SlideshowPictures != null ? newPlace.SlideshowPictures.Select(x => x.PictureId).ToArray() : new int[]{};
+            var existingIdsAry = placeToUpdate.SlideshowPictures != null ? placeToUpdate.SlideshowPictures.Select(x => x.PictureId).ToArray() : new int[] { };
+
+            //TODO: make performance testing for this logic
+            foreach (Picture picture in pictures)
+            {
+                if (selectedIdsAry.Contains(picture.PictureId))
+                {
+                    if (!existingIdsAry.Contains(picture.PictureId))
+                        placeToUpdate.SlideshowPictures.Add(picture);
+                }
+                else
+                {
+                    if (existingIdsAry.Contains(picture.PictureId))
+                        placeToUpdate.SlideshowPictures.Remove(picture);
+                }
+            }
+        }
+
         private void UpdateRelatedPlaces(Place newPlace, Place placeToUpdate)
         {
             var places = _uOW.PlaceRepo.Get();
-            var selectedIdsAry = newPlace.RelatedPlaces.Select(x => x.PlaceId).ToArray();
-            var existingIdsAry = placeToUpdate.RelatedPlaces.Select(x => x.PlaceId).ToArray();
+            var selectedIdsAry = newPlace.RelatedPlaces != null ? newPlace.RelatedPlaces.Select(x => x.PlaceId).ToArray() : new int[]{};
+            var existingIdsAry = placeToUpdate.RelatedPlaces != null ? placeToUpdate.RelatedPlaces.Select(x => x.PlaceId).ToArray() : new int[]{};
             foreach (Place place in places)
             {
                 if (selectedIdsAry.Contains(place.PlaceId))
@@ -117,8 +147,8 @@ namespace ExperimentalCMS.Domain.Managers
         private void UpdateRelatedArticles(Place newPlace, Place placeToUpdate)
         {
             var articles = _uOW.ArticleRepo.Get();
-            var selectedIdsAry = newPlace.Articles.Select(x => x.ArticleId).ToArray();
-            var existingIdsAry = placeToUpdate.Articles.Select(x => x.ArticleId).ToArray();
+            var selectedIdsAry = newPlace.Articles != null ? newPlace.Articles.Select(x => x.ArticleId).ToArray() : new int[]{};
+            var existingIdsAry = placeToUpdate.Articles != null ? placeToUpdate.Articles.Select(x => x.ArticleId).ToArray() : new int[]{};
             foreach (Article article in articles)
             {
                 if (selectedIdsAry.Contains(article.ArticleId))

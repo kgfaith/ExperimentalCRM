@@ -27,5 +27,11 @@ namespace ExperimentalCMS.Model
 
         [InverseProperty("GalleryPlaces")]
         public virtual ICollection<Picture> PictureGallery { get; set; }
+
+        [Required]
+        public float Latitude { get; set; }
+
+        [Required]
+        public float Longitude { get; set; }
     }
 }

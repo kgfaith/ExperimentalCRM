@@ -12,6 +12,7 @@ using ExperimentalCMS.ViewModels;
 using ExperimentalCMS.Web.BackEnd.Utility;
 using System.Web;
 using System.IO;
+using ExperimentalCMS.Domain.Utility;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
@@ -91,8 +92,9 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
 
         private Place PreparePlaceViewModelToUpdate(PlaceViewModel viewModel)
         {
-            var articleIds = !string.IsNullOrEmpty(viewModel.RelatedArticleIds) ? viewModel.RelatedArticleIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries) : null;
-            var placeIds = !string.IsNullOrEmpty(viewModel.RelatedPlaceIds) ? viewModel.RelatedPlaceIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries) : null;
+            var articleIds = !string.IsNullOrEmpty(viewModel.RelatedArticleIds) ? viewModel.RelatedArticleIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries) : new string[]{};
+            var placeIds = !string.IsNullOrEmpty(viewModel.RelatedPlaceIds) ? viewModel.RelatedPlaceIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries) : new string[] { };
+            var slideShowPicIds = !string.IsNullOrEmpty(viewModel.RelatedSlideShowPictureIds) ? viewModel.RelatedSlideShowPictureIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries) : new string[] { };
 
             var placeObj = viewModel.TransformToPlaceObject();
             foreach (var id in articleIds)
@@ -109,6 +111,15 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
                     placeObj.RelatedPlaces = new List<Place>();
                 placeObj.RelatedPlaces.Add(place);
             }
+
+            foreach (var id in slideShowPicIds)
+            {
+                var picture = new Picture { PictureId = int.Parse(id) };
+                if (placeObj.SlideshowPictures == null)
+                    placeObj.SlideshowPictures = new List<Picture>();
+                placeObj.SlideshowPictures.Add(picture);
+            }
+
             return placeObj;
         }
 

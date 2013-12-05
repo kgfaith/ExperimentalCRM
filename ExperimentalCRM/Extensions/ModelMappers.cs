@@ -41,7 +41,10 @@ namespace ExperimentalCMS.Web.BackEnd.Extensions
             InternalRanking = place.InternalRanking, 
             PlaceTypeId = place.PlaceTypeId,
             RelatedPlaces = place.RelatedPlaces,
-            Articles = place.Articles
+            Articles = place.Articles,
+            SlideShowPictures = place.SlideshowPictures,
+            Latitude = place.Latitude,
+            Longitude = place.Longitude 
             };
             string str = string.Empty;
             foreach (var p in place.RelatedPlaces)
@@ -55,6 +58,12 @@ namespace ExperimentalCMS.Web.BackEnd.Extensions
                 str += a.ArticleId.ToString() + ',';
             }
             obj.RelatedArticleIds = str;
+            str = string.Empty;
+            foreach (var s in place.SlideshowPictures)
+            {
+                str += s.PictureId.ToString() + ',';
+            }
+            obj.RelatedSlideShowPictureIds = str;
             return obj;
         }
     }

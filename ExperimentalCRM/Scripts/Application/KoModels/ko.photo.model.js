@@ -19,6 +19,7 @@ var photoModel = function(data) {
         self.description = ko.observable(data.Description);
         self.pictureSourceId = ko.observable(data.PictureSourceId);
         self.pictureSourceName = ko.observable(data.PictureSourceName);
+        self.isSelected = ko.observable(false);
         self.errorMessage = ko.observable();
         
         self.toJson = function () {
