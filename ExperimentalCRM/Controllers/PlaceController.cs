@@ -104,13 +104,13 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
                     placeObj.Articles = new List<Article>();
                 placeObj.Articles.Add(article);
             }
-            foreach (var id in placeIds)
+            /*foreach (var id in placeIds)
             {
                 var place = new Place { PlaceId = int.Parse(id) };
                 if (placeObj.RelatedPlaces == null)
                     placeObj.RelatedPlaces = new List<Place>();
                 placeObj.RelatedPlaces.Add(place);
-            }
+            }*/
 
             foreach (var id in slideShowPicIds)
             {

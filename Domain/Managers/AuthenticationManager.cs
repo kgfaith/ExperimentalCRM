@@ -25,10 +25,22 @@ namespace ExperimentalCMS.Domain.Managers
 
         public bool IsValidBackEndAdminUser(string username, string password, out Admin admin)
         {
-            admin = _uOW.AdminRepo.Get(u => u.UserName == username).SingleOrDefault();
-            if (admin != null && BCryptHelper.CheckPassword(password, admin.PasswordHash))
+            admin = null;
+            try
             {
-                return true;
+                var result = _uOW.AdminRepo.Get(u => u.UserName == username);
+                if (!result.Any())
+                    return false;
+
+                admin = result.FirstOrDefault();
+                if (admin != null && BCryptHelper.CheckPassword(password, admin.PasswordHash))
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
             return false;
         }

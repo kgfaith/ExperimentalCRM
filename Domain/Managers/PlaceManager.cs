@@ -22,10 +22,10 @@ namespace ExperimentalCMS.Domain.Managers
         public DomainResponse<Place> CreateNewPlace(Place newPlace)
         {
             var response = new DomainResponse<Place>();
-            var tempRelatedPlaces = newPlace.RelatedPlaces != null? newPlace.RelatedPlaces : new List<Place>();
+            //var tempRelatedPlaces = newPlace.RelatedPlaces != null? newPlace.RelatedPlaces : new List<Place>();
             var tempArticles = newPlace.Articles != null ? newPlace.Articles : new List<Article>();
             var tempSlideShowPics = newPlace.SlideshowPictures != null ? newPlace.SlideshowPictures : new List<Picture>();
-            newPlace.RelatedPlaces = new List<Place>();
+            //newPlace.RelatedPlaces = new List<Place>();
             newPlace.Articles = new List<Article>();
             newPlace.SlideshowPictures = new List<Picture>();
 
@@ -33,11 +33,11 @@ namespace ExperimentalCMS.Domain.Managers
             {
                 newPlace = _uOW.PlaceRepo.Insert(newPlace);
                 _uOW.Save();
-                foreach (Place place in tempRelatedPlaces)
+                /*foreach (Place place in tempRelatedPlaces)
                 {
                     var tempPlace = _uOW.PlaceRepo.GetByID(place.PlaceId);
                     newPlace.RelatedPlaces.Add(tempPlace);
-                }
+                }*/
                 foreach (Article article in tempArticles)
                 {
                     var tempArticle = _uOW.ArticleRepo.GetByID(article.ArticleId);
@@ -83,7 +83,7 @@ namespace ExperimentalCMS.Domain.Managers
                 placeData.PlaceTypeId = newPlace.PlaceTypeId > 0 ? newPlace.PlaceTypeId : placeData.PlaceTypeId;
                 placeData.PlaceType = newPlace.PlaceType != null ? newPlace.PlaceType : placeData.PlaceType;
 
-                UpdateRelatedPlaces(newPlace, placeData);
+                //UpdateRelatedPlaces(newPlace, placeData);
                 UpdateRelatedArticles(newPlace, placeData);
                 UpdateRelatedSlideshowPictures(newPlace, placeData);
                 _uOW.PlaceRepo.Update(placeData);
@@ -124,7 +124,7 @@ namespace ExperimentalCMS.Domain.Managers
             }
         }
 
-        private void UpdateRelatedPlaces(Place newPlace, Place placeToUpdate)
+       /* private void UpdateRelatedPlaces(Place newPlace, Place placeToUpdate)
         {
             var places = _uOW.PlaceRepo.Get();
             var selectedIdsAry = newPlace.RelatedPlaces != null ? newPlace.RelatedPlaces.Select(x => x.PlaceId).ToArray() : new int[]{};
@@ -142,7 +142,7 @@ namespace ExperimentalCMS.Domain.Managers
                         placeToUpdate.RelatedPlaces.Remove(place);
                 }
             }
-        }
+        }*/
 
         private void UpdateRelatedArticles(Place newPlace, Place placeToUpdate)
         {

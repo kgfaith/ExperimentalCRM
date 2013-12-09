@@ -18,9 +18,23 @@ namespace ExperimentalCMS.Model
 
         public int InternalRanking { get; set; }
         public int PlaceTypeId { get; set; }
+
+        public int? ParentStateId { get; set; }
+        public virtual Place ParentState { get; set; }
+
+        public int? ParentAttractionId { get; set; }
+        public virtual Place ParentAttraction { get; set; }
+
+        public int? ParentTownCityId { get; set; }
+        public virtual Place ParentTownCity { get; set; }
+
         public virtual PlaceType PlaceType { get; set; }
         public virtual ICollection<Article> Articles { get; set; }
-        public virtual ICollection<Place> RelatedPlaces { get; set; }
+        //public virtual ICollection<Place> RelatedPlaces { get; set; }
+
+        public virtual ICollection<Place> StateChilds { get; set; }
+        public virtual ICollection<Place> AttractionChilds { get; set; }
+        public virtual ICollection<Place> TownCityChilds { get; set; }
 
         [InverseProperty("SlideShowPlaces")]
         public virtual ICollection<Picture> SlideshowPictures { get; set; }

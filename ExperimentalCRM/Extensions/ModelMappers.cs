@@ -40,18 +40,18 @@ namespace ExperimentalCMS.Web.BackEnd.Extensions
             Description = place.Description,
             InternalRanking = place.InternalRanking, 
             PlaceTypeId = place.PlaceTypeId,
-            RelatedPlaces = place.RelatedPlaces,
+            //RelatedPlaces = place.RelatedPlaces,
             Articles = place.Articles,
             SlideShowPictures = place.SlideshowPictures,
             Latitude = place.Latitude,
             Longitude = place.Longitude 
             };
             string str = string.Empty;
-            foreach (var p in place.RelatedPlaces)
-            {
-                str += p.PlaceId.ToString() + ',';
-            }
-            obj.RelatedPlaceIds = str;
+            //foreach (var p in place.RelatedPlaces)
+            //{
+            //    str += p.PlaceId.ToString() + ',';
+            //}
+            //obj.RelatedPlaceIds = str;
             str = string.Empty;
             foreach (var a in place.Articles)
             {

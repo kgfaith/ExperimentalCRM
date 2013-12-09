@@ -54,6 +54,21 @@ namespace ExperimentalCMS.Repositories.DataAccess
                     x.MapRightKey("PictureId");
                     x.ToTable("PlacesSlideshows");
                 });
+
+            modelBuilder.Entity<Place>()
+                .HasOptional(p => p.ParentState)
+                    .WithMany(u => u.StateChilds)
+                    .HasForeignKey(u => u.ParentStateId);
+
+            modelBuilder.Entity<Place>()
+                .HasOptional(p => p.ParentTownCity)
+                    .WithMany(u => u.TownCityChilds)
+                    .HasForeignKey(u => u.ParentTownCityId);
+
+            modelBuilder.Entity<Place>()
+                .HasOptional(p => p.ParentAttraction)
+                    .WithMany(u => u.AttractionChilds)
+                    .HasForeignKey(u => u.ParentAttractionId);
             
         }
     }
