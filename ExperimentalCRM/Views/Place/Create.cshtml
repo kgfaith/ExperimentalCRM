@@ -54,6 +54,30 @@
                         @Html.DropDownList("PlaceTypeId", String.Empty)
                         @Html.ValidationMessageFor(model => model.PlaceTypeId)
                     </div>
+                    
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ParentStateId, "Parent State")
+                    </div>
+                    <div class="editor-field">
+                        @Html.DropDownList("ParentStateId", String.Empty)
+                        @Html.ValidationMessageFor(model => model.PlaceTypeId)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ParentCityTownId, "Parent City/Town")
+                    </div>
+                    <div class="editor-field">
+                        @Html.DropDownList("ParentCityTownId", String.Empty)
+                        @Html.ValidationMessageFor(model => model.ParentCityTownId)
+                    </div>
+                    
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ParentAttractionId, "Parent Attraction Id")
+                    </div>
+                    <div class="editor-field">
+                        @Html.DropDownList("ParentAttractionId", String.Empty)
+                        @Html.ValidationMessageFor(model => model.ParentAttractionId)
+                    </div>
 
                     <div class="editor-label">
                         @Html.LabelFor(model => model.InternalRanking)

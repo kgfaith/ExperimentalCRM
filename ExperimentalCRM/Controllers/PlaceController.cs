@@ -52,23 +52,53 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             return View(place);
         }
 
+      
+        private SelectList PopulatePlaceTypesSelectList(object selectedValue = null)
+        {
+            var placeTypeList = _placeManager.GetPlaceTypeList();
+            if (placeTypeList.Success && placeTypeList.Result.Any())
+                return new SelectList(placeTypeList.Result.Select(x => new SelectListItem { Text = x.PlaceTypeName, Value = x.PlaceTypeId.ToString() }), "Value", "Text", selectedValue);
+
+            return null;
+        }
+
+        private SelectList PopulateParentStateSelectList(object selectedValue = null)
+        {
+            var placeTypeList = _placeManager.GetStateList();
+            if (placeTypeList.Success && placeTypeList.Result.Any())
+                return new SelectList(placeTypeList.Result.Select(x => new SelectListItem { Text = x.PlaceName, Value = x.PlaceId.ToString() }), "Value", "Text", selectedValue);
+
+            return null;
+        }
+
+        private SelectList PopulateParentCityTownSelectList(object selectedValue = null)
+        {
+            var placeTypeList = _placeManager.GetCityTownList();
+            if (placeTypeList.Success && placeTypeList.Result.Any())
+                return new SelectList(placeTypeList.Result.Select(x => new SelectListItem { Text = x.PlaceName, Value = x.PlaceId.ToString() }), "Value", "Text", selectedValue);
+
+            return null;
+        }
+
+        private SelectList PopulateParentAttractionSelectList(object selectedValue = null)
+        {
+            var placeTypeList = _placeManager.GetAttractionList();
+            if (placeTypeList.Success && placeTypeList.Result.Any())
+                return new SelectList(placeTypeList.Result.Select(x => new SelectListItem { Text = x.PlaceName, Value = x.PlaceId.ToString() }), "Value", "Text", selectedValue);
+
+            return null;
+        }
+
         //
         // GET: /Place/Create
 
         public ActionResult Create()
         {
             ViewBag.PlaceTypeId = PopulatePlaceTypesSelectList();
-
+            ViewBag.ParentStateId = PopulateParentStateSelectList();
+            ViewBag.ParentCityTownId = PopulateParentCityTownSelectList();
+            ViewBag.ParentAttractionId = PopulateParentAttractionSelectList();
             return View();
-        }
-
-        private SelectList PopulatePlaceTypesSelectList(object selectedValue = null)
-        {
-            var placeTypeList = _placeManager.GetPlaceTypeList();
-            if (placeTypeList.Success && placeTypeList.Result.Count() > 0)
-                return new SelectList(placeTypeList.Result.Select(x => new SelectListItem { Text = x.PlaceTypeName, Value = x.PlaceTypeId.ToString() }), "Value", "Text", selectedValue);
-
-            return null;
         }
 
         //

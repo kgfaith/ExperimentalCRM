@@ -17,6 +17,9 @@ namespace ExperimentalCMS.Domain.Contracts
         DomainResponse<Place> GetPlaceById(int id);
         bool DeletPlaceById(int id);
         DomainResponse<IEnumerable<Place>> SearchPlace(string searchTerm, IEnumerable<int> placeIdsToExclude);
+        DomainResponse<IEnumerable<Place>> GetStateList();
+        DomainResponse<IEnumerable<Place>> GetCityTownList();
+        DomainResponse<IEnumerable<Place>> GetAttractionList();
         void Dispose();
     }
 }

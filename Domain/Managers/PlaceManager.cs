@@ -13,6 +13,9 @@ namespace ExperimentalCMS.Domain.Managers
     public class PlaceManager : IPlaceManager
     {
         private IUnitOfWork _uOW;
+        private const int StateTypeId = 2;
+        private const int TownCityId = 3;
+        private const int AttractionTypeId = 1;
 
         public PlaceManager(IUnitOfWork uow)
         {
@@ -170,6 +173,54 @@ namespace ExperimentalCMS.Domain.Managers
             try
             {
                 response.Result = _uOW.PlaceTypeRepo.Get().ToArray();
+            }
+            catch (Exception ex)
+            {
+                return response.ReturnFailResponse(new[] { ex.Message }
+                       , "There is an error trying to retrieve data", null);
+            }
+
+            return response.ReturnSuccessResponse(response.Result, null, null);
+        }
+
+        public DomainResponse<IEnumerable<Place>> GetStateList()
+        {
+            var response = new DomainResponse<IEnumerable<Place>>();
+            try
+            {
+                response.Result = _uOW.PlaceRepo.Get(filter: p => p.PlaceTypeId == StateTypeId).ToArray();
+            }
+            catch (Exception ex)
+            {
+                return response.ReturnFailResponse(new[] { ex.Message }
+                       , "There is an error trying to retrieve data", null);
+            }
+
+            return response.ReturnSuccessResponse(response.Result, null, null);
+        }
+
+        public DomainResponse<IEnumerable<Place>> GetCityTownList()
+        {
+            var response = new DomainResponse<IEnumerable<Place>>();
+            try
+            {
+                response.Result = _uOW.PlaceRepo.Get(filter: p => p.PlaceTypeId == TownCityId).ToArray();
+            }
+            catch (Exception ex)
+            {
+                return response.ReturnFailResponse(new[] { ex.Message }
+                       , "There is an error trying to retrieve data", null);
+            }
+
+            return response.ReturnSuccessResponse(response.Result, null, null);
+        }
+
+        public DomainResponse<IEnumerable<Place>> GetAttractionList()
+        {
+            var response = new DomainResponse<IEnumerable<Place>>();
+            try
+            {
+                response.Result = _uOW.PlaceRepo.Get(filter:p => p.PlaceTypeId == AttractionTypeId).ToArray();
             }
             catch (Exception ex)
             {

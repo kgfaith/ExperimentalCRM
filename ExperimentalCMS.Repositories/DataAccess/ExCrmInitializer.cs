@@ -21,7 +21,9 @@ namespace ExperimentalCMS.Repositories.DataAccess
 
             var placeTypes = new List<PlaceType>
                                  {
-                                     new PlaceType{ PlaceTypeName = "Tourist Attraction"}
+                                     new PlaceType{ PlaceTypeName = "Tourist Attraction"},
+                                     new PlaceType{ PlaceTypeName = "State"},
+                                     new PlaceType{ PlaceTypeName = "City/Town"}
                                  };
 
             placeTypes.ForEach(s => context.PlaceTypes.Add(s));
