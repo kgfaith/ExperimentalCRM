@@ -48,7 +48,10 @@
     <Compile Include="ArticleCreateViewModel.cs" />
     <Compile Include="CustomPrincipalSerializeModel.cs" />
     <Compile Include="Enums\PhotoSource.cs" />
+    <Compile Include="PaginationItemModel.cs" />
+    <Compile Include="PaginationModel.cs" />
     <Compile Include="PhotoViewModel.cs" />
+    <Compile Include="PlaceListViewModel.cs" />
     <Compile Include="PlaceViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

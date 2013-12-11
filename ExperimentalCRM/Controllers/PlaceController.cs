@@ -13,6 +13,7 @@ using ExperimentalCMS.Web.BackEnd.Utility;
 using System.Web;
 using System.IO;
 using ExperimentalCMS.Domain.Utility;
+using ExperimentalCMS.Web.BackEnd.Domain;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
@@ -33,10 +34,13 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         //
         // GET: /Place/
 
-        public ActionResult Index()
+        public ActionResult Index(int pageSize = 10, int pageNumber = 1, string sortOrder = "PlaceName", bool sortAscending = true, int placeType = 1)
         {
+            var placeListViewModel = new PlaceListViewModel();
             var places = db.Places.Include(p => p.PlaceType);
-            return View(places.ToList());
+            ViewBag.PlaceTypeId = PopulatePlaceTypesSelectList(placeType);
+            ViewBag.PageSize = Pagination.CreatePageSizeSelectListUsing(pageSize);
+            return View(placeListViewModel);
         }
 
         //
@@ -56,37 +60,25 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         private SelectList PopulatePlaceTypesSelectList(object selectedValue = null)
         {
             var placeTypeList = _placeManager.GetPlaceTypeList();
-            if (placeTypeList.Success && placeTypeList.Result.Any())
-                return new SelectList(placeTypeList.Result.Select(x => new SelectListItem { Text = x.PlaceTypeName, Value = x.PlaceTypeId.ToString() }), "Value", "Text", selectedValue);
-
-            return null;
+            return new SelectList(placeTypeList.Result.Select(x => new SelectListItem { Text = x.PlaceTypeName, Value = x.PlaceTypeId.ToString() }), "Value", "Text", selectedValue);
         }
 
         private SelectList PopulateParentStateSelectList(object selectedValue = null)
         {
-            var placeTypeList = _placeManager.GetStateList();
-            if (placeTypeList.Success && placeTypeList.Result.Any())
-                return new SelectList(placeTypeList.Result.Select(x => new SelectListItem { Text = x.PlaceName, Value = x.PlaceId.ToString() }), "Value", "Text", selectedValue);
-
-            return null;
+            var stateList = _placeManager.GetStateList();
+            return new SelectList(stateList.Result.Select(x => new SelectListItem { Text = x.PlaceName, Value = x.PlaceId.ToString() }), "Value", "Text", selectedValue);
         }
 
         private SelectList PopulateParentCityTownSelectList(object selectedValue = null)
         {
             var placeTypeList = _placeManager.GetCityTownList();
-            if (placeTypeList.Success && placeTypeList.Result.Any())
-                return new SelectList(placeTypeList.Result.Select(x => new SelectListItem { Text = x.PlaceName, Value = x.PlaceId.ToString() }), "Value", "Text", selectedValue);
-
-            return null;
+            return new SelectList(placeTypeList.Result.Select(x => new SelectListItem { Text = x.PlaceName, Value = x.PlaceId.ToString() }), "Value", "Text", selectedValue);
         }
 
         private SelectList PopulateParentAttractionSelectList(object selectedValue = null)
         {
             var placeTypeList = _placeManager.GetAttractionList();
-            if (placeTypeList.Success && placeTypeList.Result.Any())
-                return new SelectList(placeTypeList.Result.Select(x => new SelectListItem { Text = x.PlaceName, Value = x.PlaceId.ToString() }), "Value", "Text", selectedValue);
-
-            return null;
+            return new SelectList(placeTypeList.Result.Select(x => new SelectListItem { Text = x.PlaceName, Value = x.PlaceId.ToString() }), "Value", "Text", selectedValue);
         }
 
         //
@@ -117,6 +109,9 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
                     ModelState.AddModelErrors("", response.Messages);
             }
             ViewBag.PlaceTypeId = PopulatePlaceTypesSelectList();
+            ViewBag.ParentStateId = PopulateParentStateSelectList();
+            ViewBag.ParentCityTownId = PopulateParentCityTownSelectList();
+            ViewBag.ParentAttractionId = PopulateParentAttractionSelectList();
             return View(model);
         }
 
@@ -150,6 +145,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
                 placeObj.SlideshowPictures.Add(picture);
             }
 
+            
             return placeObj;
         }
 
@@ -165,6 +161,9 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
                 return HttpNotFound();
             }
             ViewBag.PlaceTypeId = PopulatePlaceTypesSelectList(place.PlaceTypeId);
+            ViewBag.ParentStateId = PopulateParentStateSelectList(place.ParentStateId);
+            ViewBag.ParentCityTownId = PopulateParentCityTownSelectList(place.ParentTownCityId);
+            ViewBag.ParentAttractionId = PopulateParentAttractionSelectList(place.ParentAttractionId);
             return View(place.MapToPlaceViewModel());
         }
 
@@ -190,6 +189,9 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
                 }
             }
             ViewBag.PlaceTypeId = PopulatePlaceTypesSelectList(place.PlaceTypeId);
+            ViewBag.ParentStateId = PopulateParentStateSelectList(place.ParentStateId);
+            ViewBag.ParentCityTownId = PopulateParentCityTownSelectList(place.ParentCityTownId);
+            ViewBag.ParentAttractionId = PopulateParentAttractionSelectList(place.ParentAttractionId);
             return RedirectToAction("Edit");
         }
 

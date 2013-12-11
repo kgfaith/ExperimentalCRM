@@ -34,8 +34,12 @@ namespace ExperimentalCMS.Repositories.DataAccess
                              {
                                  new Place{ PlaceName = "Bagan", Description = "Description of bagan", PlaceType = placeTypes[0], PlaceId = placeTypes[0].PlaceTypeId, InternalRanking = 1, },
                                  new Place{ PlaceName = "Mandalay", Description = "Description of mandalay", PlaceType = placeTypes[0], PlaceId = placeTypes[0].PlaceTypeId, InternalRanking = 1},
-                                 new Place{ PlaceName = "Taungyi", Description = "Description of taungyi", PlaceType = placeTypes[0], PlaceId = placeTypes[0].PlaceTypeId, InternalRanking = 1},
+                                 new Place{ PlaceName = "Taungyi", Description = "Description of taungyi", PlaceType = placeTypes[2], PlaceId = placeTypes[2].PlaceTypeId, InternalRanking = 1},
                                  new Place{ PlaceName = "Ngapali", Description = "Description of ngapali", PlaceType = placeTypes[0], PlaceId = placeTypes[0].PlaceTypeId, InternalRanking = 1},
+                                 new Place{ PlaceName = "Shan state", Description = "Description of Shan state", PlaceType = placeTypes[1], PlaceId = placeTypes[1].PlaceTypeId, InternalRanking = 1},
+                                 new Place{ PlaceName = "Yangon state", Description = "Description of Yangon state", PlaceType = placeTypes[1], PlaceId = placeTypes[1].PlaceTypeId, InternalRanking = 1},
+                                 new Place{ PlaceName = "Yangon", Description = "Description of Yangon city", PlaceType = placeTypes[2], PlaceId = placeTypes[2].PlaceTypeId, InternalRanking = 1}
+
                              };
 
             places.ForEach(s => context.Places.Add(s));

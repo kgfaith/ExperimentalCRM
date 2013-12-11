@@ -29,21 +29,21 @@ namespace ExperimentalCMS.ViewModels
         [Required]
         public float Longitude { get; set; }
 
-        public int PlaceTypeId { get; set; }
+        public int? PlaceTypeId { get; set; }
         public PlaceType PlaceType { get; set; }
 
-        public int ParentStateId { get; set; }
+        public int? ParentStateId { get; set; }
         public Place ParentState { get; set; }
 
-        public int ParentCityTownId { get; set; }
+        public int? ParentCityTownId { get; set; }
         public Place ParentCityTown { get; set; }
 
-        public int ParentAttractionId { get; set; }
+        public int? ParentAttractionId { get; set; }
         public Place ParentAttraction { get; set; }
 
         public ICollection<Article> Articles { get; set; }
         public ICollection<Picture> SlideShowPictures { get; set; }
-        public ICollection<Place> RelatedPlaces { get; set; }
+        //public ICollection<Place> RelatedPlaces { get; set; }
 
         public string RelatedArticleIds { get; set; }
         public string RelatedPlaceIds { get; set; }
@@ -56,7 +56,10 @@ namespace ExperimentalCMS.ViewModels
             placeObj.PlaceName = PlaceName;
             placeObj.Description = Description;
             placeObj.InternalRanking = InternalRanking;
-            placeObj.PlaceTypeId = PlaceTypeId;
+            placeObj.PlaceTypeId = PlaceTypeId.Value;
+            placeObj.ParentStateId = ParentStateId;
+            placeObj.ParentTownCityId = ParentCityTownId;
+            placeObj.ParentAttractionId = ParentAttractionId;
             placeObj.Latitude = Latitude;
             placeObj.Longitude = Longitude;
             return placeObj;

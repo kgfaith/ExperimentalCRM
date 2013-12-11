@@ -79,12 +79,16 @@ namespace ExperimentalCMS.Domain.Managers
             var response = new DomainResponse<BooleanResult>();
             try
             {
-                var placeData = _uOW.PlaceRepo.Get(filter: p => p.PlaceId == newPlace.PlaceId, includeProperties: "RelatedPlaces,Articles").FirstOrDefault();
+                var placeData = _uOW.PlaceRepo.Get(filter: p => p.PlaceId == newPlace.PlaceId, includeProperties: "Articles").FirstOrDefault();
                 placeData.PlaceName = newPlace.PlaceName ?? placeData.PlaceName;
                 placeData.Description = newPlace.Description ?? placeData.Description;
                 placeData.InternalRanking = newPlace.InternalRanking > -1 ? newPlace.InternalRanking : placeData.InternalRanking;
                 placeData.PlaceTypeId = newPlace.PlaceTypeId > 0 ? newPlace.PlaceTypeId : placeData.PlaceTypeId;
                 placeData.PlaceType = newPlace.PlaceType != null ? newPlace.PlaceType : placeData.PlaceType;
+
+                placeData.ParentStateId = newPlace.ParentStateId.HasValue ? newPlace.ParentStateId : placeData.ParentStateId;
+                placeData.ParentTownCityId = newPlace.ParentTownCityId.HasValue ? newPlace.ParentTownCityId : placeData.ParentTownCityId;
+                placeData.ParentAttractionId = newPlace.ParentAttractionId.HasValue ? newPlace.ParentAttractionId : placeData.ParentAttractionId;
 
                 //UpdateRelatedPlaces(newPlace, placeData);
                 UpdateRelatedArticles(newPlace, placeData);

@@ -47,5 +47,7 @@ namespace ExperimentalCMS.Model
 
         [Required]
         public float Longitude { get; set; }
+
+        //public string Something { get; set; }
     }
 }

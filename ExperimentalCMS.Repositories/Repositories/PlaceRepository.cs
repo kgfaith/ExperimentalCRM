@@ -36,7 +36,7 @@ namespace ExperimentalCMS.Repositories.Repositories
 
         public Place GetPlaceById(int id)
         {
-            var obj = Get(x => x.PlaceId == id, null, "RelatedPlaces,Articles");
+            var obj = Get(x => x.PlaceId == id, null, "Articles");
             return obj.FirstOrDefault();
         }
 

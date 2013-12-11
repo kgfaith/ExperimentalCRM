@@ -55,6 +55,30 @@
                     </div>
 
                     <div class="editor-label">
+                        @Html.LabelFor(model => model.ParentStateId, "Parent State")
+                    </div>
+                    <div class="editor-field">
+                        @Html.DropDownList("ParentStateId", String.Empty)
+                        @Html.ValidationMessageFor(model => model.PlaceTypeId)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ParentCityTownId, "Parent City/Town")
+                    </div>
+                    <div class="editor-field">
+                        @Html.DropDownList("ParentCityTownId", String.Empty)
+                        @Html.ValidationMessageFor(model => model.ParentCityTownId)
+                    </div>
+                    
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ParentAttractionId, "Parent Attraction")
+                    </div>
+                    <div class="editor-field">
+                        @Html.DropDownList("ParentAttractionId", String.Empty)
+                        @Html.ValidationMessageFor(model => model.ParentAttractionId)
+                    </div>
+
+                    <div class="editor-label">
                         @Html.LabelFor(model => model.InternalRanking)
                     </div>
                     <div class="editor-field">
@@ -92,7 +116,7 @@
             </div>
             <div class="mt20">
                 <div class="row-fluid">
-                    <div class="span5">
+                    @*<div class="span5">
                         <div >
                             <h4>Related Places</h4>
                             <div id="PlaceOutputDiv" class="mb20">
@@ -111,7 +135,7 @@
                                 <input type="hidden" id="SelectedPlaces" name="RelatedPlaceIds" class="hidden" value="@Model.RelatedPlaceIds" />
                             </div>
                         </div>
-                    </div>
+                    </div>*@
                     <div class="span7" id="RelatedArticleContainer">
                         <h4>Related Articles</h4>
                         <div id="ArticleOutputDiv" class="mb20">
