@@ -40,6 +40,19 @@ namespace ExperimentalCMS.Repositories.Repositories
             return obj.FirstOrDefault();
         }
 
+        public IEnumerable<Place> GetPagedPlaces(int skip, int take)
+        {
+            //using (var context = new AdventureWorksLTEntities())
+            //{
+            //    var query = context.Customers.Include("SalesOrderHeaders")
+            //      .Where(c => c.SalesOrderHeaders.Any())
+            //      .OrderBy(c => c.CompanyName + c.LastName + c.FirstName);
+
+            //    return query.Skip(skip).Take(take).ToList();
+            //}
+            return null;
+        }
+
         public void Dispose()
         {
             Dispose(true);

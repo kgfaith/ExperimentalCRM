@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace ExperimentalCMS.ViewModels.Enums
 {
-    public enum PhotoSource
+    public static class Enums
     {
-        Normal = 1,
-        FlickrPhoto =2
+
     }
 }
