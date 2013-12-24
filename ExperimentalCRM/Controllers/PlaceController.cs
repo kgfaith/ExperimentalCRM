@@ -23,23 +23,24 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
     {
         private ExCMSContext db = new ExCMSContext();
 
-        private IArticleManager _articleManager;
+        //private IArticleManager _articleManager;
         private IPlaceManager _placeManager;
 
-        public PlaceController(IArticleManager articleManager, IPlaceManager placeManager)
+        public PlaceController(IPlaceManager placeManager)
         {
-            _articleManager = articleManager;
+            //_articleManager = articleManager;
             _placeManager = placeManager;
         }
 
         //
         // GET: /Place/
 
-        public ActionResult Index(int pageSize = 10, int pageNumber = 1, string sortOrder = "PlaceName", bool sortAscending = true, int placeType = 1)
+        public ActionResult Index(int pageSize = 10, int pageNumber = 1, string sortOrder = "PlaceName", bool sortDescending = true, int PlaceTypeId = 2)
         {
             var placeListViewModel = new PlaceListViewModel();
-            var places = db.Places.Include(p => p.PlaceType);
-            ViewBag.PlaceTypeId = PopulatePlaceTypesSelectList(placeType);
+            var result = _placeManager.GetPagedPlaceList(pageSize, pageNumber, sortOrder, sortDescending, PlaceTypeId);
+            placeListViewModel.Places = result.Result;
+            ViewBag.PlaceTypeId = PopulatePlaceTypesSelectList(PlaceTypeId);
             ViewBag.PageSize = Pagination.CreatePageSizeSelectListUsing(pageSize);
             return View(placeListViewModel);
         }

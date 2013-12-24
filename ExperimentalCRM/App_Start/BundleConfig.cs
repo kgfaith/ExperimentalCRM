@@ -58,6 +58,10 @@ namespace ExperimentalCMS.Web.BackEnd.App_Start
                 "~/Scripts/Application/KoViewModels/ko.selectpictures.viewmodel.js",
                 "~/Scripts/Application/function.interactions.js"
                 ));
+
+            bundles.Add(new ScriptBundle("~/bundles/PlaceIndex").Include(
+                "~/Scripts/Application/page.placeindex.js"
+                ));
         }
     }
 }

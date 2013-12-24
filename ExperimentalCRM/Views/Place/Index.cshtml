@@ -7,14 +7,18 @@
 <p>
     @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
 </p>
-<div class="row-fluid">
-    <div class="span2">
-        @Html.DropDownList("PlaceTypeId", String.Empty)
+
+@using (Html.BeginForm("Index", "Place", FormMethod.Get, new { id = "place-list-filter" }))
+{
+    <div class="row-fluid">
+        <div class="span2">
+            @Html.DropDownList("PlaceTypeId", null,new Dictionary<string, Object> {{ "id", "placetypeid-ddl" }})
+        </div>
+        <div class="span2">
+            @Html.DropDownList("PageSize", null,new Dictionary<string, Object> {{ "id", "pagesize-ddl" }})
+        </div>
     </div>
-    <div class="span2">
-        @Html.DropDownList("PlaceTypeId", String.Empty)
-    </div>
-</div>
+}
 <div class="row-fluid">
     <div class="span6">
         <table class="table table-striped">
@@ -29,20 +33,32 @@
                     
                 </th>
             </tr>
-            @foreach (var item in Model.Places)
+            @if(Model.Places != null && Model.Places.Any())
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PlaceName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.InternalRanking)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.PlaceId }) |
-                    </td>
-                </tr>
+                foreach (var item in Model.Places)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PlaceName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InternalRanking)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new {id = item.PlaceId})
+                        </td>
+                    </tr>
+                }
             }
         </table>
     </div>
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/PlaceIndex")
+    @*<script>
+        var screenScript = PlaceCreate(jQuery);
+        screenScript.LetsDoIt();
+    </script>*@
+}

@@ -22,13 +22,14 @@ namespace ExperimentalCMS.Domain.Managers
             _uOW = uow;
         }
 
-        public DomainResponse<IEnumerable<Place>> GetPagedPlaceList(int pageSize = 10, int pageNumber = 1, string sortOrder = "PlaceName", bool sortAscending = true, int placeType = 1)
+        public DomainResponse<IEnumerable<Place>> GetPagedPlaceList(int pageSize = 10, int pageNumber = 1, string sortOrder = "PlaceName", bool sortDescending = false, int placeType = 1)
         {
             var response = new DomainResponse<IEnumerable<Place>>();
             try
             {
-                response.Result = _uOW.PlaceRepo.Get(filter: p => p.PlaceTypeId == placeType,
-                                                     orderBy: places => places.OrderBy(s => s.PlaceName));
+                response.Result = _uOW.PlaceRepo.GetPagedPlaces((pageNumber == 1 ? 0 : pageNumber)*pageSize, pageSize, placeType,
+                                                                PlaceSortOrderExpressionFactory.GetSortOrderExpression(
+                                                                    sortOrder), sortDescending);
             }
             catch (Exception ex)
             {

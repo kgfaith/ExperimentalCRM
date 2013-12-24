@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using ExperimentalCMS.Repositories.DataAccess;
@@ -40,17 +41,13 @@ namespace ExperimentalCMS.Repositories.Repositories
             return obj.FirstOrDefault();
         }
 
-        public IEnumerable<Place> GetPagedPlaces(int skip, int take)
+        public IEnumerable<Place> GetPagedPlaces(int skip, int take, int placeTypeId, Expression<Func<Place, object>> expression, bool isDesending = false)
         {
-            //using (var context = new AdventureWorksLTEntities())
-            //{
-            //    var query = context.Customers.Include("SalesOrderHeaders")
-            //      .Where(c => c.SalesOrderHeaders.Any())
-            //      .OrderBy(c => c.CompanyName + c.LastName + c.FirstName);
+            var query = _context.Places.Where(p => p.PlaceTypeId == placeTypeId);
 
-            //    return query.Skip(skip).Take(take).ToList();
-            //}
-            return null;
+            query = isDesending ? query.OrderByDescending(expression) : query.OrderBy(expression);
+
+            return query.Skip(skip).Take(take).ToList();
         }
 
         public void Dispose()

@@ -47,7 +47,6 @@
     <Compile Include="AjaxSearchParams.cs" />
     <Compile Include="ArticleCreateViewModel.cs" />
     <Compile Include="CustomPrincipalSerializeModel.cs" />
-    <Compile Include="Utility\Constants.cs" />
     <Compile Include="Utility\Enums.cs" />
     <Compile Include="Utility\PhotoSource.cs" />
     <Compile Include="PaginationItemModel.cs" />
