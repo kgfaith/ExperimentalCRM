@@ -57,27 +57,27 @@ namespace ExperimentalCMS.Web.BackEnd.Domain
             var showPaginationControls = model.TotalPages > 1;
 
             var showNext = model.PageNumber + 1 <= model.TotalPages;
-            var nextPageSetting = new { PageNumber = model.PageNumber + 1, model.PageSize, model.SortOrder, model.SortAscending };
+            var nextPageSetting = new { PageNumber = model.PageNumber + 1, model.PageSize, model.SortOrder, model.SortAscending, model.PlaceTypeId };
 
             var showPrevious = model.PageNumber > 1;
-            var previousPageSetting = new { PageNumber = model.PageNumber - 1, model.PageSize, model.SortOrder, model.SortAscending };
+            var previousPageSetting = new { PageNumber = model.PageNumber - 1, model.PageSize, model.SortOrder, model.SortAscending, model.PlaceTypeId };
 
-            var showSkipForwards = model.PageNumber + (pagesToShow / 2) < model.TotalPages;
+            var showSkipForwards = model.PageNumber + (pagesToShow / 2) < model.TotalPages && pagesToShow != model.TotalPages;
 
             int skipForwardsPageNumber = model.PageNumber + pagesToShow >= model.TotalPages ? model.TotalPages : model.PageNumber + pagesToShow;
 
-            var skipForwardsPageSetting = new { PageNumber = skipForwardsPageNumber, model.PageSize,model.SortOrder, model.SortAscending };
+            var skipForwardsPageSetting = new { PageNumber = skipForwardsPageNumber, model.PageSize, model.SortOrder, model.SortAscending, model.PlaceTypeId };
 
-            var showSkipBackwards = model.PageNumber > (pagesToShow / 2) + 1;
+            var showSkipBackwards = model.PageNumber > (pagesToShow / 2) + 1 && pagesToShow != model.TotalPages;
 
             int skipBackwardsPageNumber = model.PageNumber - pagesToShow <= 0 ? 1 : model.PageNumber - pagesToShow;
 
-            var skipBackwardsPageSetting = new { PageNumber = skipBackwardsPageNumber, model.PageSize, model.SortOrder, model.SortAscending };
+            var skipBackwardsPageSetting = new { PageNumber = skipBackwardsPageNumber, model.PageSize, model.SortOrder, model.SortAscending, model.PlaceTypeId };
 
 
-            var firstPage = new { PageNumber = 1, model.PageSize, model.SortOrder, model.SortAscending };
+            var firstPage = new { PageNumber = 1, model.PageSize, model.SortOrder, model.SortAscending, model.PlaceTypeId };
 
-            var lastPage = new { PageNumber = model.TotalPages, model.PageSize, model.SortOrder, model.SortAscending };
+            var lastPage = new { PageNumber = model.TotalPages, model.PageSize, model.SortOrder, model.SortAscending, model.PlaceTypeId };
 
             var startPage = model.TotalPages - model.PageNumber < pagesToShow / 2M
                 ? model.TotalPages - pagesToShow + 1
@@ -98,7 +98,7 @@ namespace ExperimentalCMS.Web.BackEnd.Domain
 
                 for (int i = startPage; i <= endPage; i++)
                 {
-                    list.Add(new PaginationItemModel { DataPage = i.ToString(), IsSelected = (i == model.PageNumber), Text = i.ToString(), Url = url.Action(model.LinkAction, model.LinkController, new { PageNumber = i, PageSize = model.PageSize, SortOrder = model.SortOrder, SortAscending = model.SortAscending }) });
+                    list.Add(new PaginationItemModel { DataPage = i.ToString(), IsSelected = (i == model.PageNumber), Text = i.ToString(), Url = url.Action(model.LinkAction, model.LinkController, new { PageNumber = i, PageSize = model.PageSize, SortOrder = model.SortOrder, SortAscending = model.SortAscending, PlaceTypeId = model.PlaceTypeId }) });
                 }
 
                 if (showSkipForwards)

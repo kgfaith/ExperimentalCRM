@@ -1,0 +1,18 @@
+﻿
+@model ExperimentalCMS.ViewModels.ColumnHeadingModel
+@{
+
+	var cellClasses = "sort";
+	var sortingOnThisColumn = Model.SortOrder == Model.ColumnId;
+
+	if (sortingOnThisColumn)
+	{
+		cellClasses += Model.SortAscending ? " ascending" : " descending";
+	}
+}
+
+<th class="@cellClasses cln-@Model.ColumnId" id="@("sortByUser" + Model.ColumnId)" data-sort-order="@(sortingOnThisColumn && Model.SortAscending ? "ascending" : sortingOnThisColumn ? "descending" : string.Empty)">
+	<a href="@Url.Action("Index", "Place", new { SortOrder = Model.ColumnId, SortAscending = sortingOnThisColumn ? !Model.SortAscending : true, Model.PageNumber,Model.PageSize, Model.PlaceTypeId})">
+		@Model.ColumnHeading
+	</a>
+</th>

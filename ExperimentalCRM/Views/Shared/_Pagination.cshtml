@@ -1,0 +1,23 @@
+﻿@model List<ExperimentalCMS.ViewModels.PaginationItemModel>
+
+@*@{
+    string prefix = Guid.NewGuid().ToString("N");
+}*@
+
+@if (Model.Count > 0)
+{
+    <div class="pagination">
+        <ul>
+
+            @foreach (var item in Model)
+            {
+                <li class="@item.ListClass @(item.IsSelected ? "active" : "")"><a data-page="@item.DataPage" href="@item.Url">@Html.Raw(item.Text)</a></li>
+            }
+
+        </ul>
+    </div>
+}
+
+@*<script type="text/html" id="pagination-template_@prefix">
+    <li data-bind="attr: { class: pagination().ListClass }"><a data-bind="    attr: { class: pagination().IsSelected ? 'gradient on' : 'gradient', 'data-page': pagination().DataPage, href: $('<div/>').html(pagination().Url).text() }, html: $('<div/>').html(pagination().Text).text()" ></a></li>
+</script>*@

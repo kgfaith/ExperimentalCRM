@@ -41,12 +41,14 @@ namespace ExperimentalCMS.Repositories.Repositories
             return obj.FirstOrDefault();
         }
 
-        public IEnumerable<Place> GetPagedPlaces(int skip, int take, int placeTypeId, Expression<Func<Place, object>> expression, bool isDesending = false)
+        public IEnumerable<Place> GetPagedPlaces(out int totalPages, int skip, int take, int placeTypeId, Expression<Func<Place, object>> expression, bool isDesending = false)
         {
+            totalPages = 1;        
             var query = _context.Places.Where(p => p.PlaceTypeId == placeTypeId);
 
             query = isDesending ? query.OrderByDescending(expression) : query.OrderBy(expression);
-
+            if(query.Any())
+                totalPages = (int) Math.Ceiling((double) query.Count() / take);
             return query.Skip(skip).Take(take).ToList();
         }
 

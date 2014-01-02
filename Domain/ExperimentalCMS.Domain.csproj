@@ -73,8 +73,9 @@
     <Compile Include="Utility\BooleanResult.cs" />
     <Compile Include="Utility\Constants.cs" />
     <Compile Include="Utility\Crypto.cs" />
-    <Compile Include="Utility\Response.cs" />
-    <Compile Include="Utility\SortOrderFactory.cs" />
+    <Compile Include="Utility\PlacePaginationResponse.cs" />
+    <Compile Include="Utility\DomainResponse.cs" />
+    <Compile Include="Utility\PlaceSortOrderExpressionFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

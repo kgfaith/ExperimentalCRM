@@ -11,7 +11,8 @@ namespace ExperimentalCMS.Repositories.Contracts
     public interface IPlaceRepository : IGenericRepository<Place>
     {
         Place GetPlaceById(int id);
-        IEnumerable<Place> GetPagedPlaces(int skip, int take, int placeTypeId,
-                                          Expression<Func<Place, object>> expression, bool isDesending = false);
+        IEnumerable<Place> GetPagedPlaces(out int totalPages, int skip
+            , int take, int placeTypeId
+            , Expression<Func<Place, object>> expression, bool isDesending = false);
     }
 }

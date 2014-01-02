@@ -2,6 +2,8 @@
 using System.Web.Mvc;
 using ExperimentalCMS.Domain.Contracts;
 using ExperimentalCMS.Repositories.DataAccess;
+using ExperimentalCMS.ViewModels;
+using ExperimentalCMS.Web.BackEnd.Domain;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
@@ -33,5 +35,11 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
 
             return View();
         }
+
+        public ActionResult PaginationItems(PaginationModel model)
+        {
+            var list = Pagination.CreatePaginationList(model, Url);
+            return PartialView("_Pagination", list);
+        }   
     }
 }

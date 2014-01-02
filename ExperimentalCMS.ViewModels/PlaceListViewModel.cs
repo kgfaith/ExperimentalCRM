@@ -14,8 +14,12 @@ namespace ExperimentalCMS.ViewModels
         public int PageSize { get; set; }
         public string SearchTerm { get; set; }
         public int PageNumber { get; set; }
+        public int TotalPages { get; set; }
+        public string SortOrder { get; set; }
+        public bool SortAscending { get; set; }
 
         public IEnumerable<Place> Places { get; set; }
-        
+        public IEnumerable<PaginationItemModel> Pagination { get; set; }
+       
     }
 }

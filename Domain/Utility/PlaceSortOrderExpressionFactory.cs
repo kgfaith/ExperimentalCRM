@@ -17,7 +17,7 @@ namespace ExperimentalCMS.Domain.Utility
                 case Constants.SortOrders.PlaceName:
                     return p => p.PlaceName;
                 case Constants.SortOrders.Ranking:
-                    return p => p.InternalRanking;
+                    return p => new { p.PlaceTypeId };
             }
             return null;
         }

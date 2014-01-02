@@ -7,6 +7,6 @@
     });
 
     $("#pagesize-ddl").on('change', function () {
-        $("#place-list-filter").trigger('submit');
+        $("#page-size-form").trigger('submit');
     });
 });

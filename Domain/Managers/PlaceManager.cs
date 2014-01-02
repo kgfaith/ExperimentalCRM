@@ -22,22 +22,24 @@ namespace ExperimentalCMS.Domain.Managers
             _uOW = uow;
         }
 
-        public DomainResponse<IEnumerable<Place>> GetPagedPlaceList(int pageSize = 10, int pageNumber = 1, string sortOrder = "PlaceName", bool sortDescending = false, int placeType = 1)
+        public PlacePaginationResponse GetPagedPlaceList(int pageSize = 10, int pageNumber = 1, string sortOrder = "PlaceName", bool sortDescending = false, int placeType = 1)
         {
-            var response = new DomainResponse<IEnumerable<Place>>();
+            var response = new PlacePaginationResponse();
             try
             {
-                response.Result = _uOW.PlaceRepo.GetPagedPlaces((pageNumber == 1 ? 0 : pageNumber)*pageSize, pageSize, placeType,
+                int totalPages = 0;
+                response.Result = _uOW.PlaceRepo.GetPagedPlaces(out totalPages, (pageNumber == 1 ? 0 : pageNumber-1)*pageSize, pageSize, placeType,
                                                                 PlaceSortOrderExpressionFactory.GetSortOrderExpression(
                                                                     sortOrder), sortDescending);
+                response.TotalPages = totalPages;
             }
             catch (Exception ex)
             {
-                return response.ReturnFailResponse(new[] { ex.Message }
+                return (PlacePaginationResponse)response.ReturnFailResponse(new[] { ex.Message }
                        , "There is an error trying to retrieve data", null);
             }
 
-            return response.ReturnSuccessResponse(response.Result, null, null);
+            return (PlacePaginationResponse)response.ReturnSuccessResponse(response.Result, null, null);
 
         }
 

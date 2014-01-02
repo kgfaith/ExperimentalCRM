@@ -15,6 +15,7 @@ using System.IO;
 using ExperimentalCMS.Domain.Utility;
 using ExperimentalCMS.Web.BackEnd.Domain;
 using Constants = ExperimentalCMS.Web.BackEnd.Utility.Constants;
+using ExperimentalCMS.Web.BackEnd.Mappers;
 
 namespace ExperimentalCMS.Web.BackEnd.Controllers
 {
@@ -35,14 +36,13 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
         //
         // GET: /Place/
 
-        public ActionResult Index(int pageSize = 10, int pageNumber = 1, string sortOrder = "PlaceName", bool sortDescending = true, int PlaceTypeId = 2)
+        public ActionResult Index(int pageSize = 14, int pageNumber = 1, string sortOrder = "PlaceName", bool sortAscending = true, int placeTypeId = 2)
         {
-            var placeListViewModel = new PlaceListViewModel();
-            var result = _placeManager.GetPagedPlaceList(pageSize, pageNumber, sortOrder, sortDescending, PlaceTypeId);
-            placeListViewModel.Places = result.Result;
-            ViewBag.PlaceTypeId = PopulatePlaceTypesSelectList(PlaceTypeId);
+            var response = _placeManager.GetPagedPlaceList(pageSize, pageNumber, sortOrder, sortAscending, placeTypeId);
+            var model = PlaceListViewModelMapper.Map(Url, response, pageSize, pageNumber, sortOrder, sortAscending, placeTypeId);
+            ViewBag.PlaceTypeId = PopulatePlaceTypesSelectList(placeTypeId);
             ViewBag.PageSize = Pagination.CreatePageSizeSelectListUsing(pageSize);
-            return View(placeListViewModel);
+            return View(model);
         }
 
         //

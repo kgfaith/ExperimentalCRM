@@ -6,17 +6,14 @@ using System.Threading.Tasks;
 
 namespace ExperimentalCMS.ViewModels
 {
-    public class PaginationModel
+    public class ColumnHeadingModel
     {
+        public string ColumnHeading { get; set; }
+        public string ColumnId { get; set; }
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
-        public int TotalPages { get; set; }
         public int PlaceTypeId { get; set; }
-
         public string SortOrder { get; set; }
         public bool SortAscending { get; set; }
-
-        public string LinkAction { get; set; }
-        public string LinkController { get; set; }
     }
 }

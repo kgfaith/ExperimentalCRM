@@ -20,7 +20,7 @@ namespace ExperimentalCMS.Domain.Contracts
         DomainResponse<IEnumerable<Place>> GetStateList();
         DomainResponse<IEnumerable<Place>> GetCityTownList();
         DomainResponse<IEnumerable<Place>> GetAttractionList();
-        DomainResponse<IEnumerable<Place>> GetPagedPlaceList(int pageSize = 10, int pageNumber = 1,
+        PlacePaginationResponse GetPagedPlaceList(int pageSize = 10, int pageNumber = 1,
                                                              string sortOrder = "PlaceName", bool sortDescending = false,
                                                              int placeType = 1);
         void Dispose();

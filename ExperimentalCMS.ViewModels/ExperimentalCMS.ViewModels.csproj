@@ -46,6 +46,7 @@
     <Compile Include="AdminEditViewModel.cs" />
     <Compile Include="AjaxSearchParams.cs" />
     <Compile Include="ArticleCreateViewModel.cs" />
+    <Compile Include="ColumnHeadingModel.cs" />
     <Compile Include="CustomPrincipalSerializeModel.cs" />
     <Compile Include="Utility\Enums.cs" />
     <Compile Include="Utility\PhotoSource.cs" />
