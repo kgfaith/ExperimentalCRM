@@ -188,6 +188,7 @@
     <Compile Include="Installers\LoggerInstaller.cs" />
     <Compile Include="Installers\ManagersInstaller.cs" />
     <Compile Include="Installers\UowInstaller.cs" />
+    <Compile Include="Mappers\PhotoChildModelMapper.cs" />
     <Compile Include="Mappers\PhotoViewModelMapper.cs" />
     <Compile Include="Mappers\PlaceListViewModelMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -875,6 +876,7 @@
     <Content Include="Views\Shared\_AttachPictures.cshtml" />
     <Content Include="Views\Shared\_Pagination.cshtml" />
     <Content Include="Views\Shared\_PlaceListTableHeading.cshtml" />
+    <Content Include="Views\Place\_PlaceChildList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

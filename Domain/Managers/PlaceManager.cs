@@ -281,6 +281,27 @@ namespace ExperimentalCMS.Domain.Managers
                     , "There is an error trying to retrieve data", null);
         }
 
+        public DomainResponse<Place> GetPlaceWithChildPlacesById(int id)
+        {
+            var response = new DomainResponse<Place>();
+            try
+            {
+                response.Result = _uOW.PlaceRepo.Get(x => x.PlaceId == id, null, "StateChilds,AttractionChilds,TownCityChilds").FirstOrDefault();
+
+            }
+            catch (Exception ex)
+            {
+                return response.ReturnFailResponse(new[] { ex.Message }
+                       , "There is an error trying to retrieve data", null);
+            }
+
+            if (response.Result != null)
+                return response.ReturnSuccessResponse(response.Result, null, null);
+            else
+                return response.ReturnFailResponse(new[] { string.Format("Error occur whilte retrieving data for admingId {0}", id) }
+                    , "There is an error trying to retrieve data", null);
+        }
+
         public bool DeletPlaceById(int id)
         {
             throw new NotImplementedException();

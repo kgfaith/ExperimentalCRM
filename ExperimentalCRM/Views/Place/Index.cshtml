@@ -11,12 +11,15 @@
 @using (Html.BeginForm("Index", "Place", FormMethod.Get, new { id = "place-list-filter" }))
 {
     <div class="row-fluid">
+        <div class="span1">
+            Place type:
+        </div>
         <div class="span2">
             @Html.DropDownList("PlaceTypeId", null,new Dictionary<string, Object> {{ "id", "placetypeid-ddl" }})
         </div>
-        <div class="span2">
+        @*<div class="span2">
             @Html.TextBox("SearchTerm")
-        </div>
+        </div>*@
     </div>
 }
 

@@ -265,6 +265,21 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
             }
         }
 
+
+        public ActionResult PlaceChildList(int placeId)
+        {
+            var domainResponse = _placeManager.GetPlaceWithChildPlacesById(placeId);
+
+            if (!domainResponse.Success)
+            {
+                return HttpNotFound();
+            }
+
+            var mapper = new PhotoChildModelMapper();
+            var model = mapper.Map(domainResponse.Result);
+            return View("_PlaceChildList", model);
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

@@ -15,6 +15,7 @@ namespace ExperimentalCMS.Domain.Contracts
         IEnumerable<Place> GetAllPlaceList();
         DomainResponse<IEnumerable<PlaceType>> GetPlaceTypeList();
         DomainResponse<Place> GetPlaceById(int id);
+        DomainResponse<Place> GetPlaceWithChildPlacesById(int id);
         bool DeletPlaceById(int id);
         DomainResponse<IEnumerable<Place>> SearchPlace(string searchTerm, IEnumerable<int> placeIdsToExclude);
         DomainResponse<IEnumerable<Place>> GetStateList();

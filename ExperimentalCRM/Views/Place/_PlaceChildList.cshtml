@@ -1,0 +1,37 @@
+﻿@model ExperimentalCMS.ViewModels.PlaceChildsViewModel
+
+<h4>Attraction Childs</h4>
+<table>
+@foreach (var childPlace in Model.AttractionChilds)
+{
+    <tr>
+        <td>
+            @Html.ActionLink(childPlace.PlaceName,"Edit",  new {id = childPlace.PlaceId})
+        </td>
+    </tr>
+}
+</table>
+
+<h4>State Childs</h4>
+<table>
+@foreach (var childPlace in Model.StateChilds)
+{
+    <tr>
+        <td>
+          @Html.ActionLink(childPlace.PlaceName,"Edit",  new {id = childPlace.PlaceId})
+        </td>
+    </tr>
+}
+</table>
+
+<h4>Town/City Childs</h4>
+<table>
+@foreach (var childPlace in Model.TownCityChilds)
+{
+    <tr>
+        <td>
+            @Html.ActionLink(childPlace.PlaceName,"Edit",  new {id = childPlace.PlaceId})
+        </td>
+    </tr>
+}
+</table>
