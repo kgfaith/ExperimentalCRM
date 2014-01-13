@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperimentalCMS.ViewModels"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperimentalCMS.Repositories", "ExperimentalCMS.Repositories\ExperimentalCMS.Repositories.csproj", "{14F34EC4-2ABE-46FB-AB37-4F486A1433CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperimentalCMS.Web.FrontEnd", "ExperimentalCMS.Web.FrontEnd\ExperimentalCMS.Web.FrontEnd.csproj", "{2D050EA6-949B-452E-B101-7F16E88432A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{14F34EC4-2ABE-46FB-AB37-4F486A1433CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14F34EC4-2ABE-46FB-AB37-4F486A1433CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14F34EC4-2ABE-46FB-AB37-4F486A1433CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D050EA6-949B-452E-B101-7F16E88432A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D050EA6-949B-452E-B101-7F16E88432A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D050EA6-949B-452E-B101-7F16E88432A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D050EA6-949B-452E-B101-7F16E88432A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
