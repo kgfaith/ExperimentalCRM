@@ -3,7 +3,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using ExperimentalCMS.Repositories;
 
-namespace ExperimentalCMS.Web.BackEnd.Installers
+namespace ExperimentalCMS.Web.FrontEnd.Installers
 {
     public class UowInstaller : IWindsorInstaller
     {

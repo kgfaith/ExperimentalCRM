@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Castle.Windsor;
+using Castle.Windsor.Installer;
+using ExperimentalCMS.Web.FrontEnd.Infrastructure;
 
 namespace ExperimentalCMS.Web.FrontEnd
 {
@@ -17,12 +15,27 @@ namespace ExperimentalCMS.Web.FrontEnd
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-
-            WebApiConfig.Register(GlobalConfiguration.Configuration);
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            AuthConfig.RegisterAuth();
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            //WebApiConfig.Register(GlobalConfiguration.Configuration);
+            //FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            //AuthConfig.RegisterAuth();
+
+            BootstrapContainer();
+        }
+
+        private static IWindsorContainer _container;
+
+        private static void BootstrapContainer()
+        {
+            _container = new WindsorContainer().Install(FromAssembly.This());
+            var controllerFactory = new CustomControllerFactory(_container.Kernel);
+            ControllerBuilder.Current.SetControllerFactory(controllerFactory);
+        }
+
+        protected void Application_End()
+        {
+            _container.Dispose();
         }
     }
 }

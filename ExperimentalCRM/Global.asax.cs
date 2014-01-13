@@ -5,8 +5,6 @@ using System.Web.Routing;
 using System.Data.Entity;
 using ExperimentalCMS.Repositories.DataAccess;
 using ExperimentalCMS.Web.BackEnd.App_Start;
-using WebMatrix.WebData;
-using System.Linq;
 using System;
 using System.Web;
 using System.Web.Security;
@@ -15,7 +13,6 @@ using ExperimentalCMS.ViewModels;
 using ExperimentalCMS.Web.BackEnd.Infrastructure;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
-using System.Diagnostics;
 
 namespace ExperimentalCMS.Web.BackEnd
 {
@@ -48,7 +45,6 @@ namespace ExperimentalCMS.Web.BackEnd
 
         protected void Application_Start()
         {
-            DataAnnotationsModelValidatorProvider.AddImplicitRequiredAttributeForValueTypes = false;
             Database.SetInitializer<ExCMSContext>(new ExCrmInitializer());
             AreaRegistration.RegisterAllAreas();
 

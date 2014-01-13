@@ -3,9 +3,9 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using ExperimentalCMS.Domain.Contracts;
 using ExperimentalCMS.Domain.Managers;
-using ExperimentalCMS.Web.BackEnd.Utility;
+using ExperimentalCMS.Web.FrontEnd.Utility;
 
-namespace ExperimentalCMS.Web.BackEnd.Installers
+namespace ExperimentalCMS.Web.FrontEnd.Installers
 {
     public class ManagersInstaller : IWindsorInstaller
     {
