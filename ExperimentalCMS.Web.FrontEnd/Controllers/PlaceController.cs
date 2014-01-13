@@ -1,5 +1,7 @@
 ﻿using System.Web.Mvc;
 using ExperimentalCMS.Domain.Contracts;
+using ExperimentalCMS.Model;
+using ExperimentalCMS.ViewModels;
 
 namespace ExperimentalCMS.Web.FrontEnd.Controllers
 {
@@ -13,9 +15,21 @@ namespace ExperimentalCMS.Web.FrontEnd.Controllers
             _placeManager = placeManager;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int id = 0)
         {
-            return View();
+            var domainResponse = _placeManager.GetPlaceWithChildPlacesById(id);
+
+            if (domainResponse.Result == null)
+            {
+                return HttpNotFound();
+            }
+
+            PlaceViewModel model = new PlaceViewModel 
+                                    {
+                                        PlaceName = domainResponse.Result.PlaceName
+                                    };
+
+            return View(model);
         }
 
     }
