@@ -1,7 +1,6 @@
 ﻿(function ($) {
     var isAjaxRequestOnGoing = false,
     $associateWithPicturesDialog = $('#AssociateWithPicturesDialog'),
-    $newPhotoFormValidator = new customFormValidator($('#newphoto-form')),
     $searchPictureBox = $('#search-pictures-box'),
     $selectedPictureBox = $('#SelectedSlideShowPictures'),
     $ajaxLoader = $('#floatingCirclesG');

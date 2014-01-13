@@ -53,11 +53,13 @@
   <ItemGroup>
     <Compile Include="Admin.cs" />
     <Compile Include="Article.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="FlickrPhoto.cs" />
     <Compile Include="Picture.cs" />
     <Compile Include="PictureSource.cs" />
     <Compile Include="Place.cs" />
     <Compile Include="PlaceType.cs" />
+    <Compile Include="PlaceTypeMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

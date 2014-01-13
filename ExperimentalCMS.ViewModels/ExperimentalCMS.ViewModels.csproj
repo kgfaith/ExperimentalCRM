@@ -49,7 +49,6 @@
     <Compile Include="ColumnHeadingModel.cs" />
     <Compile Include="CustomPrincipalSerializeModel.cs" />
     <Compile Include="PlaceChildsViewModel.cs" />
-    <Compile Include="Utility\Enums.cs" />
     <Compile Include="Utility\PhotoSource.cs" />
     <Compile Include="PaginationItemModel.cs" />
     <Compile Include="PaginationModel.cs" />

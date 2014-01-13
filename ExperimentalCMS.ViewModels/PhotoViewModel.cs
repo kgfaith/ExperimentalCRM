@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
-using ExperimentalCMS.ViewModels.Enums;
 
 namespace ExperimentalCMS.ViewModels
 {
@@ -36,7 +30,6 @@ namespace ExperimentalCMS.ViewModels
         public string Description { get; set; }
 
         public int SourceId { get; set; }
-
         
     }
 }

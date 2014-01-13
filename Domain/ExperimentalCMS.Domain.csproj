@@ -73,9 +73,11 @@
     <Compile Include="Utility\BooleanResult.cs" />
     <Compile Include="Utility\Constants.cs" />
     <Compile Include="Utility\Crypto.cs" />
+    <Compile Include="Utility\Enums.cs" />
     <Compile Include="Utility\PlacePaginationResponse.cs" />
     <Compile Include="Utility\DomainResponse.cs" />
     <Compile Include="Utility\PlaceSortOrderExpressionFactory.cs" />
+    <Compile Include="Utility\PlaceTypeMapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

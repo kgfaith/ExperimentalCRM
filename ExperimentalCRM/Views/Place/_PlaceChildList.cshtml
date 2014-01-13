@@ -1,37 +1,52 @@
-﻿@model ExperimentalCMS.ViewModels.PlaceChildsViewModel
+﻿@using ExperimentalCMS.Model
+@model ExperimentalCMS.ViewModels.PlaceChildsViewModel
+@{
+    string title;
+    List<Place> childPlaces = new List<Place>();
+    switch (Model.PlaceTypeEnum)
+    {
+        case Enums.PlaceTypes.State:
+            title = "State related places";
+            childPlaces = Model.StateChilds.ToList();
+            break;
 
-<h4>Attraction Childs</h4>
-<table>
-@foreach (var childPlace in Model.AttractionChilds)
-{
-    <tr>
-        <td>
-            @Html.ActionLink(childPlace.PlaceName,"Edit",  new {id = childPlace.PlaceId})
-        </td>
-    </tr>
-}
-</table>
+        case Enums.PlaceTypes.TownCity:
+            title = "Town/City related places";
+            childPlaces = Model.TownCityChilds.ToList();
+            break;
 
-<h4>State Childs</h4>
-<table>
-@foreach (var childPlace in Model.StateChilds)
-{
-    <tr>
-        <td>
-          @Html.ActionLink(childPlace.PlaceName,"Edit",  new {id = childPlace.PlaceId})
-        </td>
-    </tr>
+        default:
+            title = "Tourist attraction related places";
+            childPlaces = Model.AttractionChilds.ToList();
+            break;
+    }
+    
 }
-</table>
 
-<h4>Town/City Childs</h4>
-<table>
-@foreach (var childPlace in Model.TownCityChilds)
-{
-    <tr>
-        <td>
-            @Html.ActionLink(childPlace.PlaceName,"Edit",  new {id = childPlace.PlaceId})
-        </td>
-    </tr>
-}
-</table>
+<div class="row-fluid mt20">
+    <div class="span6">
+        @if (childPlaces.Any())
+        {
+            <h4>@title</h4>
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <th class="p8">Place Names</th>
+                </tr>
+                @foreach (var childPlace in childPlaces)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(childPlace.PlaceName, "Edit", new { id = childPlace.PlaceId })
+                        </td>
+                    </tr>
+                }
+            </table>
+
+        }
+        else
+        {
+            <p>There is no related child for this place</p>    
+        }
+
+    </div>
+</div>

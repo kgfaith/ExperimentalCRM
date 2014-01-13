@@ -18,6 +18,11 @@ namespace ExperimentalCMS.Model
 
         public int InternalRanking { get; set; }
         public int PlaceTypeId { get; set; }
+        public virtual PlaceType PlaceType { get; set; }
+        public Enums.PlaceTypes PlaceTypeEnum 
+        { 
+            get { return PlaceTypeMapper.Map(PlaceTypeId); }
+        }
 
         public int? ParentStateId { get; set; }
         public virtual Place ParentState { get; set; }
@@ -28,7 +33,7 @@ namespace ExperimentalCMS.Model
         public int? ParentTownCityId { get; set; }
         public virtual Place ParentTownCity { get; set; }
 
-        public virtual PlaceType PlaceType { get; set; }
+        
         public virtual ICollection<Article> Articles { get; set; }
         //public virtual ICollection<Place> RelatedPlaces { get; set; }
 
@@ -48,6 +53,6 @@ namespace ExperimentalCMS.Model
         [Required]
         public float Longitude { get; set; }
 
-        public string Something { get; set; }
+        //public string Something { get; set; }
     }
 }

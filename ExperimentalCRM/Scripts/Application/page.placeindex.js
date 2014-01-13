@@ -1,5 +1,4 @@
 ﻿$(function () {
-    var something = 123;
     var $div = $("#placetypeid-ddl");
 
     $("#placetypeid-ddl").on('change', function () {

@@ -57,6 +57,8 @@ namespace ExperimentalCMS.Web.BackEnd.App_Start
                 "~/Scripts/Application/KoModels/ko.photo.model.js",
                 "~/Scripts/Application/KoViewModels/ko.selectpictures.viewmodel.js",
                 "~/Scripts/Application/function.interactions.js"
+                ,
+                "~/Scripts/Application/page.placeedit.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/PlaceIndex").Include(

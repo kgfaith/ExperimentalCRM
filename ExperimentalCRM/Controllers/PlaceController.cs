@@ -277,7 +277,7 @@ namespace ExperimentalCMS.Web.BackEnd.Controllers
 
             var mapper = new PhotoChildModelMapper();
             var model = mapper.Map(domainResponse.Result);
-            return View("_PlaceChildList", model);
+            return PartialView("_PlaceChildList", model);
         }
 
         protected override void Dispose(bool disposing)

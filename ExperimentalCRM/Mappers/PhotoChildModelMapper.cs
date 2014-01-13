@@ -13,6 +13,7 @@ namespace ExperimentalCMS.Web.BackEnd.Mappers
         {
             var model = new PlaceChildsViewModel
             {
+                PlaceTypeEnum = place.PlaceTypeEnum,
                 StateChilds = place.StateChilds,
                 AttractionChilds = place.AttractionChilds,
                 TownCityChilds = place.TownCityChilds
