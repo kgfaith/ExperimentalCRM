@@ -48,11 +48,18 @@ namespace ExperimentalCMS.Model
         public virtual ICollection<Picture> PictureGallery { get; set; }
 
         [Required]
-        public float Latitude { get; set; }
+        public decimal Latitude { get; set; }
 
         [Required]
-        public float Longitude { get; set; }
+        public decimal Longitude { get; set; }
 
+        //Panoramio data
+        public decimal MinLongitude { get; set; }
+        public decimal MinLatitude { get; set; }
+        public decimal MaxLongitude { get; set; }
+        public decimal MaxLatitude { get; set; }
+        
         //public string Something { get; set; }
+
     }
 }

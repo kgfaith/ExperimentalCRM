@@ -48,6 +48,7 @@
     <Compile Include="ArticleCreateViewModel.cs" />
     <Compile Include="ColumnHeadingModel.cs" />
     <Compile Include="CustomPrincipalSerializeModel.cs" />
+    <Compile Include="FePlaceViewModel.cs" />
     <Compile Include="PlaceChildsViewModel.cs" />
     <Compile Include="Utility\PhotoSource.cs" />
     <Compile Include="PaginationItemModel.cs" />

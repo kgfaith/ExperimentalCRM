@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using ExperimentalCMS.Domain.Contracts;
@@ -9,10 +7,8 @@ using ExperimentalCMS.Model;
 using ExperimentalCMS.Repositories.DataAccess;
 using ExperimentalCMS.Web.BackEnd.Extensions;
 using ExperimentalCMS.ViewModels;
-using ExperimentalCMS.Web.BackEnd.Utility;
 using System.Web;
 using System.IO;
-using ExperimentalCMS.Domain.Utility;
 using ExperimentalCMS.Web.BackEnd.Domain;
 using Constants = ExperimentalCMS.Web.BackEnd.Utility.Constants;
 using ExperimentalCMS.Web.BackEnd.Mappers;
